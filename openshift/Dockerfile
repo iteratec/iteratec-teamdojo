@@ -17,4 +17,4 @@ CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && \
 
 EXPOSE 8080
 
-RUN mv /app/docker/*.war /app/teamdojo.war
+RUN mv /app/build/libs/*.war /app/teamdojo.war
