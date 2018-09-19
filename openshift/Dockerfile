@@ -1,10 +1,10 @@
 FROM openjdk:8-jdk
 
-RUN apt-get install git -y
-
 COPY . /app
 WORKDIR /app
-RUN git clone --no-checkout https://github.com/iteratec/slab-dojo
+RUN git clone --no-checkout https://github.com/iteratec/slab-dojo .tmpdir
+RUN mv .tmpdir/.git .git
+RUN rm -rf .tmpdir/
 RUN ./gradlew bootWar -Pprod --info --stacktrace
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
@@ -17,4 +17,4 @@ CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && \
 
 EXPOSE 8080
 
-RUN mv /app/*.war /app/teamdojo.war
+RUN mv /app/docker/*.war /app/teamdojo.war
