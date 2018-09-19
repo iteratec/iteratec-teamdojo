@@ -2,7 +2,7 @@ FROM openjdk:8-jdk
 
 COPY . /app
 WORKDIR /app
-RUN ./gradlew bootWar -Pprod --debug --stacktrace
+RUN ./gradlew bootWar -Pprod --info --stacktrace
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
     JHIPSTER_SLEEP=0 \
