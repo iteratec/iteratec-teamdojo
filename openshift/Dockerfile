@@ -1,7 +1,10 @@
 FROM openjdk:8-jdk
 
+RUN apt-get install git -y
+
 COPY . /app
 WORKDIR /app
+RUN git clone --no-checkout https://github.com/iteratec/slab-dojo
 RUN ./gradlew bootWar -Pprod --info --stacktrace
 
 ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
