@@ -1,10 +1,10 @@
 package de.otto.teamdojo.service;
 
 import de.otto.teamdojo.service.dto.LevelSkillDTO;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,9 +23,10 @@ public interface LevelSkillService {
     /**
      * Get all the levelSkills.
      *
+     * @param pageable the pagination information
      * @return the list of entities
      */
-    List<LevelSkillDTO> findAll();
+    Page<LevelSkillDTO> findAll(Pageable pageable);
 
 
     /**
@@ -36,15 +37,10 @@ public interface LevelSkillService {
      */
     Optional<LevelSkillDTO> findOne(Long id);
 
-
-    List<LevelSkillDTO> findBySkillIdIn(List<Long> skillIds, Pageable pageable);
-
     /**
      * Delete the "id" levelSkill.
      *
      * @param id the id of the entity
      */
     void delete(Long id);
-
-
 }

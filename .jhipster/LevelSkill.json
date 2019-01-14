@@ -27,5 +27,5 @@
     "service": "serviceImpl",
     "entityTableName": "level_skill",
     "jpaMetamodelFiltering": true,
-    "pagination": "no"
+    "pagination": "infinite-scroll"
 }

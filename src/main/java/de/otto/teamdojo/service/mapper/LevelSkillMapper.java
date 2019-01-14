@@ -1,9 +1,9 @@
 package de.otto.teamdojo.service.mapper;
 
-import de.otto.teamdojo.domain.LevelSkill;
+import de.otto.teamdojo.domain.*;
 import de.otto.teamdojo.service.dto.LevelSkillDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+
+import org.mapstruct.*;
 
 /**
  * Mapper for the entity LevelSkill and its DTO LevelSkillDTO.

@@ -1,21 +1,19 @@
 package de.otto.teamdojo.service.impl;
 
+import de.otto.teamdojo.service.LevelSkillService;
 import de.otto.teamdojo.domain.LevelSkill;
 import de.otto.teamdojo.repository.LevelSkillRepository;
-import de.otto.teamdojo.service.LevelSkillService;
 import de.otto.teamdojo.service.dto.LevelSkillDTO;
 import de.otto.teamdojo.service.mapper.LevelSkillMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing LevelSkill.
@@ -52,15 +50,15 @@ public class LevelSkillServiceImpl implements LevelSkillService {
     /**
      * Get all the levelSkills.
      *
+     * @param pageable the pagination information
      * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<LevelSkillDTO> findAll() {
+    public Page<LevelSkillDTO> findAll(Pageable pageable) {
         log.debug("Request to get all LevelSkills");
-        return levelSkillRepository.findAll().stream()
-            .map(levelSkillMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return levelSkillRepository.findAll(pageable)
+            .map(levelSkillMapper::toDto);
     }
 
 
@@ -77,23 +75,6 @@ public class LevelSkillServiceImpl implements LevelSkillService {
         return levelSkillRepository.findById(id)
             .map(levelSkillMapper::toDto);
     }
-
-    /**
-     * Get levelSkills by skill id.
-     *
-     * @param skillIds the ids of the skills
-     * @return the entity
-     */
-    @Override
-    @Transactional(readOnly = true)
-    public List<LevelSkillDTO> findBySkillIdIn(List<Long> skillIds, Pageable pageable) {
-        log.debug("Request to get LevelSkill by skill Ids: {}", skillIds);
-        return levelSkillRepository.findBySkillIdIn(skillIds, pageable)
-            .stream()
-            .map(levelSkillMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
-    }
-
 
     /**
      * Delete the levelSkill by id.
