@@ -31,5 +31,5 @@
     "service": "serviceImpl",
     "entityTableName": "image",
     "jpaMetamodelFiltering": true,
-    "pagination": "no"
+    "pagination": "infinite-scroll"
 }

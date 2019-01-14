@@ -13,16 +13,21 @@
     <div class="table-responsive" *ngIf="images">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="teamdojoApp.image.name">Name</span></th>
-            <th><span jhiTranslate="teamdojoApp.image.small">Small</span></th>
-            <th><span jhiTranslate="teamdojoApp.image.medium">Medium</span></th>
-            <th><span jhiTranslate="teamdojoApp.image.large">Large</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="name"><span jhiTranslate="teamdojoApp.image.name">Name</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="small"><span jhiTranslate="teamdojoApp.image.small">Small</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="medium"><span jhiTranslate="teamdojoApp.image.medium">Medium</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="large"><span jhiTranslate="teamdojoApp.image.large">Large</span> <span
+                    class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                   [infiniteScrollDistance]="0">
             <tr *ngFor="let image of images ;trackBy: trackId">
                 <td><a [routerLink]="['/image', image.id, 'view' ]">{{image.id}}</a></td>
                 <td>{{image.name}}</td>
