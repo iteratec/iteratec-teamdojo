@@ -38,7 +38,7 @@ export class CommentComponent implements OnInit, OnDestroy {
         this.links = {
             last: 0
         };
-        this.predicate = 'id';
+        this.predicate = 'name';
         this.reverse = true;
     }
 
