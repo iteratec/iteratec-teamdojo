@@ -1,21 +1,19 @@
 package de.otto.teamdojo.service.impl;
 
+import de.otto.teamdojo.service.LevelService;
 import de.otto.teamdojo.domain.Level;
 import de.otto.teamdojo.repository.LevelRepository;
-import de.otto.teamdojo.service.LevelService;
 import de.otto.teamdojo.service.dto.LevelDTO;
 import de.otto.teamdojo.service.mapper.LevelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Level.
@@ -52,15 +50,15 @@ public class LevelServiceImpl implements LevelService {
     /**
      * Get all the levels.
      *
+     * @param pageable the pagination information
      * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
-    public List<LevelDTO> findAll() {
+    public Page<LevelDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Levels");
-        return levelRepository.findAll().stream()
-            .map(levelMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return levelRepository.findAll(pageable)
+            .map(levelMapper::toDto);
     }
 
 
@@ -87,13 +85,5 @@ public class LevelServiceImpl implements LevelService {
     public void delete(Long id) {
         log.debug("Request to delete Level : {}", id);
         levelRepository.deleteById(id);
-    }
-
-    public Page<LevelDTO> findByIdIn(List<Long> levelIds, Pageable pageable){
-        {
-            log.debug("Request to get Levels by level Ids: {}", levelIds);
-            return levelRepository.findByIdIn(levelIds, pageable)
-                .map(levelMapper::toDto);
-        }
     }
 }

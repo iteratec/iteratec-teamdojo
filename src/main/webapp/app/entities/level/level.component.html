@@ -13,20 +13,30 @@
     <div class="table-responsive" *ngIf="levels">
         <table class="table table-striped">
             <thead>
-            <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.name">Name</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.description">Description</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.requiredScore">Required Score</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.instantMultiplier">Instant Multiplier</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.completionBonus">Completion Bonus</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.dimension">Dimension</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.dependsOn">Depends On</span></th>
-            <th><span jhiTranslate="teamdojoApp.level.image">Image</span></th>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+                <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="name"><span jhiTranslate="teamdojoApp.level.name">Name</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="description"><span jhiTranslate="teamdojoApp.level.description">Description</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="requiredScore"><span jhiTranslate="teamdojoApp.level.requiredScore">Required Score</span>
+                    <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="instantMultiplier"><span jhiTranslate="teamdojoApp.level.instantMultiplier">Instant Multiplier</span>
+                    <span class="fa fa-sort"></span></th>
+                <th jhiSortBy="completionBonus"><span
+                    jhiTranslate="teamdojoApp.level.completionBonus">Completion Bonus</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="dimensionName"><span jhiTranslate="teamdojoApp.level.dimension">Dimension</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="dependsOnName"><span jhiTranslate="teamdojoApp.level.dependsOn">Depends On</span> <span
+                    class="fa fa-sort"></span></th>
+                <th jhiSortBy="imageName"><span jhiTranslate="teamdojoApp.level.image">Image</span> <span
+                    class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
+                   [infiniteScrollDistance]="0">
             <tr *ngFor="let level of levels ;trackBy: trackId">
                 <td><a [routerLink]="['/level', level.id, 'view' ]">{{level.id}}</a></td>
                 <td>{{level.name}}</td>

@@ -1,15 +1,13 @@
 package de.otto.teamdojo.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import de.otto.teamdojo.service.LevelQueryService;
 import de.otto.teamdojo.service.LevelService;
-import de.otto.teamdojo.service.LevelSkillService;
-import de.otto.teamdojo.service.dto.LevelCriteria;
-import de.otto.teamdojo.service.dto.LevelDTO;
-import de.otto.teamdojo.service.dto.LevelSkillDTO;
 import de.otto.teamdojo.web.rest.errors.BadRequestAlertException;
 import de.otto.teamdojo.web.rest.util.HeaderUtil;
 import de.otto.teamdojo.web.rest.util.PaginationUtil;
+import de.otto.teamdojo.service.dto.LevelDTO;
+import de.otto.teamdojo.service.dto.LevelCriteria;
+import de.otto.teamdojo.service.LevelQueryService;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -42,12 +40,9 @@ public class LevelResource {
 
     private final LevelQueryService levelQueryService;
 
-    private final LevelSkillService levelSkillService;
-
-    public LevelResource(LevelService levelService, LevelQueryService levelQueryService, LevelSkillService levelSkillService) {
+    public LevelResource(LevelService levelService, LevelQueryService levelQueryService) {
         this.levelService = levelService;
         this.levelQueryService = levelQueryService;
-        this.levelSkillService = levelSkillService;
     }
 
     /**
@@ -95,6 +90,7 @@ public class LevelResource {
     /**
      * GET  /levels : get all the levels.
      *
+     * @param pageable the pagination information
      * @param criteria the criterias which the requested entities should match
      * @return the ResponseEntity with status 200 (OK) and the list of levels in body
      */
@@ -102,37 +98,10 @@ public class LevelResource {
     @Timed
     public ResponseEntity<List<LevelDTO>> getAllLevels(LevelCriteria criteria, Pageable pageable) {
         log.debug("REST request to get Levels by criteria: {}", criteria);
-
-        if(criteria != null && criteria.getSkillsId() != null && criteria.getSkillsId().getIn() != null)
-            return getAllLevelsBySkills(criteria.getSkillsId().getIn(), pageable);
-
-        List<LevelDTO> entityList = levelQueryService.findByCriteria(criteria);
-        return ResponseEntity.ok().body(entityList);
-    }
-
-
-    /**
-     * GET  /levels : get all the levels.
-     *
-     * @param skillsId the skillsId to search for
-     * @return the ResponseEntity with status 200 (OK) and the list of levels in body
-     */
-    public ResponseEntity<List<LevelDTO>> getAllLevelsBySkills(
-        List<Long> skillsId,
-        Pageable pageable) {
-        log.debug("REST request to get Levels for Skills; {}", skillsId);
-
-        List<LevelSkillDTO> levelSkills = levelSkillService.findBySkillIdIn(skillsId, pageable);
-        List<Long> levelIds = new ArrayList<>();
-        for(LevelSkillDTO levelSkill : levelSkills){
-            levelIds.add(levelSkill.getLevelId());
-        }
-
-        Page<LevelDTO> page = levelService.findByIdIn(levelIds, pageable);
+        Page<LevelDTO> page = levelQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/levels");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
 
     /**
      * GET  /levels/:id : get the "id" level.
