@@ -42,5 +42,5 @@
     "service": "serviceImpl",
     "entityTableName": "comment",
     "jpaMetamodelFiltering": true,
-    "pagination": "no"
+    "pagination": "infinite-scroll"
 }

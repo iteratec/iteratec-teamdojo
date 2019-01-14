@@ -1,14 +1,7 @@
 package de.otto.teamdojo.service;
 
-import de.otto.teamdojo.domain.Comment;
-import de.otto.teamdojo.domain.Comment_;
-import de.otto.teamdojo.domain.Skill_;
-import de.otto.teamdojo.domain.Team_;
-import de.otto.teamdojo.repository.CommentRepository;
-import de.otto.teamdojo.service.dto.CommentCriteria;
-import de.otto.teamdojo.service.dto.CommentDTO;
-import de.otto.teamdojo.service.mapper.CommentMapper;
-import io.github.jhipster.service.QueryService;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,7 +10,15 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import io.github.jhipster.service.QueryService;
+
+import de.otto.teamdojo.domain.Comment;
+import de.otto.teamdojo.domain.*; // for static metamodels
+import de.otto.teamdojo.repository.CommentRepository;
+import de.otto.teamdojo.service.dto.CommentCriteria;
+
+import de.otto.teamdojo.service.dto.CommentDTO;
+import de.otto.teamdojo.service.mapper.CommentMapper;
 
 /**
  * Service for executing complex queries for Comment entities in the database.
@@ -42,7 +43,6 @@ public class CommentQueryService extends QueryService<Comment> {
 
     /**
      * Return a {@link List} of {@link CommentDTO} which matches the criteria from the database
-     *
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -55,9 +55,8 @@ public class CommentQueryService extends QueryService<Comment> {
 
     /**
      * Return a {@link Page} of {@link CommentDTO} which matches the criteria from the database
-     *
      * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page     The page, which should be returned.
+     * @param page The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
