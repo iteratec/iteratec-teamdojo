@@ -49,10 +49,22 @@
         .skill-title {
             padding: 5px 5px 5px 20px;
             word-break: break-word;
+            flex-grow: 100;
 
             &.irrelevant {
                 opacity: 0.3;
             }
+        }
+            .skill-score {
+                width: 2.8rem;
+                height: 1.4rem;
+                border-radius: 0.5rem;
+                font-size: 1rem;
+                color: white;
+                line-height: 1.4rem;
+                text-align: center;
+                background: black;
+                opacity: 0.9;
         }
 
         .teams-skills-badge {

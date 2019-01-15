@@ -16,6 +16,7 @@ public class AchievableSkillDTO {
     private Integer vote;
     private String voters;
     private Boolean irrelevant;
+    private Integer score;
     private Double rateScore;
     private Integer rateCount;
 
@@ -33,6 +34,7 @@ public class AchievableSkillDTO {
         Integer vote,
         String voters,
         Boolean irrelevant,
+        Integer score,
         Double rateScore,
         Integer rateCount) {
         this.teamSkillId = teamSkillId;
@@ -44,6 +46,7 @@ public class AchievableSkillDTO {
         this.vote = vote;
         this.voters = voters;
         this.irrelevant = irrelevant;
+        this.score = score;
         this.rateScore = rateScore;
         this.rateCount = rateCount;
     }
@@ -112,6 +115,14 @@ public class AchievableSkillDTO {
 
     public void setIrrelevant(Boolean irrelevant){
         this.irrelevant = irrelevant;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     public Double getRateScore() {

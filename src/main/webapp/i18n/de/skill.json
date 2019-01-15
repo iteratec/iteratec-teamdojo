@@ -18,7 +18,8 @@
                 "rateCount": "Bewertungen",
                 "modalTitle": "Bewerte den Skill",
                 "modalClose": "Abbrechen",
-                "modalSubmit": "Bewertung abschicken"
+                "modalSubmit": "Bewertung abschicken",
+                "score": "Scorewert: {{ score }}"
             },
             "title": "Title",
             "description": "Description",

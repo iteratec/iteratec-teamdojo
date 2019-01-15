@@ -10,6 +10,7 @@ export interface IAchievableSkill {
     vote?: number;
     voters?: string;
     irrelevant?: boolean;
+    score?: number;
     rateScore?: number;
     rateCount?: number;
 }
@@ -25,6 +26,7 @@ export class AchievableSkill implements IAchievableSkill {
         public vote?: number,
         public voters?: string,
         public irrelevant?: boolean,
+        public score?: number,
         public rateScore?: number,
         public rateCount?: number
     ) {}

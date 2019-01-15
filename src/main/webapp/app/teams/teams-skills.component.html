@@ -18,26 +18,37 @@
             <li class="list-group-item list-group-item-action flex-column align-items-start mb-3 skill-list-item"
                 [ngClass]="{'active-skill':isActiveSkill(skill), 'irrelevant-skill': skill.irrelevant, 'in-skill-details': isInSkillDetails()}"
                 *ngFor="let skill of skills | skillFilter:search"
-                (click)="handleSkillClicked(skill)">
+                (click)="handleSkillClicked(skill)"
+                [ngbPopover]="popoverContent" triggers="mouseenter:mouseleave" placement="top" container="body">
+                <ng-template #popoverContent>
+                    <div class="d-flex flex-column align-items-center">
+                        <small jhiTranslate="teamdojoApp.skill.detail.score" translateValues="{score: '{{skill.score}}'}"></small>
+                    </div>
+                </ng-template>
                 <div class="d-flex flex-column">
                     <div class="d-flex">
                         <div class="skill-title d-flex flex-column" [ngClass]="{'irrelevant': skill.irrelevant}">
-                            <div>
+                            <div class="d-flex flex-row">
                                 <a *ngIf="isInSkillDetails()" class="mb-1">{{skill.title}}</a>
                                 <a *ngIf="!isInSkillDetails()"
                                    (click)="goToDetails(skill)"
                                    class="mb-1">{{skill.title}}</a>
                             </div>
-                            <div>
-                                <ngb-rating [(rate)]="skill.rateScore" max="5" [readonly]="true" [starTemplate]="stars">
-                                </ngb-rating>
-                                {{getRateCount(skill.rateCount)}} <span class="rating-text" jhiTranslate="teamdojoApp.skill.detail.rateCount"></span>
+                            <div class="d-flex flex-row justify-content-between " >
+                                <div>
+                                    <ngb-rating [(rate)]="skill.rateScore" max="5" [readonly]="true" [starTemplate]="stars">
+                                    </ngb-rating>
+                                    {{getRateCount(skill.rateCount)}} <span class="rating-text" jhiTranslate="teamdojoApp.skill.detail.rateCount"></span>
 
-                                <ng-template #stars let-fill="fill" let-index="index">
+                                    <ng-template #stars let-fill="fill" let-index="index">
                                     <span class="star star-sm" [class.full]="fill === 100">
                                         <span class="half star-sm" [style.width.%]="fill">&#9733;</span>&#9733;
                                     </span>
-                                </ng-template>
+                                    </ng-template>
+                                </div>
+                                <div class="skill-score ml-auto">
+                                    <span class="mb-auto">{{skill.score }}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="skill-status ml-auto"
