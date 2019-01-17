@@ -18,6 +18,7 @@ import { BadgeService } from 'app/entities/badge';
 import { IBadge } from 'app/shared/model/badge.model';
 import { IDimension } from 'app/shared/model/dimension.model';
 import { DimensionService } from 'app/entities/dimension';
+import { Principal } from 'app/core/auth/principal.service';
 import 'simplebar';
 import { Subject } from 'rxjs/Subject';
 
@@ -56,7 +57,8 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         private breadcrumbService: BreadcrumbService,
         private levelService: LevelService,
         private badgeService: BadgeService,
-        private dimensionService: DimensionService
+        private dimensionService: DimensionService,
+        private principalService: Principal
     ) {}
 
     ngOnInit() {
@@ -223,7 +225,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     }
 
     isSuggestAble(s: IAchievableSkill) {
-        return !s.achievedAt && !s.irrelevant && (!s.vote || (s.vote && s.vote != 1)) && this.isTeamVoteAble(s);
+        return !s.achievedAt && !s.irrelevant && (!s.vote || (s.vote && s.vote !== 1)) && this.isTeamVoteAble(s);
     }
 
     private onError(errorMessage: string) {
@@ -297,5 +299,29 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         array.push(this.teamsSelectionService.selectedTeam.id.toString());
         s.voters = array.join('||');
         this.updateSkill(s);
+    }
+
+    updateScore(popover, s: IAchievableSkill) {
+        popover.close();
+        console.log(s.score);
+        this.skillService.find(s.skillId).subscribe(skill => {
+            skill.body.score = s.score;
+            this.skillService.update(skill.body).subscribe((res: HttpResponse<ISkill>) => {
+                this.onSkillChanged.emit({
+                    iSkill: res.body,
+                    aSkill: s
+                });
+            });
+            },
+            (res: HttpErrorResponse) => {
+                console.log(res);
+            }
+        );
+    }
+
+    openPopover(popover) {
+        if (this.principalService.hasAnyAuthorityDirect(['ROLE_ADMIN'])) {
+            popover.open();
+        }
     }
 }

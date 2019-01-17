@@ -18,7 +18,6 @@
             <li class="list-group-item list-group-item-action flex-column align-items-start mb-3 skill-list-item"
                 [ngClass]="{'active-skill':isActiveSkill(skill), 'irrelevant-skill': skill.irrelevant, 'in-skill-details': isInSkillDetails()}"
                 *ngFor="let skill of skills | skillFilter:search"
-                (click)="handleSkillClicked(skill)"
                 [ngbPopover]="popoverContent" triggers="mouseenter:mouseleave" placement="top" container="body">
                 <ng-template #popoverContent>
                     <div class="d-flex flex-column align-items-center">
@@ -28,7 +27,7 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex">
                         <div class="skill-title d-flex flex-column" [ngClass]="{'irrelevant': skill.irrelevant}">
-                            <div class="d-flex flex-row">
+                            <div class="d-flex flex-row" (click)="handleSkillClicked(skill)">
                                 <a *ngIf="isInSkillDetails()" class="mb-1">{{skill.title}}</a>
                                 <a *ngIf="!isInSkillDetails()"
                                    (click)="goToDetails(skill)"
@@ -46,9 +45,18 @@
                                     </span>
                                     </ng-template>
                                 </div>
-                                <div class="skill-score ml-auto">
-                                    <span class="mb-auto">{{skill.score }}</span>
+                                <div class="skill-score ml-auto" [ngbPopover]="editScore" popover-class="score-popover" placement="top" container="body" triggers="manual" #p="ngbPopover" (click)="openPopover(p)">
+                                    <span class="mb-auto">{{skill.score}}</span>
                                 </div>
+                                <ng-template #editScore>
+                                        <form name="scoreEditing" class="score-editing" (ngSubmit)="updateScore(p, skill)">
+                                        <input class="input" type="number" name="score" [(ngModel)]="skill.score" [ngModelOptions]="{ allowInvalid: false, updateOn: 'submit' }" [min]="0" [required]="true">
+                                        <button class="button" type="submit" jhiTranslate="teamdojoApp.teamSkill.save">
+                                        </button>
+                                        <button class="button" type="button" (click)="p.close()" jhiTranslate="teamdojoApp.teamSkill.cancel">
+                                        </button>
+                                    </form>
+                                </ng-template>
                             </div>
                         </div>
                         <div class="skill-status ml-auto"

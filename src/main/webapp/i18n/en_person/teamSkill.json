@@ -23,6 +23,8 @@
             "completedAt": "Completed At",
             "verifiedAt": "Verified At",
             "irrelevant": "Irrelevant",
+            "save": "OK",
+            "cancel": "Cancel",
             "note": "Note",
             "vote": "Vote",
             "skill": "Skill",

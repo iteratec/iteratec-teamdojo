@@ -24,6 +24,24 @@
     }
 }
 
+.score-popover{
+    background-color: #666666;
+}
+
+.score-editing {
+        display: flex;
+        justify-content: space-between;
+        width: 12rem;
+        .input {
+            width: 3rem;
+            text-align: center;
+        }
+
+        .button {
+
+        }
+    }
+
 .teams-skills {
 
     h4 {
