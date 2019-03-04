@@ -20,7 +20,7 @@
             "requiredScore": "Benötigte Punktzahl",
             "instantMultiplier": "Skill Score Multiplikator",
             "completionBonus": "Level Vollendungsbonus",
-            "dimension": "Dimension",
+            "dimension": "Themengebiet",
             "dependsOn": "Abhängig von",
             "skills": "Skills",
             "image": "Image"

@@ -2,18 +2,18 @@
     "teamdojoApp": {
         "dimension": {
             "home": {
-                "title": "Dimensions",
-                "createLabel": "Dimension erstellen",
-                "createOrEditLabel": "Dimension erstellen oder bearbeiten"
+                "title": "Topics",
+                "createLabel": "Themengebiet erstellen",
+                "createOrEditLabel": "Themengebiet erstellen oder bearbeiten"
             },
-            "created": "Dimension erstellt mit ID {{ param }}",
-            "updated": "Dimension aktualisiert mit ID {{ param }}",
-            "deleted": "Dimension gelöscht mit ID {{ param }}",
+            "created": "Themengebiet erstellt mit ID {{ param }}",
+            "updated": "Themengebiet aktualisiert mit ID {{ param }}",
+            "deleted": "Themengebiet gelöscht mit ID {{ param }}",
             "delete": {
-                "question": "Soll Dimension {{ id }} wirklich dauerhaft gelöscht werden?"
+                "question": "Soll Themengebiet {{ id }} wirklich dauerhaft gelöscht werden?"
             },
             "detail": {
-                "title": "Dimension"
+                "title": "Topic"
             },
             "name": "Name",
             "description": "Description",

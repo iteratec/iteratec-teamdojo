@@ -8,7 +8,7 @@
                 "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
                 "entities": {
                     "main": "Entitäten",
-                    "dimension": "Dimension",
+                    "dimension": "Topic",
                     "skill": "Skill",
                     "team": "Team",
                     "teamSkill": "Team Skill",

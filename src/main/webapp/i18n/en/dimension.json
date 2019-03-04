@@ -2,21 +2,21 @@
     "teamdojoApp": {
         "dimension": {
             "home": {
-                "title": "Dimensions",
-                "createLabel": "Create a new Dimension",
-                "createOrEditLabel": "Create or edit a Dimension"
+                "title": "Topics",
+                "createLabel": "Create a new Topic",
+                "createOrEditLabel": "Create or edit a Topic"
             },
-            "created": "A new Dimension is created with identifier {{ param }}",
-            "updated": "A Dimension is updated with identifier {{ param }}",
-            "deleted": "A Dimension is deleted with identifier {{ param }}",
+            "created": "A new Topic is created with identifier {{ param }}",
+            "updated": "A Topic is updated with identifier {{ param }}",
+            "deleted": "A Topic is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Dimension {{ id }}?"
+                "question": "Are you sure you want to delete Topic {{ id }}?"
             },
             "detail": {
-                "title": "Dimension"
+                "title": "Topic"
             },
             "name": "Name",
-            "description": "Description",
+            "description": "Topic",
             "participants": "Participants",
             "levels": "Levels",
             "badges": "Badges"
