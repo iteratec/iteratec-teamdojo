@@ -2,12 +2,16 @@
 @import '../../../content/scss/bootstrap-variables';
 @import '../../../content/scss/colors';
 @import '../../../content/scss/mixins';
+@import '../../teams/skill-details/skill-details-status/skill-details-status';
 
 .skill-title {
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 15px;
     color: $dojo-text-primary;
+}
+.skill-status {
+    display: block;
 }
 .desc-block {
     margin-bottom: 35px;
@@ -22,12 +26,16 @@
     font-size: 1rem;
 }
 
-.skill-actions {
+.skill-actions,/*TODO nur eins von beiden gilt*/
+.skill-action-items {
     * {
         color: $dojo-text-primary;
     }
+    display: block;
     margin-bottom: 5px;
-    margin-left: 2px;
+    .skill-action-item {
+        margin-right: 20px;
+    }
 }
 
 .skill-rating {
@@ -104,6 +112,7 @@
 .needed-for-badges {
     display: flex;
     flex-wrap: wrap;
+    /*  flex-flow: wrap; */
     > * {
         display: inline-flex;
     }

@@ -30,6 +30,20 @@
                         "rateCount": "Rate count"
                     }
                 },
+                "status": {
+                    "IRRELEVANT": "This skill is irrelevant.",
+                    "ACHIEVED": "This skill has been completed.",
+                    "EXPIRING": "This skill has been completed, but will expire within the next 7 days.",
+                    "EXPIRED": "This skill has been completed before, but is now expired.",
+                    "OPEN": "This skill awaits completion."
+                },
+                "relevanceAction": {
+                    "IRRELEVANT": "Relevant",
+                    "ACHIEVED": "Irrelevant",
+                    "EXPIRING": "Irrelevant",
+                    "EXPIRED": "Irrelevant",
+                    "OPEN": "Irrelevant"
+                },
                 "action": {
                     "complete": "Complete",
                     "incomplete": "Reopen",
@@ -37,6 +51,11 @@
                     "relevant": "Relevant",
                     "vote": "Do you think {{ team }} can handle this?",
                     "suggest": "Suggest {{ team }} this Skill!"
+                    "IRRELEVANT": "",
+                    "ACHIEVED": "Reopen",
+                    "EXPIRING": "Reopen",
+                    "EXPIRED": "Renew",
+                    "OPEN": "Complete"
                 },
                 "details": {
                     "activate": "Activate skill",

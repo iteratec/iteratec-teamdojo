@@ -31,7 +31,7 @@
                 *ngFor="let skill of skills | skillFilter:search | skillSort:orderBy">
                 <div class="d-flex flex-column">
                     <div class="d-flex">
-                        <div class="skill-title d-flex flex-column" [ngClass]="{'irrelevant': skill.irrelevant}">
+                        <div class="skill-title d-flex flex-column skill-status-{{getStatusClass(skill)}}"><!-- TODO slab-stand war:  [ngClass]="{'irrelevant': skill.irrelevant}"-->
                             <div class="d-flex flex-row" (click)="handleSkillClicked(skill)">
                                 <a *ngIf="isInSkillDetails()" class="mb-1">{{skill.title}}</a>
                                 <a *ngIf="!isInSkillDetails()"
@@ -59,6 +59,9 @@
                             <fa-icon *ngIf="!skill.irrelevant && skill.achievedAt" icon="check" inverse="true"></fa-icon>
                             <fa-icon *ngIf="!skill.irrelevant &&!skill.achievedAt" icon="circle"></fa-icon>
                         </div>
+                        <!-- TODO einkommentieren und prüfen   div class="skill-status ml-auto fa fa-inverse skill-status-{{getStatusClass(skill)}}"
+                             title="{{'teamdojoApp.teams.skills.status.' + skill.skillStatus | translate}}">
+                        </div -->
                     </div>
                     <div *ngIf="isSameTeamSelected()"
                          class="skill-action-bar d-flex flex-wrap justify-content-between">
@@ -81,6 +84,21 @@
                             <small dojoTranslate="teamdojoApp.teams.skills.action.incomplete"></small>
                         </a>
                     </div>
+                    <!-- TODO einkommentieren und prüfen
+                                        <div *ngIf="isSameTeamSelected()"
+                         class="skill-action-items d-flex flex-wrap justify-content-between">
+
+                        <a class="skill-action-item" (click)="toggleRelevance(skill)">
+                            <i class="skill-relevance-action-item fa skill-status-{{getStatusClass(skill)}}"></i>
+                            <small jhiTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
+                        </a>
+                        <a class="skill-action-item" (click)="clickSkillStatus(skill)">
+                            <i class="skill-status-action-item fa skill-status-{{getStatusClass(skill)}}"></i>
+                            <small jhiTranslate="teamdojoApp.teams.skills.action.{{skill.skillStatus}}"></small>
+                        </a>
+
+                    </div>
+                     -->
                     <div *ngIf="!isSameTeamSelected()">
                         <div *jhiHasAnyAuthority="'ROLE_ADMIN'"
                              class="skill-action-bar d-flex flex-wrap justify-content-between">

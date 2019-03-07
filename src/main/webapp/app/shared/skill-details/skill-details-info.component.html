@@ -28,6 +28,22 @@
     </ng-template>
 </div>
 
+<!--
+<div class="skill-action-items" *ngIf="isSameTeamSelected()">
+
+    <small jhiTranslate="teamdojoApp.teams.skills.status.{{achievableSkill.skillStatus}}" class="skill-status"></small>
+    <a class="skill-action-item" (click)="onToggleIrrelevance()">
+        <i class="skill-relevance-action-item fa skill-status-{{getStatusClass(achievableSkill)}}"></i>
+        <small jhiTranslate="teamdojoApp.teams.skills.relevanceAction.{{achievableSkill.skillStatus}}"></small>
+    </a>
+    <a class="skill-action-item" (click)="onToggleSkill()">
+        <i class="skill-status-action-item fa skill-status-{{getStatusClass(achievableSkill)}}"></i>
+        <small jhiTranslate="teamdojoApp.teams.skills.action.{{achievableSkill.skillStatus}}"></small>
+    </a>
+
+</div>
+-->
+
 <div>
     <div class="skill-rating">
         <jhi-star-rating (onCommentSubmitted)="onCommentSubmittedFromChild($event)" (onVoteSubmitted)="onVoteSubmittedFromChild($event)" [skill]="skill"></jhi-star-rating>

@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { SkillStatus } from 'app/shared/model/skill-status';
 
 export interface IAchievableSkill {
     teamSkillId?: number;
@@ -11,6 +12,7 @@ export interface IAchievableSkill {
     voters?: string;
     irrelevant?: boolean;
     score?: number;
+    skillStatus?: SkillStatus;
     rateScore?: number;
     rateCount?: number;
 }
@@ -27,6 +29,7 @@ export class AchievableSkill implements IAchievableSkill {
         public voters?: string,
         public irrelevant?: boolean,
         public score?: number,
+        public skillStatus?: SkillStatus,
         public rateScore?: number,
         public rateCount?: number
     ) {}

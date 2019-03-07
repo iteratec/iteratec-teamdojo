@@ -34,7 +34,6 @@ import org.springframework.validation.Validator;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-
 import static de.otto.teamdojo.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -62,8 +61,9 @@ public class SkillResourceIntTest {
     private static final String DEFAULT_VALIDATION = "AAAAAAAAAA";
     private static final String UPDATED_VALIDATION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_EXPIRY_PERIOD = "P9M+71W-05D";
-    private static final String UPDATED_EXPIRY_PERIOD = "P25D";
+    private static final Integer DEFAULT_EXPIRY_PERIOD = 24;
+
+    private static final Integer UPDATED_EXPIRY_PERIOD = 21;
 
     private static final String DEFAULT_CONTACT = "AAAAAAAAAA";
     private static final String UPDATED_CONTACT = "BBBBBBBBBB";
@@ -122,7 +122,7 @@ public class SkillResourceIntTest {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -245,7 +245,7 @@ public class SkillResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].implementation").value(hasItem(DEFAULT_IMPLEMENTATION.toString())))
             .andExpect(jsonPath("$.[*].validation").value(hasItem(DEFAULT_VALIDATION.toString())))
-            .andExpect(jsonPath("$.[*].expiryPeriod").value(hasItem(DEFAULT_EXPIRY_PERIOD.toString())))
+            .andExpect(jsonPath("$.[*].expiryPeriod").value(hasItem(DEFAULT_EXPIRY_PERIOD)))
             .andExpect(jsonPath("$.[*].contact").value(hasItem(DEFAULT_CONTACT.toString())))
             .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)))
             .andExpect(jsonPath("$.[*].rateScore").value(hasItem(DEFAULT_RATE_SCORE.doubleValue())))
@@ -678,7 +678,6 @@ public class SkillResourceIntTest {
         // Get all the skillList where rateCount less than or equals to UPDATED_RATE_COUNT
         defaultSkillShouldBeFound("rateCount.lessThan=" + UPDATED_RATE_COUNT);
     }
-
 
     @Test
     @Transactional
