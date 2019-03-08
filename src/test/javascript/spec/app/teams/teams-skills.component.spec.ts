@@ -15,7 +15,7 @@ import { BreadcrumbService } from 'app/layouts/navbar/breadcrumb.service';
 import { LevelService } from 'app/entities/level';
 import { BadgeService } from 'app/entities/badge';
 import { DimensionService } from 'app/entities/dimension';
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { IAchievableSkill } from 'app/shared/model/achievable-skill.model';
 import { HttpResponse } from '@angular/common/http';
 import * as moment from 'moment';
@@ -79,7 +79,7 @@ describe('Component Tests', () => {
                     irrelevant: aSkill.irrelevant,
                     skillStatus: clickedOnce ? SkillStatus.OPEN : SkillStatus.IRRELEVANT
                 };
-                return Observable.of(new HttpResponse({ body: achievableSkill }));
+                return of(new HttpResponse({ body: achievableSkill }));
             });
 
             const skillService = TestBed.get(SkillService);
@@ -87,7 +87,7 @@ describe('Component Tests', () => {
 
             spyOn(skillService, 'find').and.callFake(skillId => {
                 expect(skillId).toEqual(1100);
-                return Observable.of(new HttpResponse({ body: { id: skillId, title: 'Input Validation' } }));
+                return of(new HttpResponse({ body: { id: skillId, title: 'Input Validation' } }));
             });
 
             comp.onSkillChanged.subscribe(ev => {
@@ -148,7 +148,7 @@ describe('Component Tests', () => {
                 if (!clickedOnce) {
                     achievableSkill['achievedAt'] = moment();
                 }
-                return Observable.of(new HttpResponse({ body: achievableSkill }));
+                return of(new HttpResponse({ body: achievableSkill }));
             });
 
             const skillService = TestBed.get(SkillService);
@@ -156,7 +156,7 @@ describe('Component Tests', () => {
 
             spyOn(skillService, 'find').and.callFake(skillId => {
                 expect(skillId).toEqual(1500);
-                return Observable.of(new HttpResponse({ body: { id: skillId, title: 'Strong passwords' } }));
+                return of(new HttpResponse({ body: { id: skillId, title: 'Strong passwords' } }));
             });
 
             comp.onSkillChanged.subscribe(ev => {
