@@ -50,7 +50,7 @@
                     "irrelevant": "Irrelevant",
                     "relevant": "Relevant",
                     "vote": "Traust du das {{ team }} zu?",
-                    "suggest": "{{ team }} diesen Skill vorschlagen!"
+                    "suggest": "{{ team }} diesen Skill vorschlagen!",
                     "IRRELEVANT": "",
                     "ACHIEVED": "Verlernen",
                     "EXPIRING": "Verlernen",
