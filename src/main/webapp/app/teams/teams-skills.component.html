@@ -46,7 +46,6 @@
                                     </ngb-rating>
                                     {{getRateCount(skill.rateCount)}} <span class="rating-text"
                                                                             dojoTranslate="teamdojoApp.teams.skills.votes">Votes</span>
-
                                     <ng-template #stars let-fill="fill" let-index="index">
                                         <span class="star star-sm" [class.full]="fill === 100">
                                             <span class="half star-sm" [style.width.%]="fill">&#9733;</span>&#9733;
@@ -72,7 +71,6 @@
                             <i class="skill-status-action-item fa skill-status-{{getStatusClass(skill)}}"></i>
                             <small jhiTranslate="teamdojoApp.teams.skills.action.{{skill.skillStatus}}"></small>
                         </a>
-
                     </div>
                     <div *ngIf="!isSameTeamSelected()">
                         <div *jhiHasAnyAuthority="'ROLE_ADMIN'"
@@ -106,13 +104,15 @@
                                 <small dojoTranslate="teamdojoApp.teams.skills.action.vote"
                                        [translateValues]="{'team': team.name }"></small>
                             </p>
-                            <p><a (click)="downVote(skill)">
-                                <fa-icon icon="angle-down"></fa-icon>
-                            </a>
-                            <p>{{skill.vote}}</p>
-                            <a (click)="upVote(skill)">
-                                <fa-icon icon="angle-up"></fa-icon>
-                            </a></p>
+                            <p>
+                                <a (click)="downVote(skill)">
+                                    <fa-icon icon="angle-down"></fa-icon>
+                                </a>
+                                <span>{{skill.vote}}</span>
+                                <a (click)="upVote(skill)">
+                                    <fa-icon icon="angle-up"></fa-icon>
+                                </a>
+                            </p>
                         </div>
                         <div *ngIf="isSuggestAble(skill)"
                              class="skill-action-bar d-flex flex-wrap justify-content-between">
