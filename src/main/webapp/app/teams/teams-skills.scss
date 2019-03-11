@@ -54,7 +54,7 @@
             word-break: break-word;
             flex-grow: 1;
 
-            &.irrelevant {
+            &.IRRELEVANT {
                 opacity: 0.3;
             }
         }
@@ -71,78 +71,45 @@
             margin-right: 5px;
         }
         .skill-status {
-            color: $dojo-text-secondary;
-            padding: 10px;
-            background-color: transparent;
-            &.completed {
-                background-color: $warning;
-            }
-            &.verified {
-                background-color: $success;
-            }
-            &.unverified {
-                background-color: $danger;
-            }
-        }
-
-        /* TODO von otto
-         .skill-status {
             padding: 10px;
             width: 35px;
             cursor: default;
             &.skill-status-irrelevant {
                 &:before {
-                    content: "\f088";  // thumbs-down
+                    content: '\f088'; // thumbs-down
                 }
-                background-color: $body-bg;
+                background-color: transparent;
                 color: $dojo-text-secondary;
             }
             &.skill-status-achieved {
                 background-color: $success;
                 &:before {
-                    content: "\f00c"; // checkmark
+                    content: '\f00c'; // checkmark
                 }
             }
             &.skill-status-expired {
                 background-color: $danger;
                 &:before {
-                    content: "\f10c"; // circle-o
+                    content: '\f10c'; // circle-o
                 }
             }
             &.skill-status-expiring {
                 background-color: $warning;
                 &:before {
-                    content: "\f071"; // exclamation-triangle
+                    content: '\f071'; // exclamation-triangle
                 }
             }
             &.skill-status-open {
                 color: black;
                 &:before {
-                    content: "\f10c"; // circle-o
+                    content: '\f10c'; // circle-o
                 }
             }
         }
-         */
         .skill-action-items, /* TODO eins von beiden */
         .skill-action-bar {
             padding: 5px 10px;
             border-top: 1px solid $gray-400;
-
-            /* TODO kann das weg??*/
-            &-item {
-                &.disabled {
-                    opacity: 0.3;
-                    cursor: default;
-                }
-                i {
-                    margin-right: 3px;
-                }
-                a {
-                    small {
-                        color: $dojo-text-secondary;
-                    }
-                }
-            }
         }
         .list-group-item {
             @include skill-list-entry();

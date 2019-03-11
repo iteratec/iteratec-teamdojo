@@ -14,13 +14,14 @@
                     <select class="form-control" name="orderBy" [(ngModel)]="orderBy" id="field_orderBy">
                         <option value="title">{{'teamdojoApp.teams.skills.search.orderBy.title' | translate}}</option>
                         <option value="score">{{'teamdojoApp.teams.skills.search.orderBy.score' | translate}}</option>
-                        <option value="rateCount">{{'teamdojoApp.teams.skills.search.orderBy.rateCount' | translate}}</option>
+                        <option
+                            value="rateCount">{{'teamdojoApp.teams.skills.search.orderBy.rateCount' | translate}}</option>
                     </select>
                 </div>
             </div>
             <div class="form-group mb-2 skill-search">
                 <input type="text" [placeholder]="'teamdojoApp.teams.skills.search.placeholder' | translate"
-                       class="skill-search-input" [value]="search" (keyup)="search$.next($event.target.value)" />
+                       class="skill-search-input" [value]="search" (keyup)="search$.next($event.target.value)"/>
             </div>
         </div>
     </div>
@@ -31,7 +32,7 @@
                 *ngFor="let skill of skills | skillFilter:search | skillSort:orderBy">
                 <div class="d-flex flex-column">
                     <div class="d-flex">
-                        <div class="skill-title d-flex flex-column" [ngClass]="{'irrelevant': skill.skillStatus === SkillStatus.IRRELEVANT}">
+                        <div class="skill-title d-flex flex-column skill-status-{{getStatusClass(skill)}}">
                             <div class="d-flex flex-row" (click)="handleSkillClicked(skill)">
                                 <a *ngIf="isInSkillDetails()" class="mb-1">{{skill.title}}</a>
                                 <a *ngIf="!isInSkillDetails()"
@@ -40,9 +41,11 @@
                             </div>
                             <div class="d-flex flex-row justify-content-between align-items-center">
                                 <div>
-                                    <ngb-rating [(rate)]="skill.rateScore" max="5" [readonly]="true" [starTemplate]="stars">
+                                    <ngb-rating [(rate)]="skill.rateScore" max="5" [readonly]="true"
+                                                [starTemplate]="stars">
                                     </ngb-rating>
-                                    {{getRateCount(skill.rateCount)}} <span class="rating-text" dojoTranslate="teamdojoApp.teams.skills.votes">Votes</span>
+                                    {{getRateCount(skill.rateCount)}} <span class="rating-text"
+                                                                            dojoTranslate="teamdojoApp.teams.skills.votes">Votes</span>
 
                                     <ng-template #stars let-fill="fill" let-index="index">
                                         <span class="star star-sm" [class.full]="fill === 100">
@@ -53,44 +56,17 @@
                                 <jhi-skill-score [skill]="skill" [hasAuthority]="hasAuthority"></jhi-skill-score>
                             </div>
                         </div>
-                        <div class="skill-status ml-auto"
-                             [ngClass]="{'completed': (!skill.irrelevant && skill.achievedAt) || (!skill.irrelevant && !skill.achievedAt && skill.vote == 1), 'verified': !skill.irrelevant && skill.achievedAt && skill.verifiedAt, 'unverified': !skill.irrelevant && skill.achievedAt && skill.vote <= -5}">
-                            <fa-icon *ngIf="skill.irrelevant" icon="thumbs-down"></fa-icon>
-                            <fa-icon *ngIf="!skill.irrelevant && skill.achievedAt" icon="check" inverse="true"></fa-icon>
-                            <fa-icon *ngIf="!skill.irrelevant &&!skill.achievedAt" icon="circle"></fa-icon>
-                        </div>
-                        <!-- TODO einkommentieren und prüfen   div class="skill-status ml-auto fa fa-inverse skill-status-{{getStatusClass(skill)}}"
+                        <div class="skill-status ml-auto fa fa-inverse skill-status-{{getStatusClass(skill)}}"
                              title="{{'teamdojoApp.teams.skills.status.' + skill.skillStatus | translate}}">
-                        </div -->
+                        </div>
                     </div>
                     <div *ngIf="isSameTeamSelected()"
-                         class="skill-action-bar d-flex flex-wrap justify-content-between">
-                        <a *ngIf="!skill.irrelevant" class="skill-action-bar-item"
-                           (click)="setIrrelevant(skill)"><fa-icon icon="thumbs-down"></fa-icon>
-                            <small dojoTranslate="teamdojoApp.teams.skills.action.irrelevant"></small>
-                        </a>
-                        <a *ngIf="skill.irrelevant" class="skill-action-bar-item"
-                           (click)="setRelevant(skill)"><fa-icon icon="thumbs-up"></fa-icon>
-                            <small dojoTranslate="teamdojoApp.teams.skills.action.relevant"></small>
-                        </a>
-                        <a *ngIf="!skill.achievedAt" class="skill-action-bar-item"
-                           [ngClass]="{'disabled': skill.irrelevant}"
-                           (click)="setComplete(skill)"><fa-icon icon="check"></fa-icon>
-                            <small dojoTranslate="teamdojoApp.teams.skills.action.complete"></small>
-                        </a>
-                        <a *ngIf="skill.achievedAt" class="skill-action-bar-item"
-                           [ngClass]="{'disabled': skill.irrelevant}"
-                           (click)="setIncomplete(skill)"><fa-icon icon="check"></fa-icon>
-                            <small dojoTranslate="teamdojoApp.teams.skills.action.incomplete"></small>
-                        </a>
-                    </div>
-                    <!-- TODO einkommentieren und prüfen
-                                        <div *ngIf="isSameTeamSelected()"
                          class="skill-action-items d-flex flex-wrap justify-content-between">
 
                         <a class="skill-action-item" (click)="toggleRelevance(skill)">
                             <i class="skill-relevance-action-item fa skill-status-{{getStatusClass(skill)}}"></i>
-                            <small jhiTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
+                            <small
+                                jhiTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
                         </a>
                         <a class="skill-action-item" (click)="clickSkillStatus(skill)">
                             <i class="skill-status-action-item fa skill-status-{{getStatusClass(skill)}}"></i>
@@ -98,33 +74,37 @@
                         </a>
 
                     </div>
-                     -->
                     <div *ngIf="!isSameTeamSelected()">
                         <div *jhiHasAnyAuthority="'ROLE_ADMIN'"
                              class="skill-action-bar d-flex flex-wrap justify-content-between">
                             <a *ngIf="!skill.irrelevant" class="skill-action-bar-item"
-                               (click)="setIrrelevant(skill)"><fa-icon icon="thumbs-down"></fa-icon>
+                               (click)="setIrrelevant(skill)">
+                                <fa-icon icon="thumbs-down"></fa-icon>
                                 <small dojoTranslate="teamdojoApp.teams.skills.action.irrelevant"></small>
                             </a>
                             <a *ngIf="skill.irrelevant" class="skill-action-bar-item"
-                               (click)="setRelevant(skill)"><fa-icon icon="thumbs-up"></fa-icon>
+                               (click)="setRelevant(skill)">
+                                <fa-icon icon="thumbs-up"></fa-icon>
                                 <small dojoTranslate="teamdojoApp.teams.skills.action.relevant"></small>
                             </a>
                             <a *ngIf="!skill.achievedAt" class="skill-action-bar-item"
                                [ngClass]="{'disabled': skill.irrelevant}"
-                               (click)="setComplete(skill)"><fa-icon icon="check"></fa-icon>
+                               (click)="setComplete(skill)">
+                                <fa-icon icon="check"></fa-icon>
                                 <small dojoTranslate="teamdojoApp.teams.skills.action.complete"></small>
                             </a>
                             <a *ngIf="skill.achievedAt" class="skill-action-bar-item"
                                [ngClass]="{'disabled': skill.irrelevant}"
-                               (click)="setIncomplete(skill)"><fa-icon icon="check"></fa-icon>
+                               (click)="setIncomplete(skill)">
+                                <fa-icon icon="check"></fa-icon>
                                 <small dojoTranslate="teamdojoApp.teams.skills.action.incomplete"></small>
                             </a>
                         </div>
                         <div *ngIf="isVoteAble(skill)"
                              class="skill-action-bar d-flex flex-wrap justify-content-between">
                             <p class="skill-action-bar-item">
-                                <small dojoTranslate="teamdojoApp.teams.skills.action.vote" [translateValues]="{'team': team.name }"></small>
+                                <small dojoTranslate="teamdojoApp.teams.skills.action.vote"
+                                       [translateValues]="{'team': team.name }"></small>
                             </p>
                             <p><a (click)="downVote(skill)">
                                 <fa-icon icon="angle-down"></fa-icon>
@@ -137,7 +117,10 @@
                         <div *ngIf="isSuggestAble(skill)"
                              class="skill-action-bar d-flex flex-wrap justify-content-between">
                             <p class="skill-action-bar-item">
-                                <a (click)="suggest(skill)"><small dojoTranslate="teamdojoApp.teams.skills.action.suggest" [translateValues]="{'team': team.name }"></small></a>
+                                <a (click)="suggest(skill)">
+                                    <small dojoTranslate="teamdojoApp.teams.skills.action.suggest"
+                                           [translateValues]="{'team': team.name }"></small>
+                                </a>
                             </p>
                         </div>
                     </div>
