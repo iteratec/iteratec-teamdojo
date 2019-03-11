@@ -14,11 +14,14 @@ import { TeamsEditComponent } from 'app/teams/teams-edit.component';
 import { BreadcrumbService } from 'app/layouts/navbar/breadcrumb.service';
 import { TeamsSelectionService } from 'app/shared/teams-selection/teams-selection.service';
 import { take } from 'rxjs/operators';
+import { trigger, transition, useAnimation } from '@angular/animations';
+import { flash } from 'ng-animate';
 
 @Component({
     selector: 'jhi-teams-status',
     templateUrl: './teams-status.component.html',
-    styleUrls: ['teams-status.scss']
+    styleUrls: ['teams-status.scss'],
+    animations: [trigger('score', [transition('* <=> *', useAnimation(flash))])]
 })
 export class TeamsStatusComponent implements OnInit, OnChanges {
     @Input() team: ITeam;

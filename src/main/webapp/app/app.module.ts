@@ -22,6 +22,7 @@ import { OverviewModule } from 'app/overview';
 import { TeamsModule } from './teams/teams.module';
 import { FeedbackModule } from './feedback/feedback.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ActiveMenuDirective, ErrorComponent, FooterComponent, JhiMainComponent, NavbarComponent, PageRibbonComponent } from './layouts';
 
@@ -46,7 +47,8 @@ import { ActiveMenuDirective, ErrorComponent, FooterComponent, JhiMainComponent,
         TeamdojoAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         TeamdojoEntityModule,
-        TeamdojoAppRoutingModule
+        TeamdojoAppRoutingModule,
+        BrowserAnimationsModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [

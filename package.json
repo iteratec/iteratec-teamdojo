@@ -8,6 +8,7 @@
         "node_modules"
     ],
     "dependencies": {
+        "@angular/animations": "^7.2.8",
         "@angular/common": "^7.2.7",
         "@angular/compiler": "^7.2.7",
         "@angular/core": "^7.2.7",
@@ -28,6 +29,7 @@
         "css-star-rating": "^1.2.4",
         "font-awesome": "^4.7.0",
         "moment": "^2.24.0",
+        "ng-animate": "^0.3.4",
         "ng-jhipster": "^0.9.3",
         "ngx-cookie": "^2.0.1",
         "ngx-infinite-scroll": "^7.0.1",
