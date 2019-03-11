@@ -31,7 +31,7 @@
                 *ngFor="let skill of skills | skillFilter:search | skillSort:orderBy">
                 <div class="d-flex flex-column">
                     <div class="d-flex">
-                        <div class="skill-title d-flex flex-column skill-status-{{getStatusClass(skill)}}"><!-- TODO slab-stand war:  [ngClass]="{'irrelevant': skill.irrelevant}"-->
+                        <div class="skill-title d-flex flex-column" [ngClass]="{'irrelevant': skill.skillStatus === SkillStatus.IRRELEVANT}">
                             <div class="d-flex flex-row" (click)="handleSkillClicked(skill)">
                                 <a *ngIf="isInSkillDetails()" class="mb-1">{{skill.title}}</a>
                                 <a *ngIf="!isInSkillDetails()"

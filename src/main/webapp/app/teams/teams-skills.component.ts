@@ -22,7 +22,7 @@ import 'simplebar';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AccountService } from 'app/core';
-import { SkillStatusUtils } from 'app/shared/model/skill-status';
+import { SkillStatus, SkillStatusUtils } from 'app/shared/model/skill-status';
 
 const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 
@@ -32,6 +32,8 @@ const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
     styleUrls: ['teams-skills.scss']
 })
 export class TeamsSkillsComponent implements OnInit, OnChanges {
+    public SkillStatus = SkillStatus;
+
     @Input() team: ITeam;
     @Input() skill: IAchievableSkill;
     @Input() iSkills: ISkill[];

@@ -1,4 +1,4 @@
-export const enum SkillStatus {
+export enum SkillStatus {
     OPEN = 'OPEN',
     ACHIEVED = 'ACHIEVED',
     EXPIRING = 'EXPIRING',
