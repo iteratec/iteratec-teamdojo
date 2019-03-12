@@ -104,6 +104,15 @@
                     content: '\f10c'; // circle-o
                 }
             }
+            &.completed {
+                background-color: $warning;
+            }
+            &.verified {
+                background-color: $success;
+            }
+            &.unverified {
+                background-color: $danger;
+            }
         }
         .skill-action-bar {
             padding: 5px 10px;

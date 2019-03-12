@@ -56,17 +56,20 @@
                             </div>
                         </div>
                         <div class="skill-status ml-auto fa fa-inverse skill-status-{{getStatusClass(skill)}}"
-                             title="{{'teamdojoApp.teams.skills.status.' + skill.skillStatus | translate}}">
+                             title="{{'teamdojoApp.teams.skills.status.' + skill.skillStatus | translate}}"
+                             [ngClass]="{'completed': (!skill.irrelevant && skill.achievedAt) || (!skill.irrelevant && !skill.achievedAt && skill.vote == 1), 'verified': !skill.irrelevant && skill.achievedAt && skill.verifiedAt, 'unverified': !skill.irrelevant && skill.achievedAt && skill.vote <= -5}">
                         </div>
                     </div>
                     <div *ngIf="isSameTeamSelected()"
                          class="skill-action-bar d-flex flex-wrap justify-content-between">
 
-                        <a class="skill-action-bar-item fa skill-status-relevance-action-{{getStatusClass(skill)}}" (click)="toggleRelevance(skill)">
+                        <a class="skill-action-bar-item fa skill-status-relevance-action-{{getStatusClass(skill)}}"
+                           (click)="toggleRelevance(skill)">
                             <small class=""
-                                jhiTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
+                                   jhiTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
                         </a>
-                        <a class="skill-action-bar-item fa skill-status-{{getStatusClass(skill)}}" (click)="clickSkillStatus(skill)">
+                        <a class="skill-action-bar-item fa skill-status-{{getStatusClass(skill)}}"
+                           (click)="clickSkillStatus(skill)">
                             <small jhiTranslate="teamdojoApp.teams.skills.action.{{skill.skillStatus}}"></small>
                         </a>
                     </div>
