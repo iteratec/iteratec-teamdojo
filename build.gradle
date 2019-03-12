@@ -59,8 +59,6 @@ dependencyManagement {
 
 defaultTasks 'bootRun'
 
-version = "0.10.1"
-
 group = 'de.otto.teamdojo'
 
 description = ''
