@@ -62,15 +62,15 @@
                     </div>
                     <div *ngIf="isSameTeamSelected()"
                          class="skill-action-bar d-flex flex-wrap justify-content-between">
-
                         <a class="skill-action-bar-item fa skill-status-relevance-action-{{getStatusClass(skill)}}"
                            (click)="toggleRelevance(skill)">
-                            <small class=""
-                                   jhiTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
+                            <small class="skill-action-bar-item-label"
+                                   dojoTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
                         </a>
-                        <a class="skill-action-bar-item fa skill-status-{{getStatusClass(skill)}}"
+                        <a class="skill-action-bar-item fa skill-status-action-{{getStatusClass(skill)}}"
                            (click)="clickSkillStatus(skill)">
-                            <small jhiTranslate="teamdojoApp.teams.skills.action.{{skill.skillStatus}}"></small>
+                            <small class="skill-action-bar-item-label"
+                                   dojoTranslate="teamdojoApp.teams.skills.action.{{skill.skillStatus}}"></small>
                         </a>
                     </div>
                     <div *ngIf="!isSameTeamSelected()">

@@ -115,22 +115,24 @@
             }
         }
         .skill-action-bar {
-            padding: 5px 10px;
+            padding: 10px;
             border-top: 1px solid $gray-400;
+
+            .skill-action-bar-item-label {
+                font-family: $font-family-sans-serif;
+            }
 
             &-item {
                 &.disabled {
                     opacity: 0.3;
                     cursor: default;
                 }
-                i {
-                    margin-right: 3px;
-                }
                 a {
                     small {
                         color: $dojo-text-secondary;
                     }
                 }
+                /* relavance action icons */
                 &.skill-status-relevance-action-irrelevant {
                     &:before {
                         content: '\f087'; // thumbs-up
@@ -156,6 +158,33 @@
                     color: black;
                     &:before {
                         content: '\f088'; // thumbs-down
+                    }
+                }
+
+                /* action icons */
+                &.skill-status-action-irrelevant {
+                    &:before {
+                        // content: '\f088'; // thumbs-down
+                    }
+                }
+                &.skill-status-action-achieved {
+                    &:before {
+                        content: '\f00c'; // checkmark
+                    }
+                }
+                &.skill-status-action-expired {
+                    &:before {
+                        content: '\f10c'; // circle-o
+                    }
+                }
+                &.skill-status-action-expiring {
+                    &:before {
+                        content: '\f071'; // exclamation-triangle
+                    }
+                }
+                &.skill-status-action-open {
+                    &:before {
+                        content: '\f10c'; // circle-o
                     }
                 }
             }
