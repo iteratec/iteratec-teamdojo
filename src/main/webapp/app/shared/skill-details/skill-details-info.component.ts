@@ -140,7 +140,11 @@ export class SkillDetailsInfoComponent implements OnInit, OnChanges {
     }
 
     getStatusClass(skill: IAchievableSkill): string {
-        return SkillStatusUtils.getStyleClassName(skill.skillStatus);
+        return SkillStatusUtils.getLowerCaseValue(skill.skillStatus);
+    }
+
+    getSkillStatusTranslationKey(skill: IAchievableSkill): string {
+        return SkillStatusUtils.getLowerCaseValue(skill.skillStatus);
     }
 
     updateSkillRating(skill: ISkill) {

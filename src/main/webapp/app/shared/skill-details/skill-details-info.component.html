@@ -4,14 +4,14 @@
 </span>
 
 <div class="skill-action-items" *ngIf="isSameTeamSelected()">
-    <small dojoTranslate="teamdojoApp.teams.skills.status.{{achievableSkill.skillStatus}}" class="skill-status"></small>
+    <small dojoTranslate="teamdojoApp.teams.skills.status.{{getSkillStatusTranslationKey(achievableSkill)}}" class="skill-status"></small>
     <a class="skill-action-item" (click)="onToggleIrrelevance()">
         <i class="skill-relevance-action-item fa skill-status-{{getStatusClass(achievableSkill)}}"></i>
-        <small dojoTranslate="teamdojoApp.teams.skills.relevanceAction.{{achievableSkill.skillStatus}}"></small>
+        <small dojoTranslate="teamdojoApp.teams.skills.relevanceAction.onSkillStatus.{{getSkillStatusTranslationKey(achievableSkill)}}"></small>
     </a>
     <a class="skill-action-item" (click)="onToggleSkill()">
         <i class="skill-status-action-item fa skill-status-{{getStatusClass(achievableSkill)}}"></i>
-        <small dojoTranslate="teamdojoApp.teams.skills.action.{{achievableSkill.skillStatus}}"></small>
+        <small dojoTranslate="teamdojoApp.teams.skills.action.onSkillStatus.{{getSkillStatusTranslationKey(achievableSkill)}}"></small>
     </a>
 </div>
 

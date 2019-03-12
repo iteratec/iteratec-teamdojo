@@ -31,31 +31,39 @@
                     }
                 },
                 "status": {
-                    "IRRELEVANT": "This skill is irrelevant.",
-                    "ACHIEVED": "This skill has been completed.",
-                    "EXPIRING": "This skill has been completed, but will expire within the next 7 days.",
-                    "EXPIRED": "This skill has been completed before, but is now expired.",
-                    "OPEN": "This skill awaits completion."
+                    "irrelevant": "This skill is irrelevant.",
+                    "achieved": "This skill has been completed.",
+                    "expiring": "This skill has been completed, but will expire within the next 7 days.",
+                    "expired": "This skill has been completed before, but is now expired.",
+                    "open": "This skill awaits completion."
                 },
                 "relevanceAction": {
-                    "IRRELEVANT": "Relevant",
-                    "ACHIEVED": "Irrelevant",
-                    "EXPIRING": "Irrelevant",
-                    "EXPIRED": "Irrelevant",
-                    "OPEN": "Irrelevant"
+                    "onSkillStatus": {
+                        "irrelevant": "Relevant",
+                        "achieved": "Irrelevant",
+                        "expiring": "Irrelevant",
+                        "expired": "Irrelevant",
+                        "open": "Irrelevant"
+                    },
+                    "admin": {
+                        "irrelevant": "Irrelevant",
+                        "relevant": "Relevant"
+                    }
                 },
                 "action": {
-                    "complete": "Complete",
-                    "incomplete": "Reopen",
-                    "irrelevant": "Irrelevant",
-                    "relevant": "Relevant",
                     "vote": "Do you think {{ team }} can handle this?",
                     "suggest": "Suggest {{ team }} this Skill!",
-                    "IRRELEVANT": "",
-                    "ACHIEVED": "Reopen",
-                    "EXPIRING": "Reopen",
-                    "EXPIRED": "Renew",
-                    "OPEN": "Complete"
+                    "onSkillStatus": {
+                        "irrelevant": "",
+                        "achieved": "Reopen",
+                        "expiring": "Reopen",
+                        "expired": "Renew",
+                        "open": "Complete"
+                    },
+                    "admin": {
+                        "complete": "Complete",
+                        "incomplete": "Reopen"
+                    }
                 },
                 "details": {
                     "activate": "Activate skill",

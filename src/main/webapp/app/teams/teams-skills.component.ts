@@ -182,7 +182,11 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     }
 
     getStatusClass(skill: IAchievableSkill): string {
-        return SkillStatusUtils.getStyleClassName(skill.skillStatus);
+        return SkillStatusUtils.getLowerCaseValue(skill.skillStatus);
+    }
+
+    getSkillStatusTranslationKey(skill: AchievableSkill): string {
+        return SkillStatusUtils.getLowerCaseValue(skill.skillStatus);
     }
 
     clickSkillStatus(skill: IAchievableSkill) {

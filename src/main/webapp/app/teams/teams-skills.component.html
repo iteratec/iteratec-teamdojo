@@ -65,12 +65,12 @@
                         <a class="skill-action-bar-item fa skill-status-relevance-action-{{getStatusClass(skill)}}"
                            (click)="toggleRelevance(skill)">
                             <small class="skill-action-bar-item-label"
-                                   dojoTranslate="teamdojoApp.teams.skills.relevanceAction.{{skill.skillStatus}}"></small>
+                                   dojoTranslate="teamdojoApp.teams.skills.relevanceAction.onSkillStatus.{{getSkillStatusTranslationKey(skill)}}"></small>
                         </a>
                         <a class="skill-action-bar-item fa skill-status-action-{{getStatusClass(skill)}}"
                            (click)="clickSkillStatus(skill)">
                             <small class="skill-action-bar-item-label"
-                                   dojoTranslate="teamdojoApp.teams.skills.action.{{skill.skillStatus}}"></small>
+                                   dojoTranslate="teamdojoApp.teams.skills.action.onSkillStatus.{{getSkillStatusTranslationKey(skill)}}"></small>
                         </a>
                     </div>
                     <div *ngIf="!isSameTeamSelected()">
@@ -79,24 +79,24 @@
                             <a *ngIf="!skill.irrelevant" class="skill-action-bar-item"
                                (click)="setIrrelevant(skill)">
                                 <fa-icon icon="thumbs-down"></fa-icon>
-                                <small dojoTranslate="teamdojoApp.teams.skills.action.irrelevant"></small>
+                                <small dojoTranslate="teamdojoApp.teams.skills.relevanceAction.admin.irrelevant"></small>
                             </a>
                             <a *ngIf="skill.irrelevant" class="skill-action-bar-item"
                                (click)="setRelevant(skill)">
                                 <fa-icon icon="thumbs-up"></fa-icon>
-                                <small dojoTranslate="teamdojoApp.teams.skills.action.relevant"></small>
+                                <small dojoTranslate="teamdojoApp.teams.skills.relevanceAction.admin.relevant"></small>
                             </a>
                             <a *ngIf="!skill.achievedAt" class="skill-action-bar-item"
                                [ngClass]="{'disabled': skill.irrelevant}"
                                (click)="setComplete(skill)">
                                 <fa-icon icon="check"></fa-icon>
-                                <small dojoTranslate="teamdojoApp.teams.skills.action.complete"></small>
+                                <small dojoTranslate="teamdojoApp.teams.skills.action.admin.complete"></small>
                             </a>
                             <a *ngIf="skill.achievedAt" class="skill-action-bar-item"
                                [ngClass]="{'disabled': skill.irrelevant}"
                                (click)="setIncomplete(skill)">
                                 <fa-icon icon="check"></fa-icon>
-                                <small dojoTranslate="teamdojoApp.teams.skills.action.incomplete"></small>
+                                <small dojoTranslate="teamdojoApp.teams.skills.action.admin.incomplete"></small>
                             </a>
                         </div>
                         <div *ngIf="isVoteAble(skill)"
