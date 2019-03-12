@@ -19,7 +19,6 @@ export interface IAchievableSkill {
 
 export class AchievableSkill implements IAchievableSkill {
     constructor(
-        public teamSkillId?: number,
         public skillId?: number,
         public title?: string,
         public description?: string,
