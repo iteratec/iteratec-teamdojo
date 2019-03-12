@@ -32,8 +32,6 @@ const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
     styleUrls: ['teams-skills.scss']
 })
 export class TeamsSkillsComponent implements OnInit, OnChanges {
-    public SkillStatus = SkillStatus;
-
     @Input() team: ITeam;
     @Input() skill: IAchievableSkill;
     @Input() iSkills: ISkill[];

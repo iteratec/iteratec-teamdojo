@@ -3,7 +3,6 @@
 @import '../../content/scss/colors';
 @import '../../content/scss/mixins';
 @import './skill-details/skill-details-rating/skill-details-rating';
-@import '/skill-details/skill-details-status/skill-details-status';
 
 .in-skill-details {
     cursor: pointer;
@@ -54,7 +53,7 @@
             word-break: break-word;
             flex-grow: 1;
 
-            &.IRRELEVANT {
+            &.irrelevant {
                 opacity: 0.3;
             }
         }
@@ -106,10 +105,51 @@
                 }
             }
         }
-        .skill-action-items, /* TODO eins von beiden */
         .skill-action-bar {
             padding: 5px 10px;
             border-top: 1px solid $gray-400;
+
+            &-item {
+                &.disabled {
+                    opacity: 0.3;
+                    cursor: default;
+                }
+                i {
+                    margin-right: 3px;
+                }
+                a {
+                    small {
+                        color: $dojo-text-secondary;
+                    }
+                }
+                &.skill-status-relevance-action-irrelevant {
+                    &:before {
+                        content: '\f087'; // thumbs-up
+                    }
+                    color: $dojo-text-secondary;
+                }
+                &.skill-status-relevance-action-achieved {
+                    &:before {
+                        content: '\f088'; // thumbs-down
+                    }
+                }
+                &.skill-status-relevance-action-expired {
+                    &:before {
+                        content: '\f088'; // thumbs-down
+                    }
+                }
+                &.skill-status-relevance-action-expiring {
+                    &:before {
+                        content: '\f088'; // thumbs-down
+                    }
+                }
+                &.skill-status-relevance-action-open {
+                    color: black;
+                    &:before {
+                        content: '\f088'; // thumbs-down
+                    }
+                }
+            }
         }
         .list-group-item {
             @include skill-list-entry();
