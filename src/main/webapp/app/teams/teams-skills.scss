@@ -137,7 +137,6 @@
                     &:before {
                         content: '\f087'; // thumbs-up
                     }
-                    color: $dojo-text-secondary;
                 }
                 &.skill-status-relevance-action-achieved {
                     &:before {
@@ -155,7 +154,6 @@
                     }
                 }
                 &.skill-status-relevance-action-open {
-                    color: black;
                     &:before {
                         content: '\f088'; // thumbs-down
                     }
