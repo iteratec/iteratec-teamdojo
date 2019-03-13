@@ -3,11 +3,11 @@ kind: Route
 metadata:
   annotations:
     haproxy.router.openshift.io/ip_whitelist: >-
-      192.168.0.0/16 213.61.180.0/24 80.83.103.98 91.213.207.150/32
+      192.168.0.0/16 213.61.180.160/27 80.83.103.98 91.213.207.150/32
       217.110.66.86 92.198.12.18 62.23.225.216/29 193.59.130.170
   name: teamdojo-int
 spec:
-  host: slabdojo-int.cloudapps.iterashift.de
+  host: TEAMDOJO_SUBDOMAIN.cloudapps.iterashift.com
   port:
     targetPort: http
   tls:

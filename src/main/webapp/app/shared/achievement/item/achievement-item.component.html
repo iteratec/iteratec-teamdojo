@@ -11,10 +11,10 @@
 <div class="d-flex flex-column achievement-item" (click)="selectItem($event)"
      popoverClass="score-popover"
      [ngClass]="[active ? 'active' : '', type, itemStatusCssClass]"
-     [ngbPopover]="popoverContent" #popover="ngbPopover" triggers="manual"
+     [ngbPopover]="popoverContent" #popover="ngbPopover" [autoClose]="false" triggers="manual"
      (mouseenter)="onPopupEnter()" (mouseleave)="onPopupLeave()" placement="top" container="body">
     <div class="badge-content">
-        <span *ngIf="item.instantMultiplier >= 0 && active" class="badge badge-pill multiplier-badge" (click)="toggleEditMode()">
+        <span *ngIf="item.instantMultiplier >= 0 && active" class="badge badge-pill multiplier-badge" (click)="toggleEditMode($event)">
            {{('teamdojoApp.teams.achievements.item.multiplier' | translate) + ': ' + item.instantMultiplier}}
         </span>
     </div>

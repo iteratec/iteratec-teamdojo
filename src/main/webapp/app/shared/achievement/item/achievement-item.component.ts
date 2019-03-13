@@ -57,6 +57,9 @@ export class AchievementItemComponent {
                     break;
             }
         }
+        if (!newInstantMultiplier) {
+            this.popover.close();
+        }
     }
 
     selectItem(event) {
@@ -65,16 +68,17 @@ export class AchievementItemComponent {
         this.inEditMode = false;
         if (!this._active) {
             this.onItemSelected.emit(this.item);
-            this.inEditMode = false;
+            if (!this.popover.isOpen()) {
+                this.popover.open();
+            }
         } else {
-            this.onItemSelected.emit(null);
-        }
-        if (!this.popover.isOpen()) {
-            this.popover.open();
+            if (this.popover.isOpen()) {
+                this.popover.close();
+            }
         }
     }
 
-    toggleEditMode() {
+    toggleEditMode(event) {
         event.preventDefault();
         event.stopPropagation();
         if (this.hasAuthority) {

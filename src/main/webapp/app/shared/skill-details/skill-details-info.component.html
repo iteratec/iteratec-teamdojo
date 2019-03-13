@@ -1,6 +1,6 @@
 <span>
     <span class="skill-title">{{ skill.title }}</span>
-    <span class="explanation">{{ 'teamdojoApp.skill.titleExplanationShort' | translate }}</span>
+    <span class="explanation">{{ 'teamdojoApp.skill.titleExplanationQuestion' | translate }}</span>
 </span>
 
 <div class="skill-action-items" *ngIf="isSameTeamSelected()">
@@ -29,24 +29,24 @@
 
 <div class="dojo-card">
     <div class="skill-desc desc-block">
-        <span>
+        <div class="skill-desc-block-headline">
             <span class="headline"> {{ 'teamdojoApp.teams.skills.details.desc' | translate }}</span>
-            <span class="explanation"> {{ 'teamdojoApp.skill.descriptionExplanationShort' | translate }}</span>
-        </span>
+            <span class="explanation"> {{ 'teamdojoApp.skill.descriptionExplanationQuestion' | translate }}</span>
+        </div>
         <p>{{ skill.description }}</p>
     </div>
     <div class="skill-impl desc-block">
-        <span>
+        <div class="skill-desc-block-headline">
             <span class="headline"> {{ 'teamdojoApp.teams.skills.details.implementation' | translate }}</span>
-            <span class="explanation"> {{ 'teamdojoApp.skill.implementationExplanationShort' | translate }}</span>
-        </span>
+            <span class="explanation"> {{ 'teamdojoApp.skill.implementationExplanationQuestion' | translate }}</span>
+        </div>
         <p>{{ skill.implementation }}</p>
     </div>
     <div class="skill-validation desc-block">
-        <span>
+        <div class="skill-desc-block-headline">
             <span class="headline"> {{ 'teamdojoApp.teams.skills.details.validation' | translate }}</span>
-            <span class="explanation"> {{ 'teamdojoApp.skill.validationExplanationShort' | translate }}</span>
-        </span>
+            <span class="explanation"> {{ 'teamdojoApp.skill.validationExplanationQuestion' | translate }}</span>
+        </div>
         <p>{{ skill.validation }}</p>
     </div>
 

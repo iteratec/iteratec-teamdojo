@@ -7,6 +7,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: bamboodeployer
-  namespace: slabdojo
 userNames:
-- system:serviceaccount:slabdojo:bamboodeployer

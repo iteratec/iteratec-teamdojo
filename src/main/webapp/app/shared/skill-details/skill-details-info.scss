@@ -87,6 +87,10 @@
     background: rgba($dojo-bg-gradient-from, 0.5);
     padding: 20px;
     @include shadow();
+
+    .skill-desc-block-headline {
+        margin-bottom: 0.3rem;
+    }
 }
 
 .skill-metadata {

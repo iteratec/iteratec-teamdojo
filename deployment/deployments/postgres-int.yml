@@ -18,7 +18,8 @@ spec:
         deploymentconfig: postgres-int
     spec:
       containers:
-      - image: postgres
+      - image: docker-registry.default.svc:5000/openshift/postgresql:9.5
+        imagePullPolicy: IfNotPresent
         name: postgres
         ports:
         - containerPort: 5432
@@ -29,12 +30,12 @@ spec:
         - name: POSTGRESQL_USER
           valueFrom:
             secretKeyRef:
-              name: slabdojo-db
-              key: user
+              name: database-creds
+              key: username
         - name: POSTGRESQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: slabdojo-db
+              name: database-creds
               key: password
         volumeMounts:
         - mountPath: /var/lib/pgsql/data
@@ -46,11 +47,3 @@ spec:
   test: false
   triggers:
   - type: ConfigChange
-  - imageChangeParams:
-      automatic: true
-      containerNames:
-      - postgres
-      from:
-        kind: ImageStreamTag
-        name: postgres:latest
-    type: ImageChange
