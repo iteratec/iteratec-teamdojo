@@ -28,7 +28,6 @@
     * {
         color: $dojo-text-primary;
     }
-    display: block;
     margin-bottom: 5px;
     .skill-action-item {
         margin-right: 20px;
@@ -109,7 +108,6 @@
 .needed-for-badges {
     display: flex;
     flex-wrap: wrap;
-    /*  flex-flow: wrap; */
     > * {
         display: inline-flex;
     }
