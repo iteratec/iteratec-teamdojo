@@ -75,7 +75,7 @@
             cursor: default;
             &.skill-status-irrelevant {
                 &:before {
-                    content: '\f088'; // thumbs-down
+                    content: '\f165'; // thumbs-down
                 }
                 background-color: transparent;
                 color: $dojo-text-secondary;
@@ -119,10 +119,12 @@
             border-top: 1px solid $gray-400;
 
             .skill-action-bar-item-label {
-                font-family: $font-family-sans-serif;
+                font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
             }
 
             &-item {
+                font-size: 18px;
+                color: $dojo-text-primary;
                 &.disabled {
                     opacity: 0.3;
                     cursor: default;
@@ -130,32 +132,33 @@
                 a {
                     small {
                         color: $dojo-text-secondary;
+                        font-size: 16px;
                     }
                 }
                 /* relavance action icons */
                 &.skill-status-relevance-action-irrelevant {
                     &:before {
-                        content: '\f087'; // thumbs-up
+                        content: '\f164'; // thumbs-up f164
                     }
                 }
                 &.skill-status-relevance-action-achieved {
                     &:before {
-                        content: '\f088'; // thumbs-down
+                        content: '\f165'; // thumbs-down
                     }
                 }
                 &.skill-status-relevance-action-expired {
                     &:before {
-                        content: '\f088'; // thumbs-down
+                        content: '\f165'; // thumbs-down
                     }
                 }
                 &.skill-status-relevance-action-expiring {
                     &:before {
-                        content: '\f088'; // thumbs-down
+                        content: '\f165'; // thumbs-down
                     }
                 }
                 &.skill-status-relevance-action-open {
                     &:before {
-                        content: '\f088'; // thumbs-down
+                        content: '\f165'; // thumbs-down
                     }
                 }
 

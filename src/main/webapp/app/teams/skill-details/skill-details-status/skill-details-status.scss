@@ -1,5 +1,4 @@
 .skill-action-items {
-
     .skill-action-item {
         &.disabled {
             opacity: 0.3;
@@ -16,7 +15,7 @@
         i.skill-relevance-action-item {
             &.skill-status-irrelevant {
                 &:before {
-                    content: "\f087"; // thumbs-up
+                    content: '\f164'; // thumbs-up
                 }
             }
             &.skill-status-achieved,
@@ -24,7 +23,7 @@
             &.skill-status-expiring,
             &.skill-status-expired {
                 &:before {
-                    content: "\f088"; // thumbs-down
+                    content: '\f165'; // thumbs-down
                 }
             }
         }
@@ -32,13 +31,13 @@
             &.skill-status-open,
             &.skill-status-expired {
                 &:before {
-                    content: "\f00c"; // checkmark
+                    content: '\f00c'; // checkmark
                 }
             }
             &.skill-status-achieved,
             &.skill-status-expiring {
                 &:before {
-                    content: "\f10c"; // circle-o
+                    content: '\f10c'; // circle-o
                 }
             }
         }
