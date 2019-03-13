@@ -31,7 +31,7 @@
                     }
                 },
                 "status": {
-                    "IRRELEVANT": "Dieser Skill ist irrelevant.",
+                    "irrelevant": "Dieser Skill ist irrelevant.",
                     "achieved": "Dieser Skill wurde bereits erreicht.",
                     "expiring": "Dieser Skill wurde erreicht, wird aber innerhalb der nächsten Tage veralten.",
                     "expired": "Dieser Skill wurde schon einmal erreicht, ist aber inzwischen veraltet.",
@@ -54,7 +54,7 @@
                     "vote": "Traust du das {{ team }} zu?",
                     "suggest": "{{ team }} diesen Skill vorschlagen!",
                     "onSkillStatus": {
-                        "IRRELEVANT": "",
+                        "irrelevant": "",
                         "achieved": "Verlernen",
                         "expiring": "Verlernen",
                         "expired": "Erneuern",
