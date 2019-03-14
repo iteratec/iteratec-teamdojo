@@ -31,7 +31,6 @@
                 [ngClass]="{'active-skill':isActiveSkill(skill), 'irrelevant-skill': skill.irrelevant, 'in-skill-details': isInSkillDetails()}"
                 *ngFor="let skill of skills | skillFilter:search | skillSort:orderBy">
                 <div class="d-flex flex-column">
-                    <div *ngIf="skill.achievedAt" class="pyro"></div>
                     <div class="d-flex">
                         <div class="skill-title d-flex flex-column" [ngClass]="{'irrelevant': skill.irrelevant}">
                             <div class="d-flex flex-row" (click)="handleSkillClicked(skill)">

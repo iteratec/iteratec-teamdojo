@@ -2,13 +2,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { JhiDataUtils } from 'ng-jhipster';
 import { ActivatedRoute } from '@angular/router';
 import { ITeam } from 'app/shared/model/team.model';
-import { sortLevels } from 'app/shared';
 import { IBadge } from 'app/shared/model/badge.model';
-import { IDimension } from 'app/shared/model/dimension.model';
-import { IBadgeSkill } from 'app/shared/model/badge-skill.model';
 import { TeamSkillService } from 'app/entities/team-skill';
 import { ITeamSkill } from 'app/shared/model/team-skill.model';
 import { ISkill } from 'app/shared/model/skill.model';
+import * as moment from 'moment';
 
 @Component({
     selector: 'jhi-teams',
@@ -39,6 +37,12 @@ export class TeamsComponent implements OnInit {
     loadTeamSkills() {
         this.teamSkillService.query({ 'teamId.equals': this.team.id }).subscribe(teamSkillResponse => {
             this.team.skills = this.teamSkills = teamSkillResponse.body;
+            if (this.team.skills.find(skill => moment().diff(skill.completedAt, 'seconds') < 2)) {
+                document.getElementById('pyro').style.display = 'block';
+                setTimeout(function() {
+                    document.getElementById('pyro').style.display = 'none';
+                }, 2000);
+            }
         });
     }
 
