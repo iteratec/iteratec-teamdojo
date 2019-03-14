@@ -3,30 +3,33 @@
         <h4>{{'teamdojoApp.overview.skills.title' | translate}}</h4>
     </div>
     <div class="additional-functions d-flex flex-column align-items-end">
-        <div class="form-group mb-2 justify-content-end skill-sort">
-            <select class="form-control" name="topicSelect" id="field_topic_select" [(ngModel)]="activeTopic"
-                   (change)="onTopicChange($event.target.value)">
+        <div class="form-group mb-2 justify-content-end">
+            <label>{{'teamdojoApp.overview.skills.filterBy' | translate}}</label>
+            <select class="form-control skill-list-control" name="topicSelect" id="field_topic_select" [(ngModel)]="activeTopic"
+                    (change)="onTopicChange()">
+                <option [ngValue]="null">{{'teamdojoApp.overview.skills.allTopics' | translate}}</option>
                 <option [ngValue]="topic" *ngFor="let topic of topics">{{topic.name}}</option>
             </select>
-            <select class="form-control" name="orderBy" id="field_orderBy"
+            <label>{{'teamdojoApp.overview.skills.searchBy' | translate}}</label>
+            <input type="text" [placeholder]="'teamdojoApp.teams.skills.search.placeholder' | translate"
+                   class="skill-search-input skill-list-control" [value]="search" (keyup)="search$.next($event.target.value)"/>
+            <label>{{'teamdojoApp.overview.skills.orderBy' | translate}}</label>
+            <select class="form-control skill-list-control" name="orderBy" id="field_orderBy"
                     [(ngModel)]="orderBy" (ngModelChange)="onSkillSort()">
                 <option value="title">{{'teamdojoApp.teams.skills.search.orderBy.title' | translate}}</option>
                 <option value="score">{{'teamdojoApp.teams.skills.search.orderBy.score' | translate}}</option>
                 <option value="rateCount">{{'teamdojoApp.teams.skills.search.orderBy.rateCount' | translate}}</option>
             </select>
         </div>
-        <div class="form-group mb-2 skill-search">
-            <input type="text" [placeholder]="'teamdojoApp.teams.skills.search.placeholder' | translate"
-                   class="skill-search-input" [value]="search" (keyup)="search$.next($event.target.value)" />
-        </div>
+
     </div>
-    <div class="teams-skills-list list-group"  data-simplebar="init">
+    <div class="teams-skills-list list-group" data-simplebar="init">
         <li class="list-group-item list-group-item-action flex-column align-items-start mb-2 skill-container"
             [ngClass]="{'active-skill':isActiveSkill(skill)}"
             *ngFor="let skill of activeSkills | skillFilter:search">
             <div class="d-flex justify-content-between" [routerLink]="['/overview', 'skills', skill.id]"
                  [queryParams]="{level: activeLevel?.id, badge: activeBadge?.id}">
-                <a class="#" class="text-dark mb-1 skill-title" >{{ skill.title }}</a>
+                <a class="#" class="text-dark mb-1 skill-title">{{ skill.title }}</a>
                 <div class="d-flex align-items-end ml-auto count-teams">
                     <span class="mb-auto">{{getRelevantTeams(skill)}}</span>
                 </div>
@@ -35,7 +38,8 @@
                 <div>
                     <ngb-rating [(rate)]="skill.id.rateScore" max="5" [readonly]="true" [starTemplate]="stars">
                     </ngb-rating>
-                    {{getRateCount(skill.id.rateCount)}} <span class="rating-text" dojoTranslate="teamdojoApp.skill.detail.rateCount"></span>
+                    {{getRateCount(skill.id.rateCount)}} <span class="rating-text"
+                                                               dojoTranslate="teamdojoApp.skill.detail.rateCount"></span>
 
                     <ng-template #stars let-fill="fill" let-index="index">
                         <span class="star star-sm" [class.full]="fill === 100">

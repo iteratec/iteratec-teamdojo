@@ -21,7 +21,11 @@
                 }
             },
             "skills": {
-                "title": "Kompetenzen"
+                "title": "Kompetenzen",
+                "allTopics": "Alle Themengebiete",
+                "filterBy": "Filtern nach Themengebiet",
+                "searchBy": "Suchen nach Titel",
+                "orderBy": "Sortierung nach"
             },
             "navigation": {
                 "text": "Teamübersicht"

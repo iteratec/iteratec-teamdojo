@@ -21,7 +21,11 @@
                 }
             },
             "skills": {
-                "title": "Skills"
+                "title": "Skills",
+                "allTopics": "All topics",
+                "filterBy": "Filter by topic",
+                "searchBy": "Search by title",
+                "orderBy": "Order by"
             },
             "navigation": {
                 "text": "Team overview"

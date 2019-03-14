@@ -83,23 +83,25 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
                     this.activeTopic = this.topics.find(
                         (dimension: IDimension) => dimension.id === Number.parseInt(params.get('topic'), 10)
                     );
-                    const levelsOfActiveTopic: ILevel[] = this.levels.filter((level: ILevel) => {
-                        return level.dimensionId === this.activeTopic.id;
-                    });
-                    const skillsOfActiveTopic: Array<ISkill[]> = levelsOfActiveTopic.map((level: ILevel) => {
-                        const levelSkillsOfLevel: ILevelSkill[] = this.levelSkills.filter((levelSkill: ILevelSkill) => {
-                            return levelSkill.levelId === level.id;
+                    if (this.activeTopic && this.activeTopic.id) {
+                        const levelsOfActiveTopic: ILevel[] = this.levels.filter((level: ILevel) => {
+                            return level.dimensionId === this.activeTopic.id;
                         });
-                        const sk: ISkill[] = levelSkillsOfLevel.map((levelSkill: ILevelSkill) => {
-                            const sks: Array<ISkill> = this.skills.filter((skill: ISkill) => {
-                                return skill.id === levelSkill.skillId;
+                        const skillsOfActiveTopic: Array<ISkill[]> = levelsOfActiveTopic.map((level: ILevel) => {
+                            const levelSkillsOfLevel: ILevelSkill[] = this.levelSkills.filter((levelSkill: ILevelSkill) => {
+                                return levelSkill.levelId === level.id;
                             });
-                            return sks[0];
+                            const sk: ISkill[] = levelSkillsOfLevel.map((levelSkill: ILevelSkill) => {
+                                const sks: Array<ISkill> = this.skills.filter((skill: ISkill) => {
+                                    return skill.id === levelSkill.skillId;
+                                });
+                                return sks[0];
+                            });
+                            return sk;
                         });
-                        return sk;
-                    });
-                    this.activeSkills = this.sortActiveSkills([].concat.apply([], skillsOfActiveTopic));
-                    this.updateBreadcrumb();
+                        this.activeSkills = this.sortActiveSkills([].concat.apply([], skillsOfActiveTopic));
+                        this.updateBreadcrumb();
+                    }
                 } else {
                     this.activeSkills = this.sortActiveSkills(this.skills);
                     this.updateBreadcrumb();
@@ -236,9 +238,9 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
         ).map(skill => activeSkills.find(activeSkill => activeSkill.id === skill.id));
     }
 
-    onTopicChange(topic: IDimension) {
+    onTopicChange() {
         this.router.navigate(['/'], {
-            queryParams: { topic: this.activeTopic.id }
+            queryParams: { topic: this.activeTopic ? this.activeTopic.id : null }
         });
     }
 }
