@@ -16,6 +16,8 @@ import { Subject } from 'rxjs';
 import { SkillSortPipe } from 'app/shared/pipe/skill-sort.pipe';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AccountService } from 'app/core';
+import { IDimension } from 'app/shared/model/dimension.model';
+import { Router } from '@angular/router';
 
 const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 
@@ -27,16 +29,19 @@ const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 export class OverviewSkillsComponent implements OnInit, OnChanges {
     @Input() activeSkill: ISkill;
     @Output() onSkillChanged = new EventEmitter<ISkill>();
+    /* data from backend */
     teams: ITeam[];
     levels: ILevel[];
     levelSkills: ILevelSkill[];
     badges: IBadge[];
     badgeSkills: IBadgeSkill[];
     skills: ISkill[];
+    topics: IDimension[];
+    /* state in view */
     activeSkills: ISkill[];
-    itemSkills: ILevelSkill[] | IBadgeSkill[];
     activeLevel: ILevel;
     activeBadge: IBadge;
+    activeTopic: IDimension;
     dimensionsBySkillId: any;
     generalSkillsIds: number[];
     search$: Subject<string>;
@@ -49,36 +54,54 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
         private route: ActivatedRoute,
         private breadcrumbService: BreadcrumbService,
         private dimensionService: DimensionService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private router: Router
     ) {}
 
     ngOnInit() {
-        this.route.data.subscribe(({ dojoModel: { teams, levels, levelSkills, badges, badgeSkills }, skills }) => {
+        this.route.data.subscribe(({ dojoModel: { teams, levels, levelSkills, badges, badgeSkills }, skills, topics }) => {
             this.teams = teams || [];
             this.levels = levels || [];
             this.levelSkills = levelSkills || [];
             this.badges = badges || [];
             this.badgeSkills = badgeSkills || [];
             this.skills = (skills && skills.body ? skills.body : skills) || [];
+            this.topics = (topics && topics.body ? topics.body : topics) || [];
             this.route.queryParamMap.subscribe((params: ParamMap) => {
                 this.activeLevel = null;
                 this.activeBadge = null;
+                this.activeTopic = null;
                 if (params.get('level')) {
                     this.activeLevel = (this.levels || []).find((level: ILevel) => level.id === Number.parseInt(params.get('level'), 10));
                     this.activeSkills = this.activeLevel ? this.sortActiveSkills(this.findSkills(this.activeLevel.skills)) : [];
-                    this.itemSkills = this.activeLevel.skills || [];
                     this.updateBreadcrumb();
                 } else if (params.get('badge')) {
                     this.activeBadge = (this.badges || []).find((badge: IBadge) => badge.id === Number.parseInt(params.get('badge'), 10));
                     this.activeSkills = this.activeBadge ? this.sortActiveSkills(this.findSkills(this.activeBadge.skills)) : [];
-                    this.itemSkills = this.activeBadge.skills || [];
+                    this.updateBreadcrumb();
+                } else if (params.get('topic')) {
+                    this.activeTopic = this.topics.find(
+                        (dimension: IDimension) => dimension.id === Number.parseInt(params.get('topic'), 10)
+                    );
+                    const levelsOfActiveTopic: ILevel[] = this.levels.filter((level: ILevel) => {
+                        return level.dimensionId === this.activeTopic.id;
+                    });
+                    const skillsOfActiveTopic: Array<ISkill[]> = levelsOfActiveTopic.map((level: ILevel) => {
+                        const levelSkillsOfLevel: ILevelSkill[] = this.levelSkills.filter((levelSkill: ILevelSkill) => {
+                            return levelSkill.levelId === level.id;
+                        });
+                        const sk: ISkill[] = levelSkillsOfLevel.map((levelSkill: ILevelSkill) => {
+                            const sks: Array<ISkill> = this.skills.filter((skill: ISkill) => {
+                                return skill.id === levelSkill.skillId;
+                            });
+                            return sks[0];
+                        });
+                        return sk;
+                    });
+                    this.activeSkills = this.sortActiveSkills([].concat.apply([], skillsOfActiveTopic));
                     this.updateBreadcrumb();
                 } else {
                     this.activeSkills = this.sortActiveSkills(this.skills);
-                    this.itemSkills = (this.levelSkills || []).concat(
-                        this.badgeSkills.filter((b: IBadgeSkill) => !this.levelSkills.find((l: ILevelSkill) => l.skillId === b.skillId)) ||
-                            []
-                    );
                     this.updateBreadcrumb();
                 }
             });
@@ -211,5 +234,11 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
         return (
             new SkillSortPipe().transform((activeSkills || []).map(activeSkill => this.findSkill(activeSkill.id)), this.orderBy) || []
         ).map(skill => activeSkills.find(activeSkill => activeSkill.id === skill.id));
+    }
+
+    onTopicChange(topic: IDimension) {
+        this.router.navigate(['/'], {
+            queryParams: { topic: this.activeTopic.id }
+        });
     }
 }

@@ -19,6 +19,7 @@ import { OrganizationService } from 'app/entities/organization';
 import { mergeMap } from 'rxjs/operators';
 import { ServerInfoService } from 'app/server-info';
 import { IServerInfo } from 'app/shared/model/server-info.model';
+import { DimensionService } from 'app/entities/dimension';
 
 @Injectable()
 export class AllTeamsResolve implements Resolve<any> {
@@ -108,6 +109,15 @@ export class DojoModelResolve implements Resolve<any> {
                 return { teams, teamSkills, levels, levelSkills, badges, badgeSkills };
             })
         );
+    }
+}
+
+@Injectable()
+export class AllTopicsResolve implements Resolve<any> {
+    constructor(private dimensionService: DimensionService) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        return this.dimensionService.query();
     }
 }
 

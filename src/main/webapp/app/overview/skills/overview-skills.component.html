@@ -4,6 +4,10 @@
     </div>
     <div class="additional-functions d-flex flex-column align-items-end">
         <div class="form-group mb-2 justify-content-end skill-sort">
+            <select class="form-control" name="topicSelect" id="field_topic_select" [(ngModel)]="activeTopic"
+                   (change)="onTopicChange($event.target.value)">
+                <option [ngValue]="topic" *ngFor="let topic of topics">{{topic.name}}</option>
+            </select>
             <select class="form-control" name="orderBy" id="field_orderBy"
                     [(ngModel)]="orderBy" (ngModelChange)="onSkillSort()">
                 <option value="title">{{'teamdojoApp.teams.skills.search.orderBy.title' | translate}}</option>
