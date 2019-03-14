@@ -35,6 +35,7 @@ export class SkillScoreComponent {
                             iSkill: res.body,
                             aSkill: null
                         });
+                        this.skill = res.body;
                         this.popover.close();
                     });
                 },
