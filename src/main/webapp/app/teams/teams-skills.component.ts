@@ -33,16 +33,17 @@ const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 export class TeamsSkillsComponent implements OnInit, OnChanges {
     @Input() team: ITeam;
     @Input() skill: IAchievableSkill;
-    @Input() iSkills: ISkill[];
     @Output() onSkillClicked = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
     @Output() onSkillChanged = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
     skills: IAchievableSkill[];
+    topics: IDimension[];
     filters: string[];
     levelId: number;
     badgeId: number;
+    topicId: number;
     activeBadge: IBadge;
     activeLevel: ILevel;
-    activeDimension: IDimension;
+    activeTopic: IDimension;
     activeSkill: ISkill;
     search$: Subject<string>;
     search: string;
@@ -69,11 +70,14 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.filters = this.getFiltersFromStorage();
         this.skills = [];
+        this.topics = [];
         this.route.queryParamMap.subscribe((params: ParamMap) => {
             const levelId = this.getParamAsNumber('level', params);
             const badgeId = this.getParamAsNumber('badge', params);
+            const topicId = this.getParamAsNumber('topic', params);
             this.levelId = levelId ? levelId : null;
             this.badgeId = badgeId ? badgeId : null;
+            this.topicId = topicId ? topicId : null;
             this.loadAll();
         });
         this.search = '';
@@ -106,21 +110,42 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     }
 
     loadAll() {
-        this.teamsSkillsService
-            .queryAchievableSkills(this.team.id, {
-                filter: this.filters,
-                levelId: this.levelId || null,
-                badgeId: this.badgeId || null
-            })
-            .subscribe(
-                (res: HttpResponse<IAchievableSkill[]>) => (this.skills = res.body),
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-
         this.activeBadge = null;
         this.activeLevel = null;
-        this.activeDimension = null;
+        this.activeTopic = null;
         this.activeSkill = null;
+
+        if (this.topics.length === 0) {
+            this.dimensionService.query().subscribe(topics => {
+                this.topics = topics.body;
+                if (this.topicId) {
+                    this.activeTopic = this.topics.find((t: IDimension) => t.id === this.topicId);
+                }
+            });
+        }
+        if (this.topicId) {
+            this.activeTopic = this.topics.find((t: IDimension) => t.id === this.topicId);
+            this.teamsSkillsService
+                .queryAchievableSkillsByTopic(this.team.id, {
+                    filter: this.filters,
+                    topicId: this.topicId
+                })
+                .subscribe(
+                    (res: HttpResponse<IAchievableSkill[]>) => (this.skills = res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        } else {
+            this.teamsSkillsService
+                .queryAchievableSkills(this.team.id, {
+                    filter: this.filters,
+                    levelId: this.levelId || null,
+                    badgeId: this.badgeId || null
+                })
+                .subscribe(
+                    (res: HttpResponse<IAchievableSkill[]>) => (this.skills = res.body),
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+        }
 
         if (this.badgeId) {
             this.badgeService.find(this.badgeId).subscribe(badge => {
@@ -132,8 +157,9 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         if (this.levelId) {
             this.levelService.find(this.levelId).subscribe(level => {
                 this.activeLevel = level.body;
-                this.dimensionService.find(this.activeLevel.dimensionId).subscribe(dimension => {
-                    this.activeDimension = dimension.body;
+                this.dimensionService.find(this.activeLevel.dimensionId).subscribe(topicResponse => {
+                    const activeTopic = topicResponse.body;
+                    this.activeTopic = this.topics.find(topic => topic.id === activeTopic.id);
                     this.updateBreadcrumb();
                 });
             });
@@ -149,7 +175,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         this.updateBreadcrumb();
     }
 
-    goToDetails(skill: IAchievableSkill) {
+    getQueryParams() {
         const queryParams = {};
         if (this.levelId) {
             queryParams['level'] = this.levelId;
@@ -157,13 +183,28 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         if (this.badgeId) {
             queryParams['badge'] = this.badgeId;
         }
+        if (this.topicId) {
+            queryParams['topic'] = this.topicId;
+        }
+        return queryParams;
+    }
+
+    goToDetails(skill: IAchievableSkill) {
+        const queryParams = this.getQueryParams();
         this.router.navigate(['teams', this.team.shortName, 'skills', skill.skillId], {
             queryParams
         });
     }
 
+    onTopicChange(activeTopic) {
+        this.activeTopic = activeTopic;
+        this.router.navigate(['teams', this.team.shortName], {
+            queryParams: { topic: activeTopic ? activeTopic.id : null }
+        });
+    }
+
     private updateBreadcrumb() {
-        this.breadcrumbService.setBreadcrumb(this.team, this.activeDimension, this.activeLevel, this.activeBadge, this.activeSkill);
+        this.breadcrumbService.setBreadcrumb(this.team, this.activeTopic, this.activeLevel, this.activeBadge, this.activeSkill);
     }
 
     setComplete(skill: IAchievableSkill) {
@@ -262,7 +303,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
                     iSkill: skill.body,
                     aSkill: s
                 });
-                this.breadcrumbService.setBreadcrumb(this.team, this.activeDimension, this.activeLevel, this.activeBadge, skill.body);
+                this.breadcrumbService.setBreadcrumb(this.team, this.activeTopic, this.activeLevel, this.activeBadge, skill.body);
             });
         }
     }

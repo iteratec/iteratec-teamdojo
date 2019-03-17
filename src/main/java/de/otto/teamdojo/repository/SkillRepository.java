@@ -41,6 +41,23 @@ public interface SkillRepository extends JpaRepository<Skill, Long>, JpaSpecific
         @Param("filter") List<String> filter,
         Pageable pageable);
 
+    @Query("SELECT DISTINCT" +
+        " new de.otto.teamdojo.service.dto.AchievableSkillDTO(t.id, s.id, s.title, s.description, t.completedAt, t.verifiedAt, t.vote, t.voters, t.irrelevant, s.score, s.rateScore, s.rateCount)" +
+        " FROM Skill s" +
+        " LEFT JOIN s.teams t ON t.team.id = :teamId" +
+        " LEFT JOIN s.levels l" +
+        " WHERE l.level.dimension.id IN :topicIds" +
+        " AND (" +
+        "  ( ('COMPLETE' IN :filter)  AND (t.completedAt is not null) )" +
+        "   OR ( ('INCOMPLETE' IN :filter) AND (t.completedAt is null) )" +
+        " )" +
+        " ORDER BY s.title")
+    Page<AchievableSkillDTO> findAchievableSkillsByTopics(
+        @Param("teamId") Long teamId,
+        @Param("topicIds") List<Long> topicIds,
+        @Param("filter") List<String> filter,
+        Pageable pageable);
+
 
     @Query("SELECT DISTINCT" +
         " new de.otto.teamdojo.service.dto.AchievableSkillDTO(t.id, s.id, s.title, s.description, t.completedAt, t.verifiedAt, t.vote, t.voters, t.irrelevant, s.score, s.rateScore, s.rateCount)" +

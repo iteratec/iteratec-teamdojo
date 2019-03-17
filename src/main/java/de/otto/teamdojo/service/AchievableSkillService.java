@@ -14,6 +14,11 @@ public interface AchievableSkillService {
      */
     Page<AchievableSkillDTO> findAllByTeamAndLevelAndBadge(Long teamId, List<Long> levelIds, List<Long> badgeIds, List<String> filterNames, Pageable pageable);
 
+    /*
+     *  Get the skills that are achievable for the given team and belong to one of the given topics
+     */
+    Page<AchievableSkillDTO> findAllByTeamAndTopic(Long teamId, List<Long> topicIds, List<String> filterNames, Pageable pageable);
+
     /**
      * Updates an achievable skill
      */

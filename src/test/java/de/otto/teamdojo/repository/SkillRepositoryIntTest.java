@@ -18,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -79,8 +81,6 @@ public class SkillRepositoryIntTest {
     public void getCompleteAndIncompleteSkills() throws Exception {
         setupTestData();
 
-        Skill evilUserStories_notAchievable = evilUserStories().build(em);
-
         em.flush();
 
         Long teamId = team.getId();
@@ -93,6 +93,27 @@ public class SkillRepositoryIntTest {
 
         Page<AchievableSkillDTO> results = skillRepository.findAchievableSkillsByLevelsAndBadges(teamId, levelIds, badgeIds, filter, Pageable.unpaged());
         assertThat(results.getTotalElements()).isEqualTo(4);
+    }
+
+    @Test
+    @Transactional
+    public void getSkillsForTopic() throws Exception {
+        setupTestData();
+
+        em.flush();
+
+        Long teamId = team.getId();
+
+        Long topicId = security.getId();
+
+        List<String> filter = Lists.newArrayList("COMPLETE", "INCOMPLETE");
+
+        Page<AchievableSkillDTO> results = skillRepository.findAchievableSkillsByTopics(
+            teamId, Arrays.asList(topicId), filter, Pageable.unpaged());
+        assertThat(results.getTotalElements()).isEqualTo(3);
+        assertThat(results.stream().anyMatch(skill -> "Input Validation".equals(skill.getTitle()))).isTrue();
+        assertThat(results.stream().anyMatch(skill -> "Software updates".equals(skill.getTitle()))).isTrue();
+        assertThat(results.stream().anyMatch(skill -> "Strong passwords".equals(skill.getTitle()))).isTrue();
     }
 
     @Test

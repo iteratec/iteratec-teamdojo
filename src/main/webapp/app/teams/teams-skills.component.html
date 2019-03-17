@@ -3,6 +3,13 @@
         <h4>{{'teamdojoApp.teams.skills.title' | translate}}</h4>
         <div class="d-flex flex-column justify-content-between">
             <div class="form-inline mb-2 justify-content-between">
+                <label>{{'teamdojoApp.overview.skills.filterBy' | translate}}</label>
+                <select class="form-control skill-list-control" name="topicSelect" id="field_topic_select" [ngModel]="activeTopic"
+                         (ngModelChange)="onTopicChange($event)">
+                    <option [ngValue]="null">{{'teamdojoApp.overview.skills.allTopics' | translate}}</option>
+                    <option [ngValue]="topic" *ngFor="let topic of topics">{{topic.name}}</option>
+                </select>
+
                 <div class="form-group form-check">
                     <input class="form-check-input" type="checkbox" value="" id="checkIncomplete"
                            [checked]="filters.indexOf('INCOMPLETE') > -1" (click)="onFilterClicked('INCOMPLETE')">

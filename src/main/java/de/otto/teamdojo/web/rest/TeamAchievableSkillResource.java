@@ -29,16 +29,28 @@ public class TeamAchievableSkillResource {
         this.achievableSkillService = achievableSkillService;
     }
 
-    @GetMapping("/teams/{id}/achievable-skills")
+    @GetMapping("/teams/{teamId}/achievable-skills")
     public ResponseEntity<List<AchievableSkillDTO>> getAchievableSkills(
-        @PathVariable Long id,
+        @PathVariable Long teamId,
         @RequestParam(name = "levelId", required = false, defaultValue = "") List<Long> levelIds,
         @RequestParam(name = "badgeId", required = false, defaultValue = "") List<Long> badgeIds,
         @RequestParam(name = "filter", required = false, defaultValue = "") List<String> filterNames,
         Pageable pageable) {
-        log.debug("REST request to get AchievableSkills for Team; {}", id);
-        Page<AchievableSkillDTO> page = achievableSkillService.findAllByTeamAndLevelAndBadge(id, levelIds, badgeIds, filterNames, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/teams/" + id + "/achievable-skills");
+        log.debug("REST request to get AchievableSkills for Team; {}", teamId);
+        Page<AchievableSkillDTO> page = achievableSkillService.findAllByTeamAndLevelAndBadge(teamId, levelIds, badgeIds, filterNames, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/teams/" + teamId + "/achievable-skills");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/teams/{teamId}/achievable-skills/by-topic")
+    public ResponseEntity<List<AchievableSkillDTO>> getAchievableSkills(
+        @PathVariable Long teamId,
+        @RequestParam(name = "topicId") List<Long> topicIds,
+        @RequestParam(name = "filter", required = false, defaultValue = "") List<String> filterNames,
+        Pageable pageable) {
+        log.debug("REST request to get AchievableSkills for Team and topic {}, {}", teamId, topicIds);
+        Page<AchievableSkillDTO> page = achievableSkillService.findAllByTeamAndTopic(teamId, topicIds, filterNames, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/teams/" + teamId + "/achievable-skills");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
