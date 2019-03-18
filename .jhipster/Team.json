@@ -61,12 +61,18 @@
         {
             "fieldName": "validUntil",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "isOffical",
+            "fieldType": "Boolean"
         }
     ],
     "changelogDate": "20180419083624",
     "dto": "mapstruct",
+    "searchEngine": false,
     "service": "serviceImpl",
     "entityTableName": "team",
+    "databaseType": "sql",
     "jpaMetamodelFiltering": true,
     "pagination": "infinite-scroll"
 }

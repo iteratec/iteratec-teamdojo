@@ -70,6 +70,9 @@ public class TeamResourceIntTest {
     private static final Instant DEFAULT_VALID_UNTIL = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_UNTIL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Boolean DEFAULT_IS_OFFICAL = false;
+    private static final Boolean UPDATED_IS_OFFICAL = true;
+
     @Autowired
     private TeamRepository teamRepository;
 
@@ -131,7 +134,8 @@ public class TeamResourceIntTest {
             .shortName(DEFAULT_SHORT_NAME)
             .slogan(DEFAULT_SLOGAN)
             .contactPerson(DEFAULT_CONTACT_PERSON)
-            .validUntil(DEFAULT_VALID_UNTIL);
+            .validUntil(DEFAULT_VALID_UNTIL)
+            .isOffical(DEFAULT_IS_OFFICAL);
         return team;
     }
 
@@ -161,6 +165,7 @@ public class TeamResourceIntTest {
         assertThat(testTeam.getSlogan()).isEqualTo(DEFAULT_SLOGAN);
         assertThat(testTeam.getContactPerson()).isEqualTo(DEFAULT_CONTACT_PERSON);
         assertThat(testTeam.getValidUntil()).isEqualTo(DEFAULT_VALID_UNTIL);
+        assertThat(testTeam.isIsOffical()).isEqualTo(DEFAULT_IS_OFFICAL);
     }
 
     @Test
@@ -236,7 +241,8 @@ public class TeamResourceIntTest {
             .andExpect(jsonPath("$.[*].shortName").value(hasItem(DEFAULT_SHORT_NAME.toString())))
             .andExpect(jsonPath("$.[*].slogan").value(hasItem(DEFAULT_SLOGAN.toString())))
             .andExpect(jsonPath("$.[*].contactPerson").value(hasItem(DEFAULT_CONTACT_PERSON.toString())))
-            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())));
+            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())))
+            .andExpect(jsonPath("$.[*].isOffical").value(hasItem(DEFAULT_IS_OFFICAL.booleanValue())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -287,7 +293,8 @@ public class TeamResourceIntTest {
             .andExpect(jsonPath("$.shortName").value(DEFAULT_SHORT_NAME.toString()))
             .andExpect(jsonPath("$.slogan").value(DEFAULT_SLOGAN.toString()))
             .andExpect(jsonPath("$.contactPerson").value(DEFAULT_CONTACT_PERSON.toString()))
-            .andExpect(jsonPath("$.validUntil").value(DEFAULT_VALID_UNTIL.toString()));
+            .andExpect(jsonPath("$.validUntil").value(DEFAULT_VALID_UNTIL.toString()))
+            .andExpect(jsonPath("$.isOffical").value(DEFAULT_IS_OFFICAL.booleanValue()));
     }
 
     @Test
@@ -487,6 +494,45 @@ public class TeamResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllTeamsByIsOfficalIsEqualToSomething() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where isOffical equals to DEFAULT_IS_OFFICAL
+        defaultTeamShouldBeFound("isOffical.equals=" + DEFAULT_IS_OFFICAL);
+
+        // Get all the teamList where isOffical equals to UPDATED_IS_OFFICAL
+        defaultTeamShouldNotBeFound("isOffical.equals=" + UPDATED_IS_OFFICAL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByIsOfficalIsInShouldWork() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where isOffical in DEFAULT_IS_OFFICAL or UPDATED_IS_OFFICAL
+        defaultTeamShouldBeFound("isOffical.in=" + DEFAULT_IS_OFFICAL + "," + UPDATED_IS_OFFICAL);
+
+        // Get all the teamList where isOffical equals to UPDATED_IS_OFFICAL
+        defaultTeamShouldNotBeFound("isOffical.in=" + UPDATED_IS_OFFICAL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByIsOfficalIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where isOffical is not null
+        defaultTeamShouldBeFound("isOffical.specified=true");
+
+        // Get all the teamList where isOffical is null
+        defaultTeamShouldNotBeFound("isOffical.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllTeamsByParticipationsIsEqualToSomething() throws Exception {
         // Initialize the database
         Dimension participations = DimensionResourceIntTest.createEntity(em);
@@ -553,7 +599,8 @@ public class TeamResourceIntTest {
             .andExpect(jsonPath("$.[*].shortName").value(hasItem(DEFAULT_SHORT_NAME)))
             .andExpect(jsonPath("$.[*].slogan").value(hasItem(DEFAULT_SLOGAN)))
             .andExpect(jsonPath("$.[*].contactPerson").value(hasItem(DEFAULT_CONTACT_PERSON)))
-            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())));
+            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())))
+            .andExpect(jsonPath("$.[*].isOffical").value(hasItem(DEFAULT_IS_OFFICAL.booleanValue())));
 
         // Check, that the count call also returns 1
         restTeamMockMvc.perform(get("/api/teams/count?sort=id,desc&" + filter))
@@ -605,7 +652,8 @@ public class TeamResourceIntTest {
             .shortName(UPDATED_SHORT_NAME)
             .slogan(UPDATED_SLOGAN)
             .contactPerson(UPDATED_CONTACT_PERSON)
-            .validUntil(UPDATED_VALID_UNTIL);
+            .validUntil(UPDATED_VALID_UNTIL)
+            .isOffical(UPDATED_IS_OFFICAL);
         TeamDTO teamDTO = teamMapper.toDto(updatedTeam);
 
         restTeamMockMvc.perform(put("/api/teams")
@@ -622,6 +670,7 @@ public class TeamResourceIntTest {
         assertThat(testTeam.getSlogan()).isEqualTo(UPDATED_SLOGAN);
         assertThat(testTeam.getContactPerson()).isEqualTo(UPDATED_CONTACT_PERSON);
         assertThat(testTeam.getValidUntil()).isEqualTo(UPDATED_VALID_UNTIL);
+        assertThat(testTeam.isIsOffical()).isEqualTo(UPDATED_IS_OFFICAL);
     }
 
     @Test

@@ -50,7 +50,10 @@ public class Team implements Serializable {
     @Column(name = "valid_until")
     private Instant validUntil;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @Column(name = "is_offical")
+    private Boolean isOffical;
+
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "team_participations",
                joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"),
@@ -136,6 +139,19 @@ public class Team implements Serializable {
 
     public void setValidUntil(Instant validUntil) {
         this.validUntil = validUntil;
+    }
+
+    public Boolean isIsOffical() {
+        return isOffical;
+    }
+
+    public Team isOffical(Boolean isOffical) {
+        this.isOffical = isOffical;
+        return this;
+    }
+
+    public void setIsOffical(Boolean isOffical) {
+        this.isOffical = isOffical;
     }
 
     public Set<Dimension> getParticipations() {
@@ -231,6 +247,7 @@ public class Team implements Serializable {
             ", slogan='" + getSlogan() + "'" +
             ", contactPerson='" + getContactPerson() + "'" +
             ", validUntil='" + getValidUntil() + "'" +
+            ", isOffical='" + isIsOffical() + "'" +
             "}";
     }
 }

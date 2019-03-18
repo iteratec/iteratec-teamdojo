@@ -33,6 +33,7 @@
                 <td>{{team.slogan}}</td>
                 <td>{{team.contactPerson}}</td>
                 <td>{{team.validUntil | date:'medium'}}</td>
+                <td>{{team.isOffical}}</td>
                 <td>
                     <div *ngIf="team.imageId">
                         <a [routerLink]="['../image', team.imageId , 'view' ]" >{{team.imageName}}</a>
