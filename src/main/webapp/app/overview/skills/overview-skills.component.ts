@@ -91,13 +91,11 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
                             const levelSkillsOfLevel: ILevelSkill[] = this.levelSkills.filter((levelSkill: ILevelSkill) => {
                                 return levelSkill.levelId === level.id;
                             });
-                            const sk: ISkill[] = levelSkillsOfLevel.map((levelSkill: ILevelSkill) => {
-                                const sks: Array<ISkill> = this.skills.filter((skill: ISkill) => {
+                            return levelSkillsOfLevel.map((levelSkill: ILevelSkill) => {
+                                return this.skills.find((skill: ISkill) => {
                                     return skill.id === levelSkill.skillId;
                                 });
-                                return sks[0];
                             });
-                            return sk;
                         });
                         this.activeSkills = this.sortActiveSkills([].concat.apply([], skillsOfActiveTopic));
                         this.updateBreadcrumb();
