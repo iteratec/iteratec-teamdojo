@@ -42,15 +42,15 @@ public class TeamAchievableSkillResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @GetMapping("/teams/{teamId}/achievable-skills/by-topic")
-    public ResponseEntity<List<AchievableSkillDTO>> getAchievableSkills(
+    @GetMapping("/teams/{teamId}/achievable-skills/by-topics")
+    public ResponseEntity<List<AchievableSkillDTO>> getAchievableSkillsByTopics(
         @PathVariable Long teamId,
         @RequestParam(name = "topicId") List<Long> topicIds,
         @RequestParam(name = "filter", required = false, defaultValue = "") List<String> filterNames,
         Pageable pageable) {
-        log.debug("REST request to get AchievableSkills for Team and topic {}, {}", teamId, topicIds);
+        log.debug("REST request to get AchievableSkills for Team and Topic {}, {}", teamId, topicIds);
         Page<AchievableSkillDTO> page = achievableSkillService.findAllByTeamAndTopic(teamId, topicIds, filterNames, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/teams/" + teamId + "/achievable-skills");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/teams/" + teamId + "/achievable-skills/by-topic");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

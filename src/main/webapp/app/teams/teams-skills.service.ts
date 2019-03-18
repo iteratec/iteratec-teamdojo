@@ -39,7 +39,7 @@ export class TeamsSkillsService {
     queryAchievableSkillsByTopic(teamId: number, req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
-            .get<IAchievableSkill[]>(`${this.resourceUrl}/${teamId}/achievable-skills/by-topic`, {
+            .get<IAchievableSkill[]>(`${this.resourceUrl}/${teamId}/achievable-skills/by-topics`, {
                 params: options,
                 observe: 'response'
             })

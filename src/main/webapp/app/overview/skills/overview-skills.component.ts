@@ -37,7 +37,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     badgeSkills: IBadgeSkill[];
     skills: ISkill[];
     topics: IDimension[];
-    /* state in view */
+    /* component state */
     activeSkills: ISkill[];
     activeLevel: ILevel;
     activeBadge: IBadge;
