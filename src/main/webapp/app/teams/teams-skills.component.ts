@@ -198,7 +198,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
 
     onTopicChange(activeTopic) {
         this.activeTopic = activeTopic;
-        this.router.navigate(['teams', this.team.shortName], {
+        this.router.navigate([], {
             queryParams: { topic: activeTopic ? activeTopic.id : null }
         });
     }

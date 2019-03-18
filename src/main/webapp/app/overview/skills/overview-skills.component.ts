@@ -239,7 +239,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     }
 
     onTopicChange() {
-        this.router.navigate(['/'], {
+        this.router.navigate([], {
             queryParams: { topic: this.activeTopic ? this.activeTopic.id : null }
         });
     }
