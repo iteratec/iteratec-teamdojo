@@ -35,7 +35,8 @@ export const OVERVIEW_ROUTE: Route[] = [
             comments: AllCommentsResolve,
             selectedTeam: TeamsSelectionResolve,
             skills: AllSkillsResolve,
-            trainings: AllTrainingsResolve
+            trainings: AllTrainingsResolve,
+            topics: AllTopicsResolve
         },
         data: {
             authorities: [],
