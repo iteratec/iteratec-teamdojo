@@ -41,16 +41,20 @@
     }
 }
 
-.additional-functions {
+.skill-list-header {
     width: 100%;
     padding-right: 13px;
     padding-left: 2px;
     margin-bottom: 25px;
 
+    .form-select-label {
+        margin-bottom: 0px;
+    }
+
     .skill-list-control {
         height: calc(2rem);
         padding: 0.2rem 0.75rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
     }
     .skill-search-input {
         border-radius: 0.25rem;
