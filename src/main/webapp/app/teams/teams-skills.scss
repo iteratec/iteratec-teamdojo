@@ -138,7 +138,7 @@
 @media only screen and (min-width: map-get($grid-breakpoints, lg)) {
     .teams-skills {
         .teams-skills-list {
-            height: calc(100vh - 320px);
+            height: calc(100vh - 400px);
             padding: 5px;
             padding-left: 0;
         }
