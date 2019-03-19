@@ -66,8 +66,8 @@ export class AchievementItemComponent {
         event.preventDefault();
         event.stopPropagation();
         this.inEditMode = false;
+        this.onItemSelected.emit(this.item);
         if (!this._active) {
-            this.onItemSelected.emit(this.item);
             if (!this.popover.isOpen()) {
                 this.popover.open();
             }
