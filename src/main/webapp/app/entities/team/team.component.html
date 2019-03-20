@@ -14,14 +14,14 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-            <th jhiSortBy="id"><span dojoTranslate="teamdojoApp.global.field.id">ID</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="name"><span dojoTranslate="teamdojoApp.team.name">Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="shortName"><span dojoTranslate="teamdojoApp.team.shortName">Short Name</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="slogan"><span dojoTranslate="teamdojoApp.team.slogan">Slogan</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="contactPerson"><span dojoTranslate="teamdojoApp.team.contactPerson">Contact Person</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="validUntil"><span dojoTranslate="teamdojoApp.team.validUntil">Valid Until</span> <span
-                    class="fa fa-sort"></span></th>
-            <th jhiSortBy="imageName"><span dojoTranslate="teamdojoApp.team.image">Image</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="id"><span dojoTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span dojoTranslate="teamdojoApp.team.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="shortName"><span dojoTranslate="teamdojoApp.team.shortName">Short Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="slogan"><span dojoTranslate="teamdojoApp.team.slogan">Slogan</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contactPerson"><span dojoTranslate="teamdojoApp.team.contactPerson">Contact Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="validUntil"><span dojoTranslate="teamdojoApp.team.validUntil">Valid Until</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pureTrainingTeam"><span dojoTranslate="teamdojoApp.team.pureTrainingTeam">Pure Training Team</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="imageName"><span dojoTranslate="teamdojoApp.team.image">Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -33,6 +33,7 @@
                 <td>{{team.slogan}}</td>
                 <td>{{team.contactPerson}}</td>
                 <td>{{team.validUntil | date:'medium'}}</td>
+                <td>{{team.pureTrainingTeam}}</td>
                 <td>
                     <div *ngIf="team.imageId">
                         <a [routerLink]="['../image', team.imageId , 'view' ]" >{{team.imageName}}</a>
