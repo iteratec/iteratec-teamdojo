@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new Team(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
+            elemDefault = new Team(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, false, false);
         });
 
         describe('Service methods', async () => {
@@ -75,7 +75,8 @@ describe('Service Tests', () => {
                         slogan: 'BBBBBB',
                         contactPerson: 'BBBBBB',
                         validUntil: currentDate.format(DATE_TIME_FORMAT),
-                        pureTrainingTeam: true
+                        pureTrainingTeam: true,
+                        official: true
                     },
                     elemDefault
                 );
@@ -102,7 +103,8 @@ describe('Service Tests', () => {
                         slogan: 'BBBBBB',
                         contactPerson: 'BBBBBB',
                         validUntil: currentDate.format(DATE_TIME_FORMAT),
-                        pureTrainingTeam: true
+                        pureTrainingTeam: true,
+                        official: true
                     },
                     elemDefault
                 );
