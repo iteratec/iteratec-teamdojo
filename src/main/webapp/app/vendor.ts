@@ -48,6 +48,7 @@ import {
     faAngleLeft,
     faAngleDown,
     faCaretRight,
+    faCaretDown,
     faPaperPlane,
     faComment,
     faEllipsisV,
@@ -100,6 +101,7 @@ library.add(faAngleUp);
 library.add(faAngleLeft);
 library.add(faAngleDown);
 library.add(faCaretRight);
+library.add(faCaretDown);
 library.add(faPaperPlane);
 library.add(faComment);
 library.add(faEllipsisV);

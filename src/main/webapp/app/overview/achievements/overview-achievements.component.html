@@ -35,7 +35,7 @@
             <ng-template ngbPanelTitle>
                 <div class="achievement-list-header d-flex align-items-center">
                     <div class="achievement-list-header-right">
-                        <fa-icon icon="caret-right" class="mr-2"></fa-icon>
+                        <fa-icon icon="caret-{{expandedDimensions.includes('achievements-dimension-' + dimension.id) ? 'down' : 'right'}}" class="mr-2"></fa-icon>
                         <span (click)="selectItem('dimension', dimension.id); $event.stopPropagation()">{{dimension.name}}</span>
                         <fa-icon *ngIf="activeItemIds.dimension === dimension.id" icon="filter"></fa-icon>
                     </div>

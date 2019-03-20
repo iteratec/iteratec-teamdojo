@@ -13,6 +13,7 @@ import 'simplebar';
 import { ISkill } from 'app/shared/model/skill.model';
 import { AccountService } from 'app/core';
 import { ILevelSkill } from 'app/shared/model/level-skill.model';
+import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 
 const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 
@@ -157,6 +158,23 @@ export class TeamsAchievementsComponent implements OnInit, OnChanges {
             : dimension.levels
                   .slice(0, dimension.levels.findIndex(l => l.id === level.id) || 0)
                   .every(l => this.getLevelOrBadgeProgress(l).isCompleted());
+    }
+
+    handleDimensionToggle(event: NgbPanelChangeEvent) {
+        this.setDimensionPanelActiveState(event.panelId, event.nextState);
+    }
+
+    setDimensionPanelActiveState(panelId: string, expanded: boolean) {
+        if (expanded) {
+            if (!this.expandedDimensions.includes(panelId)) {
+                this.expandedDimensions.push(panelId);
+            }
+        } else {
+            const idx = this.expandedDimensions.findIndex(d => panelId === d);
+            if (idx !== -1) {
+                this.expandedDimensions.splice(idx, 1);
+            }
+        }
     }
 
     private getLevelOrBadgeProgress(item: ILevel | IBadge): IProgress {
