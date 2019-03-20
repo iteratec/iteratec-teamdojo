@@ -24,7 +24,7 @@
             "pureTrainingTeam": "Reines Trainings Team",
             "pureTrainingTeamExplanation": "Bei Aktivierung als Trainings-Team wird das Team in der Übersicht nicht mehr angezeigt. In der Teamauswahl bleibt es sichtbar",
             "official": "Offizielles Projektteam",
-            "officialExplanation": "Trainings-Räume können für jeden benutzt werden auch ohne offizielles Projekt/Produktteam. Kennzeichne letztere aber gerne, so dass ein Badge \"Projektteam\" angezeigt wird.",
+            "officialExplanation": "Trainings-Räume können von jedem benutzt werden auch ohne offizielles Projekt/Produktteam. Kennzeichne diese aber gerne, dann wird ein \"offiziell\"-Badge angezeigt.",
             "participations": "Teilnahmen",
             "skills": "Skills",
             "image": "Image"

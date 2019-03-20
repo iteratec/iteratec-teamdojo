@@ -24,7 +24,7 @@
             "pureTrainingTeam": "Pure Training Team",
             "pureTrainingTeamExplanation": "When activated as pure training team, the team will not be listed in the overview. Although it remains visible in the team selection.",
             "official": "Is official project team",
-            "officialExplanation": "Training rooms can be used by anyone even without an official project/product team. But please mark the latter so that a badge \"project team\" is displayed.",
+            "officialExplanation": "Training rooms can be used by anyone even without an official project/product team. Please mark them, then an \"official\" badge will be displayed.",
             "participations": "Participations",
             "skills": "Skills",
             "image": "Image"
