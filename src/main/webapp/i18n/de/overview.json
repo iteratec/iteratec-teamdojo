@@ -4,7 +4,8 @@
             "teams": {
                 "title": "Teams",
                 "preExpiresIn": "Gültigkeit läuft in",
-                "postExpiresIn": "Tagen ab"
+                "postExpiresIn": "Tagen ab",
+                "official": "offiziell"
             },
             "achievements": {
                 "title": "Errungenschaften",

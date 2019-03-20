@@ -4,7 +4,8 @@
             "teams": {
                 "title": "Teams",
                 "preExpiresIn": "expires in",
-                "postExpiresIn": "days"
+                "postExpiresIn": "days",
+                "official": "official"
             },
             "achievements": {
                 "title": "Achievements",
