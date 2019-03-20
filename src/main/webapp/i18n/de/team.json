@@ -21,8 +21,8 @@
             "contactPerson": "Kontaktperson",
             "suggestedBy": "Vorgeschlagen von",
             "validUntil": "Gültig bis",
-            "pureTrainingTeam": "Reines Trainings Team",
-            "pureTrainingTeamExplanation": "Bei Aktivierung als Trainings-Team wird das Team in der Übersicht nicht mehr angezeigt. In der Teamauswahl bleibt es sichtbar",
+            "isOfficial": "Offizielles Projektteam",
+            "isOfficialDescription": "Trainings-Räume können für jeden benutzt werden auch ohne offizielles Projekt/Produktteam. Kennzeichne letztere aber gerne, so dass ein Badge \"Projektteam\" angezeigt wird.",
             "participations": "Teilnahmen",
             "skills": "Skills",
             "image": "Image"
