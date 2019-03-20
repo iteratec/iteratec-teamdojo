@@ -31,8 +31,8 @@ public class TeamDTO implements Serializable {
 
     private Instant validUntil;
 
-    private Boolean isOffical;
-
+    @NotNull
+    private Boolean pureTrainingTeam;
 
     private Set<DimensionDTO> participations = new HashSet<>();
 
@@ -88,12 +88,12 @@ public class TeamDTO implements Serializable {
         this.validUntil = validUntil;
     }
 
-    public Boolean isIsOffical() {
-        return isOffical;
+    public Boolean isPureTrainingTeam() {
+        return pureTrainingTeam;
     }
 
-    public void setIsOffical(Boolean isOffical) {
-        this.isOffical = isOffical;
+    public void setPureTrainingTeam(Boolean pureTrainingTeam) {
+        this.pureTrainingTeam = pureTrainingTeam;
     }
 
     public Set<DimensionDTO> getParticipations() {
@@ -158,7 +158,7 @@ public class TeamDTO implements Serializable {
             ", slogan='" + getSlogan() + "'" +
             ", contactPerson='" + getContactPerson() + "'" +
             ", validUntil='" + getValidUntil() + "'" +
-            ", isOffical='" + isIsOffical() + "'" +
+            ", pureTrainingTeam='" + isPureTrainingTeam() + "'" +
             ", image=" + getImageId() +
             ", image='" + getImageName() + "'" +
             "}";

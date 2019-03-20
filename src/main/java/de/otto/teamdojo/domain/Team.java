@@ -50,8 +50,9 @@ public class Team implements Serializable {
     @Column(name = "valid_until")
     private Instant validUntil;
 
-    @Column(name = "is_offical")
-    private Boolean isOffical;
+    @NotNull
+    @Column(name = "pure_training_team", nullable = false)
+    private Boolean pureTrainingTeam;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -141,17 +142,17 @@ public class Team implements Serializable {
         this.validUntil = validUntil;
     }
 
-    public Boolean isIsOffical() {
-        return isOffical;
+    public Boolean isPureTrainingTeam() {
+        return pureTrainingTeam;
     }
 
-    public Team isOffical(Boolean isOffical) {
-        this.isOffical = isOffical;
+    public Team pureTrainingTeam(Boolean pureTrainingTeam) {
+        this.pureTrainingTeam = pureTrainingTeam;
         return this;
     }
 
-    public void setIsOffical(Boolean isOffical) {
-        this.isOffical = isOffical;
+    public void setPureTrainingTeam(Boolean pureTrainingTeam) {
+        this.pureTrainingTeam = pureTrainingTeam;
     }
 
     public Set<Dimension> getParticipations() {
@@ -247,7 +248,7 @@ public class Team implements Serializable {
             ", slogan='" + getSlogan() + "'" +
             ", contactPerson='" + getContactPerson() + "'" +
             ", validUntil='" + getValidUntil() + "'" +
-            ", isOffical='" + isIsOffical() + "'" +
+            ", pureTrainingTeam='" + isPureTrainingTeam() + "'" +
             "}";
     }
 }

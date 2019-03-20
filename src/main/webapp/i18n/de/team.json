@@ -21,6 +21,8 @@
             "contactPerson": "Kontaktperson",
             "suggestedBy": "Vorgeschlagen von",
             "validUntil": "Gültig bis",
+            "pureTrainingTeam": "Reines Trainings Team",
+            "pureTrainingTeamExplanation": "Bei Aktivierung als Trainings-Team wird das Team in der Übersicht nicht mehr angezeigt. In der Teamauswahl bleibt es sichtbar",
             "participations": "Teilnahmen",
             "skills": "Skills",
             "image": "Image"

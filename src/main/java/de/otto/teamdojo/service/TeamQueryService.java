@@ -104,8 +104,8 @@ public class TeamQueryService extends QueryService<Team> {
             if (criteria.getValidUntil() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getValidUntil(), Team_.validUntil));
             }
-            if (criteria.getIsOffical() != null) {
-                specification = specification.and(buildSpecification(criteria.getIsOffical(), Team_.isOffical));
+            if (criteria.getPureTrainingTeam() != null) {
+                specification = specification.and(buildSpecification(criteria.getPureTrainingTeam(), Team_.pureTrainingTeam));
             }
             if (criteria.getParticipationsId() != null) {
                 specification = specification.and(buildSpecification(criteria.getParticipationsId(),

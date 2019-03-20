@@ -63,16 +63,17 @@
             "fieldType": "Instant"
         },
         {
-            "fieldName": "isOffical",
-            "fieldType": "Boolean"
+            "fieldName": "pureTrainingTeam",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180419083624",
     "dto": "mapstruct",
-    "searchEngine": false,
     "service": "serviceImpl",
     "entityTableName": "team",
-    "databaseType": "sql",
     "jpaMetamodelFiltering": true,
     "pagination": "infinite-scroll"
 }

@@ -594,7 +594,7 @@ public class LevelResourceIntTest {
     @Transactional
     public void getAllLevelsBySkillId() throws Exception {
 
-        setupTestData();;
+        setupTestData();
         em.flush();
 
         restLevelMockMvc.perform(get("/api/levels?skillsId.in="+softwareUpdates.getId()))
