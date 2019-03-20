@@ -55,7 +55,8 @@
                             </div>
                             <div class="achievement-list-header-right">
                                 <fa-icon icon="caret-right" class="mr-2"></fa-icon>
-                                <span>{{dimension.name}}</span>
+                                <span (click)="selectItem('dimension', dimension.id); $event.stopPropagation()">{{dimension.name}}</span>
+                                <fa-icon *ngIf="activeItemIds.dimension === dimension.id" icon="filter"></fa-icon>
                             </div>
                         </div>
                     </ng-template>

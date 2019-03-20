@@ -8,7 +8,6 @@ import { ITeam } from 'app/shared/model/team.model';
 import { CompletionCheck } from 'app/shared/util/completion-check';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { RelevanceCheck, sortLevels } from 'app/shared';
-import { BreadcrumbService } from 'app/layouts/navbar/breadcrumb.service';
 import 'simplebar';
 import { ISkill } from 'app/shared/model/skill.model';
 import { NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootstrap';
@@ -77,6 +76,7 @@ export class OverviewAchievementsComponent implements OnInit {
         this.route.queryParamMap.subscribe((params: ParamMap) => {
             const levelId = this.getParamAsNumber('level', params);
             const badgeId = this.getParamAsNumber('badge', params);
+            const dimensionId = this.getParamAsNumber('dimension', params);
             this.activeItemIds = {
                 badge: null,
                 level: null,
@@ -94,6 +94,8 @@ export class OverviewAchievementsComponent implements OnInit {
                 if (foundBadge) {
                     foundBadge.dimensions.forEach(d => this.setDimensionPanelActiveState(`achievements-dimension-${d.id}`, true));
                 }
+            } else if (dimensionId) {
+                this.activeItemIds.dimension = dimensionId;
             }
         });
 

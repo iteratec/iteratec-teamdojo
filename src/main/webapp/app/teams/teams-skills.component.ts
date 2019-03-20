@@ -74,7 +74,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         this.route.queryParamMap.subscribe((params: ParamMap) => {
             const levelId = this.getParamAsNumber('level', params);
             const badgeId = this.getParamAsNumber('badge', params);
-            const topicId = this.getParamAsNumber('topic', params);
+            const topicId = this.getParamAsNumber('dimension', params);
             this.levelId = levelId ? levelId : null;
             this.badgeId = badgeId ? badgeId : null;
             this.topicId = topicId ? topicId : null;
@@ -184,7 +184,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
             queryParams['badge'] = this.badgeId;
         }
         if (this.topicId) {
-            queryParams['topic'] = this.topicId;
+            queryParams['dimension'] = this.topicId;
         }
         return queryParams;
     }
@@ -199,7 +199,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     onTopicChange(activeTopic) {
         this.activeTopic = activeTopic;
         this.router.navigate([], {
-            queryParams: { topic: activeTopic ? activeTopic.id : null }
+            queryParams: { dimension: activeTopic ? activeTopic.id : null }
         });
     }
 

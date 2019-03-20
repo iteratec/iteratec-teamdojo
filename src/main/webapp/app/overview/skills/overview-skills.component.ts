@@ -17,7 +17,6 @@ import { SkillSortPipe } from 'app/shared/pipe/skill-sort.pipe';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AccountService } from 'app/core';
 import { IDimension } from 'app/shared/model/dimension.model';
-import { Router } from '@angular/router';
 
 const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 
@@ -54,8 +53,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
         private route: ActivatedRoute,
         private breadcrumbService: BreadcrumbService,
         private dimensionService: DimensionService,
-        private accountService: AccountService,
-        private router: Router
+        private accountService: AccountService
     ) {}
 
     ngOnInit() {
@@ -79,9 +77,9 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
                     this.activeBadge = (this.badges || []).find((badge: IBadge) => badge.id === Number.parseInt(params.get('badge'), 10));
                     this.activeSkills = this.activeBadge ? this.sortActiveSkills(this.findSkills(this.activeBadge.skills)) : [];
                     this.updateBreadcrumb();
-                } else if (params.get('topic')) {
+                } else if (params.get('dimension')) {
                     this.activeTopic = this.topics.find(
-                        (dimension: IDimension) => dimension.id === Number.parseInt(params.get('topic'), 10)
+                        (dimension: IDimension) => dimension.id === Number.parseInt(params.get('dimension'), 10)
                     );
                     if (this.activeTopic && this.activeTopic.id) {
                         const levelsOfActiveTopic: ILevel[] = this.levels.filter((level: ILevel) => {
@@ -234,11 +232,5 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
         return (
             new SkillSortPipe().transform((activeSkills || []).map(activeSkill => this.findSkill(activeSkill.id)), this.orderBy) || []
         ).map(skill => activeSkills.find(activeSkill => activeSkill.id === skill.id));
-    }
-
-    onTopicChange() {
-        this.router.navigate([], {
-            queryParams: { topic: this.activeTopic ? this.activeTopic.id : null }
-        });
     }
 }

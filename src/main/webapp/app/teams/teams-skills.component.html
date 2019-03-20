@@ -19,13 +19,6 @@
                 <option
                     value="rateCount">{{'teamdojoApp.teams.skills.search.orderBy.rateCount' | translate}}</option>
             </select>
-            <label class="form-select-label">{{'teamdojoApp.overview.skills.filterBy' | translate}}</label>
-            <select class="form-control skill-list-control transparent-background" name="topicSelect" id="field_topic_select"
-                    [ngModel]="activeTopic"
-                    (ngModelChange)="onTopicChange($event)">
-                <option [ngValue]="null">{{'teamdojoApp.overview.skills.allTopics' | translate}}</option>
-                <option [ngValue]="topic" *ngFor="let topic of topics">{{topic.name}}</option>
-            </select>
         </div>
     </div>
     <div>
