@@ -29,11 +29,11 @@
                 <dd>
                     <span>{{team.pureTrainingTeam}}</span>
                 </dd>
-                <dt><span jhiTranslate="teamdojoApp.team.official">Official</span></dt>
+                <dt><span dojoTranslate="teamdojoApp.team.official">Official</span></dt>
                 <dd>
                     <span>{{team.official}}</span>
                 </dd>
-                <dt><span jhiTranslate="teamdojoApp.team.participations">Participations</span></dt>
+                <dt><span dojoTranslate="teamdojoApp.team.participations">Participations</span></dt>
                 <dd>
                     <span *ngFor="let participations of team.participations; let last = last">
                         <a [routerLink]="['/dimension', participations?.id, 'view' ]">{{participations.name}}</a>{{last ? '' : ', '}}
