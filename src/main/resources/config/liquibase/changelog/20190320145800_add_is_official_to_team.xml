@@ -6,13 +6,13 @@
 
     <changeSet id="20190320145800-1" author="mhi">
         <addColumn tableName="team">
-            <column name="is_official" type="boolean">
+            <column name="official" type="boolean">
                 <constraints nullable="true"/>
             </column>
         </addColumn>
         <addNotNullConstraint
             columnDataType="boolean"
-            columnName="is_official"
+            columnName="official"
             defaultNullValue="false"
             tableName="team"/>
     </changeSet>
