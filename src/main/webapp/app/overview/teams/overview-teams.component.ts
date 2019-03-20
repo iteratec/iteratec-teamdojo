@@ -42,7 +42,7 @@ export class OverviewTeamsComponent implements OnInit {
             this.relevantTeamIds = this.getRelevantTeamIds(relevantTeams);
         });
 
-        for (const team of this.teams.filter(t => t.daysUntilExpiration > -90)) {
+        for (const team of this.teams.filter(t => t.daysUntilExpiration > -90 && !t.pureTrainingTeam)) {
             this.teamScores.push(new TeamScore(team, this._calcTeamScore(team)));
         }
         this.teamScores = this.teamScores.sort((ts1, ts2) => {

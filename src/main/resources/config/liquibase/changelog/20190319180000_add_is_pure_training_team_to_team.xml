@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="20190319180000-1" author="fbe">
+        <addColumn tableName="team">
+            <column name="pure_training_team" type="boolean">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+        <addNotNullConstraint
+            columnDataType="boolean"
+            columnName="pure_training_team"
+            defaultNullValue="false"
+            tableName="team"/>
+    </changeSet>
+</databaseChangeLog>

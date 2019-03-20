@@ -2,6 +2,7 @@ package de.otto.teamdojo.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import io.github.jhipster.service.filter.BooleanFilter;
 import io.github.jhipster.service.filter.Filter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
@@ -30,6 +31,8 @@ public class TeamCriteria implements Serializable {
     private StringFilter contactPerson;
 
     private InstantFilter validUntil;
+
+    private BooleanFilter pureTrainingTeam;
 
     private LongFilter participationsId;
 
@@ -85,6 +88,14 @@ public class TeamCriteria implements Serializable {
         this.validUntil = validUntil;
     }
 
+    public BooleanFilter getPureTrainingTeam() {
+        return pureTrainingTeam;
+    }
+
+    public void setPureTrainingTeam(BooleanFilter pureTrainingTeam) {
+        this.pureTrainingTeam = pureTrainingTeam;
+    }
+
     public LongFilter getParticipationsId() {
         return participationsId;
     }
@@ -126,6 +137,7 @@ public class TeamCriteria implements Serializable {
             Objects.equals(slogan, that.slogan) &&
             Objects.equals(contactPerson, that.contactPerson) &&
             Objects.equals(validUntil, that.validUntil) &&
+            Objects.equals(pureTrainingTeam, that.pureTrainingTeam) &&
             Objects.equals(participationsId, that.participationsId) &&
             Objects.equals(skillsId, that.skillsId) &&
             Objects.equals(imageId, that.imageId);
@@ -140,6 +152,7 @@ public class TeamCriteria implements Serializable {
         slogan,
         contactPerson,
         validUntil,
+        pureTrainingTeam,
         participationsId,
         skillsId,
         imageId
@@ -155,6 +168,7 @@ public class TeamCriteria implements Serializable {
                 (slogan != null ? "slogan=" + slogan + ", " : "") +
                 (contactPerson != null ? "contactPerson=" + contactPerson + ", " : "") +
                 (validUntil != null ? "validUntil=" + validUntil + ", " : "") +
+                (pureTrainingTeam != null ? "pureTrainingTeam=" + pureTrainingTeam + ", " : "") +
                 (participationsId != null ? "participationsId=" + participationsId + ", " : "") +
                 (skillsId != null ? "skillsId=" + skillsId + ", " : "") +
                 (imageId != null ? "imageId=" + imageId + ", " : "") +
