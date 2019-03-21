@@ -36,14 +36,14 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     @Output() onSkillClicked = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
     @Output() onSkillChanged = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
     skills: IAchievableSkill[];
-    topics: IDimension[];
+    dimensions: IDimension[];
     filters: string[];
     levelId: number;
     badgeId: number;
-    topicId: number;
+    dimensionId: number;
     activeBadge: IBadge;
     activeLevel: ILevel;
-    activeTopic: IDimension;
+    activeDimension: IDimension;
     activeSkill: ISkill;
     search$: Subject<string>;
     search: string;
@@ -70,14 +70,14 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.filters = this.getFiltersFromStorage();
         this.skills = [];
-        this.topics = [];
+        this.dimensions = [];
         this.route.queryParamMap.subscribe((params: ParamMap) => {
             const levelId = this.getParamAsNumber('level', params);
             const badgeId = this.getParamAsNumber('badge', params);
-            const topicId = this.getParamAsNumber('dimension', params);
+            const dimensionId = this.getParamAsNumber('dimension', params);
             this.levelId = levelId ? levelId : null;
             this.badgeId = badgeId ? badgeId : null;
-            this.topicId = topicId ? topicId : null;
+            this.dimensionId = dimensionId ? dimensionId : null;
             this.loadAll();
         });
         this.search = '';
@@ -112,23 +112,23 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     loadAll() {
         this.activeBadge = null;
         this.activeLevel = null;
-        this.activeTopic = null;
+        this.activeDimension = null;
         this.activeSkill = null;
 
-        if (this.topics.length === 0) {
-            this.dimensionService.query().subscribe(topics => {
-                this.topics = topics.body;
-                if (this.topicId) {
-                    this.activeTopic = this.topics.find((t: IDimension) => t.id === this.topicId);
+        if (this.dimensions.length === 0) {
+            this.dimensionService.query().subscribe(dimensions => {
+                this.dimensions = dimensions.body;
+                if (this.dimensionId) {
+                    this.activeDimension = this.dimensions.find((t: IDimension) => t.id === this.dimensionId);
                 }
             });
         }
-        if (this.topicId) {
-            this.activeTopic = this.topics.find((t: IDimension) => t.id === this.topicId);
+        if (this.dimensionId) {
+            this.activeDimension = this.dimensions.find((t: IDimension) => t.id === this.dimensionId);
             this.teamsSkillsService
-                .queryAchievableSkillsByTopic(this.team.id, {
+                .queryAchievableSkillsByDimension(this.team.id, {
                     filter: this.filters,
-                    topicId: this.topicId
+                    dimensionId: this.dimensionId
                 })
                 .subscribe(
                     (res: HttpResponse<IAchievableSkill[]>) => (this.skills = res.body),
@@ -157,9 +157,9 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         if (this.levelId) {
             this.levelService.find(this.levelId).subscribe(level => {
                 this.activeLevel = level.body;
-                this.dimensionService.find(this.activeLevel.dimensionId).subscribe(topicResponse => {
-                    const activeTopic = topicResponse.body;
-                    this.activeTopic = this.topics.find(topic => topic.id === activeTopic.id);
+                this.dimensionService.find(this.activeLevel.dimensionId).subscribe(dimensionResponse => {
+                    const activeDimension = dimensionResponse.body;
+                    this.activeDimension = this.dimensions.find(dimension => dimension.id === activeDimension.id);
                     this.updateBreadcrumb();
                 });
             });
@@ -183,8 +183,8 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         if (this.badgeId) {
             queryParams['badge'] = this.badgeId;
         }
-        if (this.topicId) {
-            queryParams['dimension'] = this.topicId;
+        if (this.dimensionId) {
+            queryParams['dimension'] = this.dimensionId;
         }
         return queryParams;
     }
@@ -196,15 +196,15 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         });
     }
 
-    onTopicChange(activeTopic) {
-        this.activeTopic = activeTopic;
+    onDimensionChange(activeDimension) {
+        this.activeDimension = activeDimension;
         this.router.navigate([], {
-            queryParams: { dimension: activeTopic ? activeTopic.id : null }
+            queryParams: { dimension: activeDimension ? activeDimension.id : null }
         });
     }
 
     private updateBreadcrumb() {
-        this.breadcrumbService.setBreadcrumb(this.team, this.activeTopic, this.activeLevel, this.activeBadge, this.activeSkill);
+        this.breadcrumbService.setBreadcrumb(this.team, this.activeDimension, this.activeLevel, this.activeBadge, this.activeSkill);
     }
 
     setComplete(skill: IAchievableSkill) {
@@ -303,7 +303,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
                     iSkill: skill.body,
                     aSkill: s
                 });
-                this.breadcrumbService.setBreadcrumb(this.team, this.activeTopic, this.activeLevel, this.activeBadge, skill.body);
+                this.breadcrumbService.setBreadcrumb(this.team, this.activeDimension, this.activeLevel, this.activeBadge, skill.body);
             });
         }
     }

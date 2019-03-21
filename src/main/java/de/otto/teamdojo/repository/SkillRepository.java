@@ -46,15 +46,15 @@ public interface SkillRepository extends JpaRepository<Skill, Long>, JpaSpecific
         " FROM Skill s" +
         " LEFT JOIN s.teams t ON t.team.id = :teamId" +
         " LEFT JOIN s.levels l" +
-        " WHERE l.level.dimension.id IN :topicIds" +
+        " WHERE l.level.dimension.id IN :dimensionIds" +
         " AND (" +
         "  ( ('COMPLETE' IN :filter)  AND (t.completedAt is not null) )" +
         "   OR ( ('INCOMPLETE' IN :filter) AND (t.completedAt is null) )" +
         " )" +
         " ORDER BY s.title")
-    Page<AchievableSkillDTO> findAchievableSkillsByTopics(
+    Page<AchievableSkillDTO> findAchievableSkillsByDimensions(
         @Param("teamId") Long teamId,
-        @Param("topicIds") List<Long> topicIds,
+        @Param("dimensionIds") List<Long> dimensionIds,
         @Param("filter") List<String> filter,
         Pageable pageable);
 

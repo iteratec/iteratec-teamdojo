@@ -12,7 +12,7 @@ import { TeamsModule } from 'app/teams';
 import { BreadcrumbService } from 'app/layouts/navbar/breadcrumb.service';
 import {
     AllCommentsResolve,
-    AllTopicsResolve,
+    AllDimensionsResolve,
     AllSkillsResolve,
     AllTrainingsResolve,
     DojoModelResolve,
@@ -36,7 +36,7 @@ import { ServerInfoService } from 'app/server-info';
         AllSkillsResolve,
         AllCommentsResolve,
         AllTrainingsResolve,
-        AllTopicsResolve,
+        AllDimensionsResolve,
         BreadcrumbService,
         ServerInfoService
     ],

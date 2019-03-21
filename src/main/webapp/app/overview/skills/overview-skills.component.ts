@@ -35,12 +35,12 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     badges: IBadge[];
     badgeSkills: IBadgeSkill[];
     skills: ISkill[];
-    topics: IDimension[];
+    dimensions: IDimension[];
     /* component state */
     activeSkills: ISkill[];
     activeLevel: ILevel;
     activeBadge: IBadge;
-    activeTopic: IDimension;
+    activeDimension: IDimension;
     dimensionsBySkillId: any;
     generalSkillsIds: number[];
     search$: Subject<string>;
@@ -57,18 +57,18 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     ) {}
 
     ngOnInit() {
-        this.route.data.subscribe(({ dojoModel: { teams, levels, levelSkills, badges, badgeSkills }, skills, topics }) => {
+        this.route.data.subscribe(({ dojoModel: { teams, levels, levelSkills, badges, badgeSkills }, skills, dimensions }) => {
             this.teams = teams || [];
             this.levels = levels || [];
             this.levelSkills = levelSkills || [];
             this.badges = badges || [];
             this.badgeSkills = badgeSkills || [];
             this.skills = (skills && skills.body ? skills.body : skills) || [];
-            this.topics = (topics && topics.body ? topics.body : topics) || [];
+            this.dimensions = (dimensions && dimensions.body ? dimensions.body : dimensions) || [];
             this.route.queryParamMap.subscribe((params: ParamMap) => {
                 this.activeLevel = null;
                 this.activeBadge = null;
-                this.activeTopic = null;
+                this.activeDimension = null;
                 if (params.get('level')) {
                     this.activeLevel = (this.levels || []).find((level: ILevel) => level.id === Number.parseInt(params.get('level'), 10));
                     this.activeSkills = this.activeLevel ? this.sortActiveSkills(this.findSkills(this.activeLevel.skills)) : [];
@@ -78,14 +78,14 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
                     this.activeSkills = this.activeBadge ? this.sortActiveSkills(this.findSkills(this.activeBadge.skills)) : [];
                     this.updateBreadcrumb();
                 } else if (params.get('dimension')) {
-                    this.activeTopic = this.topics.find(
+                    this.activeDimension = this.dimensions.find(
                         (dimension: IDimension) => dimension.id === Number.parseInt(params.get('dimension'), 10)
                     );
-                    if (this.activeTopic && this.activeTopic.id) {
-                        const levelsOfActiveTopic: ILevel[] = this.levels.filter((level: ILevel) => {
-                            return level.dimensionId === this.activeTopic.id;
+                    if (this.activeDimension && this.activeDimension.id) {
+                        const levelsOfActiveDimension: ILevel[] = this.levels.filter((level: ILevel) => {
+                            return level.dimensionId === this.activeDimension.id;
                         });
-                        const skillsOfActiveTopic: Array<ISkill[]> = levelsOfActiveTopic.map((level: ILevel) => {
+                        const skillsOfActiveDimension: Array<ISkill[]> = levelsOfActiveDimension.map((level: ILevel) => {
                             const levelSkillsOfLevel: ILevelSkill[] = this.levelSkills.filter((levelSkill: ILevelSkill) => {
                                 return levelSkill.levelId === level.id;
                             });
@@ -95,7 +95,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
                                 });
                             });
                         });
-                        this.activeSkills = this.sortActiveSkills([].concat.apply([], skillsOfActiveTopic));
+                        this.activeSkills = this.sortActiveSkills([].concat.apply([], skillsOfActiveDimension));
                         this.updateBreadcrumb();
                     }
                 } else {

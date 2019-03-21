@@ -113,7 +113,7 @@ export class DojoModelResolve implements Resolve<any> {
 }
 
 @Injectable()
-export class AllTopicsResolve implements Resolve<any> {
+export class AllDimensionsResolve implements Resolve<any> {
     constructor(private dimensionService: DimensionService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

@@ -36,10 +36,10 @@ export class TeamsSkillsService {
             .pipe(map((res: EntityArrayResponseType) => this.convertArrayResponse(res)));
     }
 
-    queryAchievableSkillsByTopic(teamId: number, req?: any): Observable<EntityArrayResponseType> {
+    queryAchievableSkillsByDimension(teamId: number, req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http
-            .get<IAchievableSkill[]>(`${this.resourceUrl}/${teamId}/achievable-skills/by-topics`, {
+            .get<IAchievableSkill[]>(`${this.resourceUrl}/${teamId}/achievable-skills-by-dimensions`, {
                 params: options,
                 observe: 'response'
             })

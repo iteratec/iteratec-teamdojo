@@ -97,19 +97,19 @@ public class SkillRepositoryIntTest {
 
     @Test
     @Transactional
-    public void getSkillsForTopic() throws Exception {
+    public void getSkillsForDimension() throws Exception {
         setupTestData();
 
         em.flush();
 
         Long teamId = team.getId();
 
-        Long topicId = security.getId();
+        Long dimensionId = security.getId();
 
         List<String> filter = Lists.newArrayList("COMPLETE", "INCOMPLETE");
 
-        Page<AchievableSkillDTO> results = skillRepository.findAchievableSkillsByTopics(
-            teamId, Arrays.asList(topicId), filter, Pageable.unpaged());
+        Page<AchievableSkillDTO> results = skillRepository.findAchievableSkillsByDimensions(
+            teamId, Arrays.asList(dimensionId), filter, Pageable.unpaged());
         assertThat(results.getTotalElements()).isEqualTo(3);
         assertThat(results.stream().anyMatch(skill -> "Input Validation".equals(skill.getTitle()))).isTrue();
         assertThat(results.stream().anyMatch(skill -> "Software updates".equals(skill.getTitle()))).isTrue();

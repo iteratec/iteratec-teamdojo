@@ -4,7 +4,7 @@ import { OverviewSkillDetailsComponent } from 'app/overview/skills/skill-details
 import { TeamsSelectionResolve } from 'app/shared/teams-selection/teams-selection.resolve';
 import {
     AllCommentsResolve,
-    AllTopicsResolve,
+    AllDimensionsResolve,
     AllSkillsResolve,
     AllTrainingsResolve,
     DojoModelResolve,
@@ -23,7 +23,7 @@ export const OVERVIEW_ROUTE: Route[] = [
             dojoModel: DojoModelResolve,
             skills: AllSkillsResolve,
             selectedTeam: TeamsSelectionResolve,
-            topics: AllTopicsResolve
+            dimensions: AllDimensionsResolve
         }
     },
     {
@@ -36,7 +36,7 @@ export const OVERVIEW_ROUTE: Route[] = [
             selectedTeam: TeamsSelectionResolve,
             skills: AllSkillsResolve,
             trainings: AllTrainingsResolve,
-            topics: AllTopicsResolve
+            dimensions: AllDimensionsResolve
         },
         data: {
             authorities: [],

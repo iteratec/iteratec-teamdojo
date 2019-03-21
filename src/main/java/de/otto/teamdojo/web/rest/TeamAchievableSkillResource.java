@@ -42,15 +42,15 @@ public class TeamAchievableSkillResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @GetMapping("/teams/{teamId}/achievable-skills/by-topics")
-    public ResponseEntity<List<AchievableSkillDTO>> getAchievableSkillsByTopics(
+    @GetMapping("/teams/{teamId}/achievable-skills-by-dimensions")
+    public ResponseEntity<List<AchievableSkillDTO>> getAchievableSkillsByDimensions(
         @PathVariable Long teamId,
-        @RequestParam(name = "topicId") List<Long> topicIds,
+        @RequestParam(name = "dimensionId") List<Long> dimensionIds,
         @RequestParam(name = "filter", required = false, defaultValue = "") List<String> filterNames,
         Pageable pageable) {
-        log.debug("REST request to get AchievableSkills for Team and Topic {}, {}", teamId, topicIds);
-        Page<AchievableSkillDTO> page = achievableSkillService.findAllByTeamAndTopic(teamId, topicIds, filterNames, pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/teams/" + teamId + "/achievable-skills/by-topic");
+        log.debug("REST request to get AchievableSkills for Team and Dimension {}, {}", teamId, dimensionIds);
+        Page<AchievableSkillDTO> page = achievableSkillService.findAllByTeamAndDimension(teamId, dimensionIds, filterNames, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/teams/" + teamId + "/achievable-skills-by-dimensions");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
