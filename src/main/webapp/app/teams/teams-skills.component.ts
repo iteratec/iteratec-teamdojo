@@ -36,7 +36,6 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     @Output() onSkillClicked = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
     @Output() onSkillChanged = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
     skills: IAchievableSkill[];
-    dimensions: IDimension[];
     filters: string[];
     levelId: number;
     badgeId: number;
@@ -70,7 +69,6 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.filters = this.getFiltersFromStorage();
         this.skills = [];
-        this.dimensions = [];
         this.route.queryParamMap.subscribe((params: ParamMap) => {
             const levelId = this.getParamAsNumber('level', params);
             const badgeId = this.getParamAsNumber('badge', params);
@@ -115,16 +113,11 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         this.activeDimension = null;
         this.activeSkill = null;
 
-        if (this.dimensions.length === 0) {
-            this.dimensionService.query().subscribe(dimensions => {
-                this.dimensions = dimensions.body;
-                if (this.dimensionId) {
-                    this.activeDimension = this.dimensions.find((t: IDimension) => t.id === this.dimensionId);
-                }
-            });
-        }
         if (this.dimensionId) {
-            this.activeDimension = this.dimensions.find((t: IDimension) => t.id === this.dimensionId);
+            this.dimensionService.find(this.dimensionId).subscribe(dimensionResponse => {
+                this.activeDimension = dimensionResponse.body;
+                this.updateBreadcrumb();
+            });
             this.teamsSkillsService
                 .queryAchievableSkillsByDimension(this.team.id, {
                     filter: this.filters,
@@ -158,8 +151,7 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
             this.levelService.find(this.levelId).subscribe(level => {
                 this.activeLevel = level.body;
                 this.dimensionService.find(this.activeLevel.dimensionId).subscribe(dimensionResponse => {
-                    const activeDimension = dimensionResponse.body;
-                    this.activeDimension = this.dimensions.find(dimension => dimension.id === activeDimension.id);
+                    this.activeDimension = dimensionResponse.body;
                     this.updateBreadcrumb();
                 });
             });
