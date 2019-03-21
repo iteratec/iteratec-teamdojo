@@ -69,13 +69,14 @@ public class ImageServiceImpl implements ImageService {
             imageDTO.setMediumContentType(contentType);
             imageDTO.setSmall(getByteArrayFromBufferedImage(small));
             imageDTO.setSmallContentType(contentType);
-        }
 
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] imageDigest = md.digest(imageDTO.getLarge());
-        String hash = DatatypeConverter
-            .printHexBinary(imageDigest).toUpperCase();
-        imageDTO.setHash(hash);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] imageDigest = md.digest(imageDTO.getLarge());
+            String hash = DatatypeConverter
+                .printHexBinary(imageDigest).toUpperCase();
+            imageDTO.setHash(hash);
+
+        }
 
         Image image = imageMapper.toEntity(imageDTO);
         image = imageRepository.save(image);
