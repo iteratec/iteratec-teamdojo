@@ -37,6 +37,6 @@ export class Team implements ITeam {
         public daysUntilExpiration?: number
     ) {
         this.pureTrainingTeam = this.pureTrainingTeam || false;
-        this.official = this.official || false;
+        this.official = official || false;
     }
 }
