@@ -4,7 +4,7 @@
         <div class="teams-skills-list-header">
             <input type="text" [placeholder]="'teamdojoApp.teams.skills.search.placeholder' | translate"
                    class="skill-search-input skill-list-control" [value]="search" (keyup)="search$.next($event.target.value)"/>
-            <div class="skill-list-control">
+            <div class="skill-list-control completed-check-control">
                 <input class="form-check-input" type="checkbox" value="" id="checkIncomplete"
                        [checked]="filters.indexOf('INCOMPLETE') > -1" (click)="onFilterClicked('INCOMPLETE')">
                 <label class="form-check-label" for="checkIncomplete"
