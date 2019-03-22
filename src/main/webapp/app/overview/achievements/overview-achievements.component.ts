@@ -87,12 +87,18 @@ export class OverviewAchievementsComponent implements OnInit {
                 this.activeItemIds.level = levelId;
                 this.levels
                     .filter(l => l.id === levelId)
-                    .forEach(l => this.setDimensionPanelActiveState(`achievements-dimension-${l.dimensionId}`, true));
+                    .forEach(l => {
+                        if (!this.expandedDimensions.includes(`achievements-dimension-${l.dimensionId}`)) {
+                            this.expandedDimensions.push(`achievements-dimension-${l.dimensionId}`);
+                        }
+                    });
             } else if (badgeId) {
                 this.activeItemIds.badge = badgeId;
                 const foundBadge = this.badges.find(b => b.id === badgeId);
                 if (foundBadge) {
-                    foundBadge.dimensions.forEach(d => this.setDimensionPanelActiveState(`achievements-dimension-${d.id}`, true));
+                    foundBadge.dimensions.forEach(d => {
+                        this.expandedDimensions.push(`achievements-dimension-${d.id}`);
+                    });
                 }
             } else if (dimensionId) {
                 this.activeItemIds.dimension = dimensionId;
@@ -106,20 +112,14 @@ export class OverviewAchievementsComponent implements OnInit {
         }, 0);
     }
 
-    handleDimensionToggle(event: NgbPanelChangeEvent) {
-        this.setDimensionPanelActiveState(event.panelId, event.nextState);
-    }
-
-    setDimensionPanelActiveState(panelId: string, expanded: boolean) {
-        if (expanded) {
-            if (!this.expandedDimensions.includes(panelId)) {
-                this.expandedDimensions.push(panelId);
-            }
-        } else {
+    handleDimensionToggle(panelId: string) {
+        if (this.expandedDimensions.includes(panelId)) {
             const idx = this.expandedDimensions.findIndex(d => panelId === d);
             if (idx !== -1) {
                 this.expandedDimensions.splice(idx, 1);
             }
+        } else {
+            this.expandedDimensions.push(panelId);
         }
     }
 

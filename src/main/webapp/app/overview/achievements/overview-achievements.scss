@@ -9,8 +9,44 @@
     }
     .achievement-container {
         @include accordion();
+        .panel {
+            background-color: #fffaf0;
+            margin-bottom: 25px;
+            box-shadow: 0px 2px 4px rgba(119, 119, 119, 0.16), 0px 2px 4px rgba(119, 119, 119, 0.23);
+            .achievement-list-header {
+                padding: 0.75rem 1.25rem;
+                cursor: pointer;
+                .achievement-list-header-right {
+                    padding: 0.375rem 1.75rem;
+                    .expand-icon {
+                        display: inline-block;
+                        width: 1rem;
+                    }
+                    .dimension-name {
+                        background-color: $dojo-text-inverse-secondary;
+                        padding: 0.2rem 0.75rem;
+                        border-radius: 0.25rem;
+                        display: inline-block;
+                        .filter-icon {
+                            font-size: 0.75rem;
+                            visibility: hidden;
+                        }
+                        .visible-filter-icon {
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+            .item-list-body {
+                padding: 20px;
+            }
+        }
+        .collapsed {
+            display: none;
+        }
+        font-weight: 400;
+        font-size: 1rem;
         height: inherit;
-        padding-right: 10px;
         /deep/ .simplebar-track {
             bottom: 1em !important;
         }
