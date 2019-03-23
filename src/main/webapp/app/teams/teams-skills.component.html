@@ -102,27 +102,23 @@
                         <div *ngIf="isVoteAble(skill)"
                              class="skill-action-bar d-flex flex-wrap justify-content-between">
                             <p class="skill-action-bar-item">
-                                <small dojoTranslate="teamdojoApp.teams.skills.action.vote"
+                                <small class="skill-vote-question" dojoTranslate="teamdojoApp.teams.skills.action.vote"
                                        [translateValues]="{'team': team.name }"></small>
-                            </p>
-                            <p>
                                 <a (click)="downVote(skill)">
                                     <fa-icon icon="angle-down"></fa-icon>
                                 </a>
-                                <span class="skill-vote">{{skill.vote}}</span>
+                                <small class="skill-vote">{{skill.vote ? skill.vote : 0}}</small>
                                 <a (click)="upVote(skill)">
                                     <fa-icon icon="angle-up"></fa-icon>
                                 </a>
                             </p>
                         </div>
                         <div *ngIf="isSuggestAble(skill)"
-                             class="skill-action-bar d-flex flex-wrap justify-content-between">
-                            <p class="skill-action-bar-item">
-                                <a (click)="suggest(skill)">
-                                    <small dojoTranslate="teamdojoApp.teams.skills.action.suggest"
-                                           [translateValues]="{'team': team.name }"></small>
-                                </a>
-                            </p>
+                            class="skill-action-bar d-flex flex-wrap justify-content-between">
+                            <a class="skill-action-bar-item" (click)="suggest(skill)">
+                                <small dojoTranslate="teamdojoApp.teams.skills.action.suggest"
+                                       [translateValues]="{'team': team.name }"></small>
+                            </a>
                         </div>
                     </div>
                 </div>
