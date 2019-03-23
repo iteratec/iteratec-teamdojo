@@ -45,7 +45,7 @@
             "badges": "Badges",
             "levels": "Levels",
             "fieldValidation": {
-                "expiryPeriod": "Die Expiry-Period muss eine positive ganze Zahl sein."
+                "expiryPeriod": "Der Gültigkeitszeitraum muss eine positive ganze Zahl sein."
             }
         },
         "skillDTO": {
