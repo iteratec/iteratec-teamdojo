@@ -50,5 +50,4 @@
     <include file="config/liquibase/changelog/20190304093000_add_hash_column_to_image.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190304153000_update_default_organization_user_mode.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190222103700_extend_skill_expiryPeriod.xml" relativeToChangelogFile="false"/>
-
 </databaseChangeLog>
