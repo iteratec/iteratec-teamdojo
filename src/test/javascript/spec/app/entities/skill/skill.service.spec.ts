@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(SkillService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Skill(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 0, 0);
+            elemDefault = new Skill(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0, 'AAAAAAA', 0, 0, 0);
         });
 
         describe('Service methods', async () => {
@@ -59,7 +59,7 @@ describe('Service Tests', () => {
                         description: 'BBBBBB',
                         implementation: 'BBBBBB',
                         validation: 'BBBBBB',
-                        expiryPeriod: 'BBBBBB',
+                        expiryPeriod: 1,
                         contact: 'BBBBBB',
                         score: 1,
                         rateScore: 1,
@@ -84,7 +84,7 @@ describe('Service Tests', () => {
                         description: 'BBBBBB',
                         implementation: 'BBBBBB',
                         validation: 'BBBBBB',
-                        expiryPeriod: 'BBBBBB',
+                        expiryPeriod: 1,
                         contact: 'BBBBBB',
                         score: 1,
                         rateScore: 1,

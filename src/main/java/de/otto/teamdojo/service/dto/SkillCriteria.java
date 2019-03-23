@@ -188,7 +188,6 @@ public class SkillCriteria implements Serializable {
             Objects.equals(badgesId, that.badgesId) &&
             Objects.equals(levelsId, that.levelsId) &&
             Objects.equals(trainingsId, that.trainingsId);
-
     }
 
     @Override

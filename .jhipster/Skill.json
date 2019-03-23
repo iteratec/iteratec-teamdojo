@@ -66,11 +66,11 @@
         },
         {
             "fieldName": "expiryPeriod",
-            "fieldType": "String",
+            "fieldType": "Integer",
             "fieldValidateRules": [
-                "pattern"
+                "min"
             ],
-            "fieldValidateRulesPattern": "^P(?:([-+]?[0-9]+)Y)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)W)?(?:([-+]?[0-9]+)D)?$"
+            "fieldValidateRulesMin": 1
         },
         {
             "fieldName": "contact",

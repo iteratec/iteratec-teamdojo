@@ -45,6 +45,7 @@ public class Skill implements Serializable {
     @Column(name = "jhi_validation", length = 2048)
     private String validation;
 
+    @Min(value = 1)
     @Column(name = "expiry_period")
     private Integer expiryPeriod;
 
@@ -143,13 +144,13 @@ public class Skill implements Serializable {
         this.validation = validation;
     }
 
+    public Integer getExpiryPeriod() {
+        return expiryPeriod;
+    }
+
     public Skill expiryPeriod(Integer expiryPeriod) {
         this.expiryPeriod = expiryPeriod;
         return this;
-    }
-
-    public Integer getExpiryPeriod() {
-        return expiryPeriod;
     }
 
     public void setExpiryPeriod(Integer expiryPeriod) {

@@ -23,6 +23,7 @@ public class SkillDTO implements Serializable {
     @Size(max = 2048)
     private String validation;
 
+    @Min(value = 1)
     private Integer expiryPeriod;
 
     private String contact;

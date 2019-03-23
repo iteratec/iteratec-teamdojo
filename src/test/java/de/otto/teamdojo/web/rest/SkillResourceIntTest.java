@@ -472,6 +472,33 @@ public class SkillResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllSkillsByExpiryPeriodIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        skillRepository.saveAndFlush(skill);
+
+        // Get all the skillList where expiryPeriod greater than or equals to DEFAULT_EXPIRY_PERIOD
+        defaultSkillShouldBeFound("expiryPeriod.greaterOrEqualThan=" + DEFAULT_EXPIRY_PERIOD);
+
+        // Get all the skillList where expiryPeriod greater than or equals to UPDATED_EXPIRY_PERIOD
+        defaultSkillShouldNotBeFound("expiryPeriod.greaterOrEqualThan=" + UPDATED_EXPIRY_PERIOD);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSkillsByExpiryPeriodIsLessThanSomething() throws Exception {
+        // Initialize the database
+        skillRepository.saveAndFlush(skill);
+
+        // Get all the skillList where expiryPeriod less than or equals to DEFAULT_EXPIRY_PERIOD
+        defaultSkillShouldNotBeFound("expiryPeriod.lessThan=" + DEFAULT_EXPIRY_PERIOD);
+
+        // Get all the skillList where expiryPeriod less than or equals to UPDATED_EXPIRY_PERIOD
+        defaultSkillShouldBeFound("expiryPeriod.lessThan=" + UPDATED_EXPIRY_PERIOD);
+    }
+
+
+    @Test
+    @Transactional
     public void getAllSkillsByContactIsEqualToSomething() throws Exception {
         // Initialize the database
         skillRepository.saveAndFlush(skill);
