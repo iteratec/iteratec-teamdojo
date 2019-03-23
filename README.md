@@ -208,29 +208,26 @@ A combination of data from the Skill and Teamskill entities are used in the dete
 
 The fields used in calculating the status are "irrelevant" and "completedAt" (From the TeamSkill Entity) and "expiryPeriod" (from the Skill Entity).
 
-In the context of a given Team, a skill is in the 
+In the context of a given Team, a skill is in the
 
-  OPEN Status - If the TeamSkill.completedAt field is not set (that is null) and TeamSkill.irrelevant is not true
-  
-  IRRELEVANT status - If the TeamSkill.irrelevant field is set to true, notwithstanding the values of the other fields.
-  
-  ACHIEVED status - If the TeamSkill.completedAt field is set and the TeamSkill.irrelevant is not true and the TeamSkill.completedAt
-                    plus the SKill.expiryPeriod (in days) is later than the current date.
-                   
-  EXPIRING status - If the TeamSkill.completedAt field is set and the TeamSkill.irrelevant is not true, the current date 
-                    is later than the TeamSkill.completedAt plus the SKill.expiryPeriod (in days) but not later than a 
-                    7-days grace period.
-                    
-  EXPIRED status - If the TeamSkill.completedAt field is set and the TeamSkill.irrelevant is not true, the current date 
-                   is later than the TeamSkill.completedAt plus the SKill.expiryPeriod (in days) and the 7-days grace period
-                   is past.
+-   Status `OPEN`: If the TeamSkill.completedAt field is not set (that is null) and TeamSkill.irrelevant is not true
 
-The corresponding skill status for a team is determined and set in the AchievableSkillDTO and passed as part of the 
-JSON string on to the frontend. 
+-   Status `IRRELEVANT`: If the TeamSkill.irrelevant field is set to true, notwithstanding the values of the other fields.
 
-At the frontend, the skillstatus information in the JSON-string from the backend is deserialized into a typescript object (SkillStatus enum in the 
+-   Status `ACHIEVED`: If the TeamSkill.completedAt field is set and the TeamSkill.irrelevant is not true and the TeamSkill.completedAt
+    plus the SKill.expiryPeriod (in days) is later than the current date.
+-   Status `EXPIRING`: If the TeamSkill.completedAt field is set and the TeamSkill.irrelevant is not true, the current date
+    is later than the TeamSkill.completedAt plus the SKill.expiryPeriod (in days) but not later than a
+    7-days grace period.
+-   Status `EXPIRED`: If the TeamSkill.completedAt field is set and the TeamSkill.irrelevant is not true, the current date
+    is later than the TeamSkill.completedAt plus the SKill.expiryPeriod (in days) and the 7-days grace period
+    is past.
+
+The corresponding skill status for a team is determined and set in the AchievableSkillDTO and passed as part of the
+JSON string on to the frontend.
+
+At the frontend, the skillstatus information in the JSON-string from the backend is deserialized into a typescript object (SkillStatus enum in the
 IAchievableSkill Typescript type).
 
-The Skillstatus information at the frontend is used to calculate the number of teams that have acquired a given skill, to display the status 
+The Skillstatus information at the frontend is used to calculate the number of teams that have acquired a given skill, to display the status
 of a skill for a given team, to toggle status from one state to another.
-
