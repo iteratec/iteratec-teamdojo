@@ -31,24 +31,26 @@
                 </ng-template>
             </ngb-panel>
         </ngb-accordion>
-        <div (panelChange)="handleDimensionToggle($event)">
-            <div class="panel" *ngFor="let dimension of dimensions" id="achievements-dimension-{{dimension.id}}">
-                <div class="achievement-list-header d-flex align-items-center"
-                     (click)="handleDimensionToggle('achievements-dimension-' + dimension.id)">
-                    <div class="achievement-list-header-right">
-                        <div class="expand-icon">
-                            <fa-icon
-                                icon="caret-{{expandedDimensions.includes('achievements-dimension-' + dimension.id) ? 'down' : 'right'}}"></fa-icon>
-                        </div>
-                        <div class="dimension-name"
-                             (click)="selectItem('dimension', dimension.id); $event.stopPropagation()">{{dimension.name}}
-                            <fa-icon class="filter-icon"
-                                     [ngClass]="{'visible-filter-icon': activeItemIds.dimension === dimension.id}"
-                                     icon="filter"></fa-icon>
+        <ngb-accordion [activeIds]="expandedDimensions" (panelChange)="handleDimensionToggle($event)">
+            <ngb-panel class="mt-1" *ngFor="let dimension of dimensions"
+                       id="achievements-dimension-{{dimension.id}}">
+                <ng-template ngbPanelTitle>
+                    <div class="achievement-list-header d-flex align-items-center">
+                        <div class="achievement-list-header-right">
+                            <div class="expand-icon">
+                                <fa-icon
+                                    icon="caret-{{expandedDimensions.includes('achievements-dimension-' + dimension.id) ? 'down' : 'right'}}"></fa-icon>
+                            </div>
+                            <div class="dimension-name"
+                                 (click)="selectItem('dimension', dimension.id); $event.stopPropagation()">{{dimension.name}}
+                                <fa-icon class="filter-icon"
+                                         [ngClass]="{'visible-filter-icon': activeItemIds.dimension === dimension.id}"
+                                         icon="filter"></fa-icon>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div [ngClass]="{'collapsed': !expandedDimensions.includes('achievements-dimension-' + dimension.id)}">
+                </ng-template>
+                <ng-template ngbPanelContent>
                     <div class="item-list-body">
                         <div *ngIf="dimension.badges.length" class="item-list-title"
                              dojoTranslate="teamdojoApp.overview.achievements.dimensions.badges.title"></div>
@@ -62,23 +64,23 @@
                                 </jhi-achievement-item>
                             </div>
                         </div>
-                    </div>
-                    <div class="item-list-body">
-                        <div *ngIf="dimension.levels.length" class="item-list-title"
-                             dojoTranslate="teamdojoApp.overview.achievements.dimensions.levels.title"></div>
-                        <div class="d-flex flex-wrap">
-                            <div *ngFor="let level of dimension.levels">
-                                <jhi-achievement-item type="item-level" [item]="level"
-                                                      [progress]="getAchievementProgress(level)"
-                                                      [active]="activeItemIds.level === level.id"
-                                                      (onItemSelected)="selectItem('level', level.id)"
-                                                      [hasAuthority]="hasAuthority">
-                                </jhi-achievement-item>
+                        <div class="item-list-body">
+                            <div *ngIf="dimension.levels.length" class="item-list-title"
+                                 dojoTranslate="teamdojoApp.overview.achievements.dimensions.levels.title"></div>
+                            <div class="d-flex flex-wrap">
+                                <div *ngFor="let level of dimension.levels">
+                                    <jhi-achievement-item type="item-level" [item]="level"
+                                                          [progress]="getAchievementProgress(level)"
+                                                          [active]="activeItemIds.level === level.id"
+                                                          (onItemSelected)="selectItem('level', level.id)"
+                                                          [hasAuthority]="hasAuthority">
+                                    </jhi-achievement-item>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                </ng-template>
+            </ngb-panel>
+        </ngb-accordion>
     </div>
 </div>
