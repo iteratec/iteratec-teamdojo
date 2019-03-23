@@ -54,9 +54,16 @@
                                 </ng-template>
                             </div>
                             <div class="achievement-list-header-right">
-                                <fa-icon icon="caret-{{expandedDimensions.includes('achievements-dimension-' + dimension.id) ? 'down' : 'right'}}" class="mr-2"></fa-icon>
-                                <span (click)="selectItem('dimension', dimension.id, $event); $event.stopPropagation()">{{dimension.name}}</span>
-                                <fa-icon *ngIf="activeItemIds.dimension === dimension.id" icon="filter"></fa-icon>
+                                <div class="expand-icon">
+                                    <fa-icon
+                                        icon="caret-{{expandedDimensions.includes('achievements-dimension-' + dimension.id) ? 'down' : 'right'}}"></fa-icon>
+                                </div>
+                                <div class="dimension-name"
+                                     (click)="selectItem('dimension', dimension.id); $event.stopPropagation()">{{dimension.name}}
+                                    <fa-icon class="filter-icon"
+                                             [ngClass]="{'visible-filter-icon': activeItemIds.dimension === dimension.id}"
+                                             icon="filter"></fa-icon>
+                                </div>
                             </div>
                         </div>
                     </ng-template>

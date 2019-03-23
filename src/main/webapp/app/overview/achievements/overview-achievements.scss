@@ -9,24 +9,22 @@
     }
     .achievement-container {
         @include accordion();
-        .achievement-list-header {
-            .achievement-list-header-right {
-                .expand-icon {
-                    display: inline-block;
-                    width: 1rem;
+        .achievement-list-header-right {
+            .expand-icon {
+                display: inline-block;
+                width: 1rem;
+            }
+            .dimension-name {
+                background-color: $dojo-text-inverse-secondary;
+                padding: 0.2rem 0.75rem;
+                border-radius: 0.25rem;
+                display: inline-block;
+                .filter-icon {
+                    font-size: 0.75rem;
+                    visibility: hidden;
                 }
-                .dimension-name {
-                    background-color: $dojo-text-inverse-secondary;
-                    padding: 0.2rem 0.75rem;
-                    border-radius: 0.25rem;
-                    display: inline-block;
-                    .filter-icon {
-                        font-size: 0.75rem;
-                        visibility: hidden;
-                    }
-                    .visible-filter-icon {
-                        visibility: visible;
-                    }
+                .visible-filter-icon {
+                    visibility: visible;
                 }
             }
         }
