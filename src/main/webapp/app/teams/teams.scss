@@ -32,7 +32,6 @@ $end: ();
 $start: ();
 @for $i from 0 through $particles {
     $end: $end, random($width)-$width / 2 + px random($height)-$height / 1.2 + px hsl(18, 100, random(90) + 5);
-    $start: $start, 0 0 #e8ddb7;
 }
 
 @mixin keyframes($animationName) {
