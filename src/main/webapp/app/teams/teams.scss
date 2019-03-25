@@ -80,7 +80,7 @@ $start: ();
     height: 6px;
     border-radius: 100%;
     box-shadow: $start;
-    @include animation((1.2s bang ease-out, 1.2s gravity ease-in));
+    @include animation((1.7s bang ease-out, 1.7s gravity ease-in));
 }
 
 @include keyframes(bang) {
