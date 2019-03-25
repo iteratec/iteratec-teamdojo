@@ -163,7 +163,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
                 this.breadcrumbService.setBreadcrumb(null, dimension.body, this.activeLevel, this.activeBadge, this.activeSkill);
             });
         } else {
-            this.breadcrumbService.setBreadcrumb(null, null, this.activeLevel, this.activeBadge, this.activeSkill);
+            this.breadcrumbService.setBreadcrumb(null, this.activeDimension, this.activeLevel, this.activeBadge, this.activeSkill);
         }
     }
 
