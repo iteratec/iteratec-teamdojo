@@ -20,6 +20,7 @@ export class TeamsComponent implements OnInit {
     teamSkills: ITeamSkill[];
     badges: IBadge[];
     skills: ISkill[];
+    readonly pyroAnimationDurationTimeout = 2000;
 
     constructor(private dataUtils: JhiDataUtils, private route: ActivatedRoute, private teamSkillService: TeamSkillService) {}
 
@@ -40,8 +41,8 @@ export class TeamsComponent implements OnInit {
             if (this.team.skills.find(skill => moment().diff(skill.completedAt, 'seconds') < 2)) {
                 document.getElementById('pyro').style.display = 'block';
                 setTimeout(function() {
-                    document.getElementById('pyro').style.display = 'none';
-                }, 2000);
+                    document.getElementById('pyro').className = 'pyro';
+                }, this.pyroAnimationDurationTimeout);
             }
         });
     }
