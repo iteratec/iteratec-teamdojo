@@ -61,6 +61,13 @@
         {
             "fieldName": "validUntil",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "pureTrainingTeam",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180419083624",

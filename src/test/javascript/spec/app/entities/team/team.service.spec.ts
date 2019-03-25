@@ -74,7 +74,8 @@ describe('Service Tests', () => {
                         shortName: 'BBBBBB',
                         slogan: 'BBBBBB',
                         contactPerson: 'BBBBBB',
-                        validUntil: currentDate.format(DATE_TIME_FORMAT)
+                        validUntil: currentDate.format(DATE_TIME_FORMAT),
+                        pureTrainingTeam: true
                     },
                     elemDefault
                 );
@@ -100,7 +101,8 @@ describe('Service Tests', () => {
                         shortName: 'BBBBBB',
                         slogan: 'BBBBBB',
                         contactPerson: 'BBBBBB',
-                        validUntil: currentDate.format(DATE_TIME_FORMAT)
+                        validUntil: currentDate.format(DATE_TIME_FORMAT),
+                        pureTrainingTeam: true
                     },
                     elemDefault
                 );
