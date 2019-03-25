@@ -2,7 +2,6 @@
 @import '../../../content/scss/bootstrap-variables';
 @import '../../../content/scss/colors';
 @import '../../../content/scss/mixins';
-@import '../../teams/skill-details/skill-details-status/skill-details-status';
 
 .skill-title {
     font-size: 1.5rem;
@@ -31,6 +30,47 @@
     margin-bottom: 5px;
     .skill-action-item {
         margin-right: 20px;
+        &.disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+        i {
+            margin-right: 3px;
+        }
+        a {
+            small {
+                color: $dojo-text-secondary;
+            }
+        }
+        i.skill-relevance-action-item {
+            &.skill-status-irrelevant {
+                &:before {
+                    content: '\f164'; // thumbs-up
+                }
+            }
+            &.skill-status-achieved,
+            &.skill-status-open,
+            &.skill-status-expiring,
+            &.skill-status-expired {
+                &:before {
+                    content: '\f165'; // thumbs-down
+                }
+            }
+        }
+        i.skill-status-action-item {
+            &.skill-status-open,
+            &.skill-status-expired {
+                &:before {
+                    content: '\f00c'; // checkmark
+                }
+            }
+            &.skill-status-achieved,
+            &.skill-status-expiring {
+                &:before {
+                    content: '\f10c'; // circle-o
+                }
+            }
+        }
     }
 }
 
