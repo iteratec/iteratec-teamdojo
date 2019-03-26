@@ -4,18 +4,14 @@
 
 .teams-achievements {
     .achievement-container {
-        /deep/ .simplebar-track {
-            bottom: 1em !important;
-        }
         /deep/ .simplebar-scroll-content {
             padding-right: 1.94em !important;
             .simplebar-content {
-                margin-right: -0.69em !important;
+                padding: 5px;
             }
         }
         @include accordion();
         height: inherit;
-        padding-right: 10px;
         .achievement-list {
         }
         &-body {
@@ -28,8 +24,7 @@
 @media only screen and (min-width: map-get($grid-breakpoints, lg)) {
     .teams-achievements {
         .achievement-container {
-            height: calc(100vh - 242px);
-            padding: 5px;
+            height: calc(100vh - 188px);
         }
         /deep/ .card-header,
         /deep/ .achievement-list-header .achievement-list-header-left .achievement-item {
