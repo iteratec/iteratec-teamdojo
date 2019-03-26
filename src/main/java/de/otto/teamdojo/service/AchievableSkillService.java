@@ -15,9 +15,9 @@ public interface AchievableSkillService {
     Page<AchievableSkillDTO> findAllByTeamAndLevelAndBadge(Long teamId, List<Long> levelIds, List<Long> badgeIds, List<String> filterNames, Pageable pageable);
 
     /*
-     *  Get the skills that are achievable for the given team and belong to one of the given dimensions
+     *  Get the skills that are achievable for the given team and belong to the given dimension
      */
-    Page<AchievableSkillDTO> findAllByTeamAndDimension(Long teamId, List<Long> dimensionIds, List<String> filterNames, Pageable pageable);
+    Page<AchievableSkillDTO> findAllByTeamAndDimension(Long teamId, Long dimensionId, List<String> filterNames, Pageable pageable);
 
     /**
      * Updates an achievable skill

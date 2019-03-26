@@ -81,9 +81,9 @@ public class AchievableSkillServiceImpl implements AchievableSkillService {
     }
 
     @Override
-    public Page<AchievableSkillDTO> findAllByTeamAndDimension(Long teamId, List<Long> dimensionIds, List<String> filter, Pageable pageable){
+    public Page<AchievableSkillDTO> findAllByTeamAndDimension(Long teamId, Long dimensionId, List<String> filter, Pageable pageable){
         List<String> queryFilter = getQueryFilter(filter);
-        return skillRepository.findAchievableSkillsByDimensions(teamId, dimensionIds, queryFilter, pageable);
+        return skillRepository.findAchievableSkillsByDimensions(teamId, dimensionId, queryFilter, pageable);
     }
 
     @Override

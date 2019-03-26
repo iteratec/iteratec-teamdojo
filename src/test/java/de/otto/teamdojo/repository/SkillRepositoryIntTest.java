@@ -109,7 +109,7 @@ public class SkillRepositoryIntTest {
         List<String> filter = Lists.newArrayList("COMPLETE", "INCOMPLETE");
 
         Page<AchievableSkillDTO> results = skillRepository.findAchievableSkillsByDimensions(
-            teamId, Arrays.asList(dimensionId), filter, Pageable.unpaged());
+            teamId, dimensionId, filter, Pageable.unpaged());
         assertThat(results.getTotalElements()).isEqualTo(3);
         assertThat(results.stream().anyMatch(skill -> "Input Validation".equals(skill.getTitle()))).isTrue();
         assertThat(results.stream().anyMatch(skill -> "Software updates".equals(skill.getTitle()))).isTrue();
