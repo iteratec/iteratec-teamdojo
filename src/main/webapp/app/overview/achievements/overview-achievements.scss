@@ -42,6 +42,10 @@
             }
         }
 
+        /deep/ .card-header {
+            padding: 0px;
+        }
+
         /deep/ .simplebar-track {
             bottom: 1em !important;
         }
