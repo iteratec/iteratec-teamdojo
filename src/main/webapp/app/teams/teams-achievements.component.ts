@@ -63,7 +63,6 @@ export class TeamsAchievementsComponent implements OnInit, OnChanges {
             if (levelId) {
                 const dimension = this.team.participations.find((d: IDimension) => d.levels.some((l: ILevel) => l.id === levelId));
                 if (dimension) {
-                    this.activeItemIds.dimension = dimension.id;
                     this.setExpandedDimensionId(dimension.id);
                     const level = dimension.levels.find((l: ILevel) => l.id === levelId);
                     if (level) {

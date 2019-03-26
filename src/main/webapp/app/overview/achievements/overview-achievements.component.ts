@@ -89,7 +89,6 @@ export class OverviewAchievementsComponent implements OnInit {
                     .filter(l => l.id === levelId)
                     .forEach(l => {
                         this.setDimensionPanelActiveState(`achievements-dimension-${l.dimensionId}`, true);
-                        this.activeItemIds.dimension = l.dimensionId;
                     });
             } else if (badgeId) {
                 this.activeItemIds.badge = badgeId;
