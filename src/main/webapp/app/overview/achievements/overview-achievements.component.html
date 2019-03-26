@@ -16,16 +16,14 @@
                     </div>
                 </ng-template>
                 <ng-template ngbPanelContent>
-                    <div class="item-list-body">
-                        <div class="d-flex flex-wrap">
-                            <div class="" *ngFor="let badge of generalBadges">
-                                <jhi-achievement-item type="item-badge" [item]="badge"
-                                                      [progress]="getAchievementProgress(badge)"
-                                                      [active]="activeItemIds.badge === badge.id"
-                                                      (onItemSelected)="selectItem('badge', badge.id)"
-                                                      [hasAuthority]="hasAuthority">
-                                </jhi-achievement-item>
-                            </div>
+                    <div class="d-flex flex-wrap">
+                        <div class="" *ngFor="let badge of generalBadges">
+                            <jhi-achievement-item type="item-badge" [item]="badge"
+                                                  [progress]="getAchievementProgress(badge)"
+                                                  [active]="activeItemIds.badge === badge.id"
+                                                  (onItemSelected)="selectItem('badge', badge.id)"
+                                                  [hasAuthority]="hasAuthority">
+                            </jhi-achievement-item>
                         </div>
                     </div>
                 </ng-template>
@@ -51,31 +49,29 @@
                     </div>
                 </ng-template>
                 <ng-template ngbPanelContent>
+                    <div *ngIf="dimension.badges.length" class="item-list-title"
+                         dojoTranslate="teamdojoApp.overview.achievements.dimensions.badges.title"></div>
+                    <div class="d-flex flex-wrap">
+                        <div *ngFor="let badge of dimension.badges">
+                            <jhi-achievement-item type="item-badge" [item]="badge"
+                                                  [progress]="getAchievementProgress(badge)"
+                                                  [active]="activeItemIds.badge === badge.id"
+                                                  (onItemSelected)="selectItem('badge', badge.id)"
+                                                  [hasAuthority]="hasAuthority">
+                            </jhi-achievement-item>
+                        </div>
+                    </div>
                     <div class="item-list-body">
-                        <div *ngIf="dimension.badges.length" class="item-list-title"
-                             dojoTranslate="teamdojoApp.overview.achievements.dimensions.badges.title"></div>
+                        <div *ngIf="dimension.levels.length" class="item-list-title"
+                             dojoTranslate="teamdojoApp.overview.achievements.dimensions.levels.title"></div>
                         <div class="d-flex flex-wrap">
-                            <div *ngFor="let badge of dimension.badges">
-                                <jhi-achievement-item type="item-badge" [item]="badge"
-                                                      [progress]="getAchievementProgress(badge)"
-                                                      [active]="activeItemIds.badge === badge.id"
-                                                      (onItemSelected)="selectItem('badge', badge.id)"
+                            <div *ngFor="let level of dimension.levels">
+                                <jhi-achievement-item type="item-level" [item]="level"
+                                                      [progress]="getAchievementProgress(level)"
+                                                      [active]="activeItemIds.level === level.id"
+                                                      (onItemSelected)="selectItem('level', level.id)"
                                                       [hasAuthority]="hasAuthority">
                                 </jhi-achievement-item>
-                            </div>
-                        </div>
-                        <div class="item-list-body">
-                            <div *ngIf="dimension.levels.length" class="item-list-title"
-                                 dojoTranslate="teamdojoApp.overview.achievements.dimensions.levels.title"></div>
-                            <div class="d-flex flex-wrap">
-                                <div *ngFor="let level of dimension.levels">
-                                    <jhi-achievement-item type="item-level" [item]="level"
-                                                          [progress]="getAchievementProgress(level)"
-                                                          [active]="activeItemIds.level === level.id"
-                                                          (onItemSelected)="selectItem('level', level.id)"
-                                                          [hasAuthority]="hasAuthority">
-                                    </jhi-achievement-item>
-                                </div>
                             </div>
                         </div>
                     </div>
