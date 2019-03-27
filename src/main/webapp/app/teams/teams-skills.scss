@@ -29,7 +29,6 @@
         color: $dojo-text-primary;
     }
 
-    padding-right: 10px;
     &-filter {
         color: $dojo-text-primary;
         margin-right: 14px;
@@ -42,10 +41,8 @@
         /deep/ .simplebar-scroll-content {
             padding-right: 1.94em !important;
             .simplebar-content {
-                padding-left: 2px !important;
-                padding-right: 5px !important;
-                margin-right: -0.69em !important;
-                overflow-x: hidden !important;
+                padding: 5px;
+                overflow-x: hidden;
             }
         }
         .skill-title {
@@ -116,9 +113,7 @@
 @media only screen and (min-width: map-get($grid-breakpoints, lg)) {
     .teams-skills {
         .teams-skills-list {
-            height: calc(100vh - 320px);
-            padding: 5px;
-            padding-left: 0;
+            height: calc(100vh - 276px);
         }
     }
 }
