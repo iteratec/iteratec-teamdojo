@@ -93,6 +93,19 @@
                 <span>{{ 'teamdojoApp.team.pureTrainingTeamExplanation' | translate }}</span>
                 <hr>
                 <div class="form-group">
+                    <label class="form-control-label" dojoTranslate="teamdojoApp.team.official" for="field_official">Is Official</label>
+                    <input type="checkbox" class="form-control" name="official" id="field_official"
+                           [(ngModel)]="team.official" />
+                    <div [hidden]="!(editForm.controls.official?.dirty && editForm.controls.official?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.official?.errors?.required" dojoTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <span>{{ 'teamdojoApp.team.officialExplanation' | translate }}</span>
+                <hr>
+                <div class="form-group">
                     <label dojoTranslate="teamdojoApp.team.participations"
                            for="field_participations">Participations</label>
                     <select class="form-control" id="field_participations" multiple name="participations" [(ngModel)]="team.participations">

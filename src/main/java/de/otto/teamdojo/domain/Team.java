@@ -54,6 +54,10 @@ public class Team implements Serializable {
     @Column(name = "pure_training_team", nullable = false)
     private Boolean pureTrainingTeam;
 
+    @NotNull
+    @Column(name = "official", nullable = false)
+    private Boolean official;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "team_participations",
@@ -155,6 +159,19 @@ public class Team implements Serializable {
         this.pureTrainingTeam = pureTrainingTeam;
     }
 
+    public Boolean isOfficial() {
+        return official;
+    }
+
+    public Team official(Boolean official) {
+        this.official = official;
+        return this;
+    }
+
+    public void setOfficial(Boolean official) {
+        this.official = official;
+    }
+
     public Set<Dimension> getParticipations() {
         return participations;
     }
@@ -249,6 +266,7 @@ public class Team implements Serializable {
             ", contactPerson='" + getContactPerson() + "'" +
             ", validUntil='" + getValidUntil() + "'" +
             ", pureTrainingTeam='" + isPureTrainingTeam() + "'" +
+            ", official='" + isOfficial() + "'" +
             "}";
     }
 }

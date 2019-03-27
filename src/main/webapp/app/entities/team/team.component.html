@@ -21,6 +21,7 @@
             <th jhiSortBy="contactPerson"><span dojoTranslate="teamdojoApp.team.contactPerson">Contact Person</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="validUntil"><span dojoTranslate="teamdojoApp.team.validUntil">Valid Until</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="pureTrainingTeam"><span dojoTranslate="teamdojoApp.team.pureTrainingTeam">Pure Training Team</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="official"><span dojoTranslate="teamdojoApp.team.official">Official</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="imageName"><span dojoTranslate="teamdojoApp.team.image">Image</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -34,6 +35,7 @@
                 <td>{{team.contactPerson}}</td>
                 <td>{{team.validUntil | date:'medium'}}</td>
                 <td>{{team.pureTrainingTeam}}</td>
+                <td>{{team.official}}</td>
                 <td>
                     <div *ngIf="team.imageId">
                         <a [routerLink]="['../image', team.imageId , 'view' ]" >{{team.imageName}}</a>

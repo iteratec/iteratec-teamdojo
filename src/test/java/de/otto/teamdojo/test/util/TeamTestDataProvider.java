@@ -36,11 +36,13 @@ public class TeamTestDataProvider {
         private String slogan;
         private String contactPerson;
         private boolean pureTrainingTeam;
+        private boolean official;
 
         public TeamBuilder(String name, String shortName) {
             this.name = name;
             this.shortName = shortName;
             this.pureTrainingTeam = false;
+            this.official = false;
         }
 
         public TeamBuilder slogan(String slogan) {
@@ -65,7 +67,7 @@ public class TeamTestDataProvider {
         }
 
         public Team build() {
-            return new Team().name(name).shortName(shortName).slogan(slogan).contactPerson(contactPerson).pureTrainingTeam(pureTrainingTeam);
+            return new Team().name(name).shortName(shortName).slogan(slogan).contactPerson(contactPerson).pureTrainingTeam(pureTrainingTeam).official(official);
         }
     }
 

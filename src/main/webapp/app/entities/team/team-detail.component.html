@@ -29,6 +29,10 @@
                 <dd>
                     <span>{{team.pureTrainingTeam}}</span>
                 </dd>
+                <dt><span dojoTranslate="teamdojoApp.team.official">Official</span></dt>
+                <dd>
+                    <span>{{team.official}}</span>
+                </dd>
                 <dt><span dojoTranslate="teamdojoApp.team.participations">Participations</span></dt>
                 <dd>
                     <span *ngFor="let participations of team.participations; let last = last">
