@@ -24,9 +24,9 @@
             </div>
         </div>
     </div>
-    <div>
-        <div class="teams-skills-list list-group" data-simplebar="init">
-            <li class="list-group-item list-group-item-action flex-column align-items-start mb-3 skill-list-item"
+    <div class="teams-skills-list list-group" data-simplebar="init">
+        <div class="d-flex flex-row flex-wrap">
+            <div class="list-group-item list-group-item-action flex-column align-items-start mb-3 skill-list-item"
                 [ngClass]="{'active-skill':isActiveSkill(skill), 'irrelevant-skill': skill.irrelevant, 'in-skill-details': isInSkillDetails()}"
                 *ngFor="let skill of skills | skillFilter:search | skillSort:orderBy">
                 <div class="d-flex flex-column">
@@ -124,7 +124,7 @@
                         </div>
                     </div>
                 </div>
-            </li>
+            </div>
         </div>
     </div>
 </div>
