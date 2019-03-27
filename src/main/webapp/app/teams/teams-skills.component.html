@@ -34,7 +34,7 @@
                         <div class="d-flex flex-column justify-content-between skill-text">
                             <div class="d-flex flex-column mb-1">
                                 <div class="skill-title">
-                                    <a (click)="handleSkillClicked(skill)">{{skill.title | truncateString: 80}}</a>
+                                    <a class="text-dark" (click)="handleSkillClicked(skill)">{{skill.title | truncateString: 80}}</a>
                                 </div>
                                 <div class="skill-description">
                                     <a (click)="handleSkillClicked(skill)">{{skill.description | truncateString: 240}}</a>

@@ -76,14 +76,9 @@
                     opacity: 0.3;
                     cursor: default;
                 }
-                i {
-                    margin-right: 3px;
-                }
-                a {
-                    small {
-                        color: $dojo-text-secondary;
-                    }
-                }
+            }
+            a.skill-action-bar-item {
+                color: $dojo-text-primary;
             }
         }
         .list-group-item {
