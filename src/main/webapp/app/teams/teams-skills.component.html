@@ -29,9 +29,9 @@
             <div class="list-group-item list-group-item-action flex-column align-items-start mb-3 skill-list-item"
                 [ngClass]="{'active-skill':isActiveSkill(skill), 'irrelevant-skill': skill.irrelevant, 'in-skill-details': isInSkillDetails()}"
                 *ngFor="let skill of skills | skillFilter:search | skillSort:orderBy">
-                <div class="d-flex flex-column">
-                    <div class="d-flex">
-                        <div class="skill-title d-flex flex-column" [ngClass]="{'irrelevant': skill.irrelevant}">
+                <div class="d-flex flex-column justify-content-between h-100">
+                    <div class="d-flex flex-grow-1">
+                        <div class="skill-title d-flex flex-column justify-content-between" [ngClass]="{'irrelevant': skill.irrelevant}">
                             <div class="d-flex flex-row" (click)="handleSkillClicked(skill)">
                                 <a *ngIf="isInSkillDetails()" class="mb-1">{{skill.title}}</a>
                                 <a *ngIf="!isInSkillDetails()"
