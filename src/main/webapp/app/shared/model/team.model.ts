@@ -9,6 +9,8 @@ export interface ITeam {
     slogan?: string;
     contactPerson?: string;
     validUntil?: Moment;
+    pureTrainingTeam?: boolean;
+    official?: boolean;
     participations?: IDimension[];
     skills?: ITeamSkill[];
     imageName?: string;
@@ -25,11 +27,16 @@ export class Team implements ITeam {
         public slogan?: string,
         public contactPerson?: string,
         public validUntil?: Moment,
+        public pureTrainingTeam?: boolean,
+        public official?: boolean,
         public participations?: IDimension[],
         public skills?: ITeamSkill[],
         public imageName?: string,
         public imageId?: number,
         public expired?: boolean,
         public daysUntilExpiration?: number
-    ) {}
+    ) {
+        this.pureTrainingTeam = this.pureTrainingTeam || false;
+        this.official = official || false;
+    }
 }

@@ -35,10 +35,14 @@ public class TeamTestDataProvider {
         private final String shortName;
         private String slogan;
         private String contactPerson;
+        private boolean pureTrainingTeam;
+        private boolean official;
 
         public TeamBuilder(String name, String shortName) {
             this.name = name;
             this.shortName = shortName;
+            this.pureTrainingTeam = false;
+            this.official = false;
         }
 
         public TeamBuilder slogan(String slogan) {
@@ -51,6 +55,11 @@ public class TeamTestDataProvider {
             return this;
         }
 
+        public TeamBuilder pureTrainingTeam(boolean pureTrainingTeam) {
+            this.pureTrainingTeam = pureTrainingTeam;
+            return this;
+        }
+
         public Team build(EntityManager em) {
             Team team = build();
             em.persist(team);
@@ -58,7 +67,7 @@ public class TeamTestDataProvider {
         }
 
         public Team build() {
-            return new Team().name(name).shortName(shortName).slogan(slogan).contactPerson(contactPerson);
+            return new Team().name(name).shortName(shortName).slogan(slogan).contactPerson(contactPerson).pureTrainingTeam(pureTrainingTeam).official(official);
         }
     }
 

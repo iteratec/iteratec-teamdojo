@@ -54,6 +54,14 @@
                             word-break: break-word;
                             font-size: 1rem;
                         }
+                        .official-badge {
+                            font-size: 0.9rem;
+                            color: green;
+                            border: 1px solid green;
+                            border-radius: 3px;
+                            padding: 3px 4px 1px 4px;
+                            margin-left: 1rem;
+                        }
                     }
                 }
                 .team-scores {

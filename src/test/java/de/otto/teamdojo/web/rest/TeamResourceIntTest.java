@@ -70,6 +70,12 @@ public class TeamResourceIntTest {
     private static final Instant DEFAULT_VALID_UNTIL = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_VALID_UNTIL = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
+    private static final Boolean DEFAULT_PURE_TRAINING_TEAM = false;
+    private static final Boolean UPDATED_PURE_TRAINING_TEAM = true;
+
+    private static final Boolean DEFAULT_OFFICIAL = false;
+    private static final Boolean UPDATED_OFFICIAL = true;
+
     @Autowired
     private TeamRepository teamRepository;
 
@@ -131,7 +137,9 @@ public class TeamResourceIntTest {
             .shortName(DEFAULT_SHORT_NAME)
             .slogan(DEFAULT_SLOGAN)
             .contactPerson(DEFAULT_CONTACT_PERSON)
-            .validUntil(DEFAULT_VALID_UNTIL);
+            .validUntil(DEFAULT_VALID_UNTIL)
+            .pureTrainingTeam(DEFAULT_PURE_TRAINING_TEAM)
+            .official(DEFAULT_OFFICIAL);
         return team;
     }
 
@@ -161,6 +169,8 @@ public class TeamResourceIntTest {
         assertThat(testTeam.getSlogan()).isEqualTo(DEFAULT_SLOGAN);
         assertThat(testTeam.getContactPerson()).isEqualTo(DEFAULT_CONTACT_PERSON);
         assertThat(testTeam.getValidUntil()).isEqualTo(DEFAULT_VALID_UNTIL);
+        assertThat(testTeam.isPureTrainingTeam()).isEqualTo(DEFAULT_PURE_TRAINING_TEAM);
+        assertThat(testTeam.isOfficial()).isEqualTo(DEFAULT_OFFICIAL);
     }
 
     @Test
@@ -223,6 +233,44 @@ public class TeamResourceIntTest {
 
     @Test
     @Transactional
+    public void checkPureTrainingTeamIsRequired() throws Exception {
+        int databaseSizeBeforeTest = teamRepository.findAll().size();
+        // set the field null
+        team.setPureTrainingTeam(null);
+
+        // Create the Team, which fails.
+        TeamDTO teamDTO = teamMapper.toDto(team);
+
+        restTeamMockMvc.perform(post("/api/teams")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(teamDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Team> teamList = teamRepository.findAll();
+        assertThat(teamList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkOfficialIsRequired() throws Exception {
+        int databaseSizeBeforeTest = teamRepository.findAll().size();
+        // set the field null
+        team.setOfficial(null);
+
+        // Create the Team, which fails.
+        TeamDTO teamDTO = teamMapper.toDto(team);
+
+        restTeamMockMvc.perform(post("/api/teams")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(teamDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Team> teamList = teamRepository.findAll();
+        assertThat(teamList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllTeams() throws Exception {
         // Initialize the database
         teamRepository.saveAndFlush(team);
@@ -236,7 +284,9 @@ public class TeamResourceIntTest {
             .andExpect(jsonPath("$.[*].shortName").value(hasItem(DEFAULT_SHORT_NAME.toString())))
             .andExpect(jsonPath("$.[*].slogan").value(hasItem(DEFAULT_SLOGAN.toString())))
             .andExpect(jsonPath("$.[*].contactPerson").value(hasItem(DEFAULT_CONTACT_PERSON.toString())))
-            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())));
+            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())))
+            .andExpect(jsonPath("$.[*].pureTrainingTeam").value(hasItem(DEFAULT_PURE_TRAINING_TEAM.booleanValue())))
+            .andExpect(jsonPath("$.[*].official").value(hasItem(DEFAULT_OFFICIAL.booleanValue())));
     }
     
     @SuppressWarnings({"unchecked"})
@@ -287,7 +337,9 @@ public class TeamResourceIntTest {
             .andExpect(jsonPath("$.shortName").value(DEFAULT_SHORT_NAME.toString()))
             .andExpect(jsonPath("$.slogan").value(DEFAULT_SLOGAN.toString()))
             .andExpect(jsonPath("$.contactPerson").value(DEFAULT_CONTACT_PERSON.toString()))
-            .andExpect(jsonPath("$.validUntil").value(DEFAULT_VALID_UNTIL.toString()));
+            .andExpect(jsonPath("$.validUntil").value(DEFAULT_VALID_UNTIL.toString()))
+            .andExpect(jsonPath("$.pureTrainingTeam").value(DEFAULT_PURE_TRAINING_TEAM.booleanValue()))
+            .andExpect(jsonPath("$.official").value(DEFAULT_OFFICIAL.booleanValue()));
     }
 
     @Test
@@ -487,6 +539,84 @@ public class TeamResourceIntTest {
 
     @Test
     @Transactional
+    public void getAllTeamsByPureTrainingTeamIsEqualToSomething() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where pureTrainingTeam equals to DEFAULT_PURE_TRAINING_TEAM
+        defaultTeamShouldBeFound("pureTrainingTeam.equals=" + DEFAULT_PURE_TRAINING_TEAM);
+
+        // Get all the teamList where pureTrainingTeam equals to UPDATED_PURE_TRAINING_TEAM
+        defaultTeamShouldNotBeFound("pureTrainingTeam.equals=" + UPDATED_PURE_TRAINING_TEAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByPureTrainingTeamIsInShouldWork() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where pureTrainingTeam in DEFAULT_PURE_TRAINING_TEAM or UPDATED_PURE_TRAINING_TEAM
+        defaultTeamShouldBeFound("pureTrainingTeam.in=" + DEFAULT_PURE_TRAINING_TEAM + "," + UPDATED_PURE_TRAINING_TEAM);
+
+        // Get all the teamList where pureTrainingTeam equals to UPDATED_PURE_TRAINING_TEAM
+        defaultTeamShouldNotBeFound("pureTrainingTeam.in=" + UPDATED_PURE_TRAINING_TEAM);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByPureTrainingTeamIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where pureTrainingTeam is not null
+        defaultTeamShouldBeFound("pureTrainingTeam.specified=true");
+
+        // Get all the teamList where pureTrainingTeam is null
+        defaultTeamShouldNotBeFound("pureTrainingTeam.specified=false");
+    }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByOfficialIsEqualToSomething() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where official equals to DEFAULT_OFFICIAL
+        defaultTeamShouldBeFound("official.equals=" + DEFAULT_OFFICIAL);
+
+        // Get all the teamList where official equals to UPDATED_OFFICIAL
+        defaultTeamShouldNotBeFound("official.equals=" + UPDATED_OFFICIAL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByOfficialIsInShouldWork() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where official in DEFAULT_OFFICIAL or UPDATED_OFFICIAL
+        defaultTeamShouldBeFound("official.in=" + DEFAULT_OFFICIAL + "," + UPDATED_OFFICIAL);
+
+        // Get all the teamList where official equals to UPDATED_OFFICIAL
+        defaultTeamShouldNotBeFound("official.in=" + UPDATED_OFFICIAL);
+    }
+
+    @Test
+    @Transactional
+    public void getAllTeamsByOfficialIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        teamRepository.saveAndFlush(team);
+
+        // Get all the teamList where official is not null
+        defaultTeamShouldBeFound("official.specified=true");
+
+        // Get all the teamList where official is null
+        defaultTeamShouldNotBeFound("official.specified=false");
+    }
+
+    @Test
+    @Transactional
     public void getAllTeamsByParticipationsIsEqualToSomething() throws Exception {
         // Initialize the database
         Dimension participations = DimensionResourceIntTest.createEntity(em);
@@ -553,7 +683,9 @@ public class TeamResourceIntTest {
             .andExpect(jsonPath("$.[*].shortName").value(hasItem(DEFAULT_SHORT_NAME)))
             .andExpect(jsonPath("$.[*].slogan").value(hasItem(DEFAULT_SLOGAN)))
             .andExpect(jsonPath("$.[*].contactPerson").value(hasItem(DEFAULT_CONTACT_PERSON)))
-            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())));
+            .andExpect(jsonPath("$.[*].validUntil").value(hasItem(DEFAULT_VALID_UNTIL.toString())))
+            .andExpect(jsonPath("$.[*].pureTrainingTeam").value(hasItem(DEFAULT_PURE_TRAINING_TEAM.booleanValue())))
+            .andExpect(jsonPath("$.[*].official").value(hasItem(DEFAULT_OFFICIAL.booleanValue())));
 
         // Check, that the count call also returns 1
         restTeamMockMvc.perform(get("/api/teams/count?sort=id,desc&" + filter))
@@ -605,7 +737,9 @@ public class TeamResourceIntTest {
             .shortName(UPDATED_SHORT_NAME)
             .slogan(UPDATED_SLOGAN)
             .contactPerson(UPDATED_CONTACT_PERSON)
-            .validUntil(UPDATED_VALID_UNTIL);
+            .validUntil(UPDATED_VALID_UNTIL)
+            .pureTrainingTeam(UPDATED_PURE_TRAINING_TEAM)
+            .official(UPDATED_OFFICIAL);
         TeamDTO teamDTO = teamMapper.toDto(updatedTeam);
 
         restTeamMockMvc.perform(put("/api/teams")
@@ -622,6 +756,8 @@ public class TeamResourceIntTest {
         assertThat(testTeam.getSlogan()).isEqualTo(UPDATED_SLOGAN);
         assertThat(testTeam.getContactPerson()).isEqualTo(UPDATED_CONTACT_PERSON);
         assertThat(testTeam.getValidUntil()).isEqualTo(UPDATED_VALID_UNTIL);
+        assertThat(testTeam.isPureTrainingTeam()).isEqualTo(UPDATED_PURE_TRAINING_TEAM);
+        assertThat(testTeam.isOfficial()).isEqualTo(UPDATED_OFFICIAL);
     }
 
     @Test
