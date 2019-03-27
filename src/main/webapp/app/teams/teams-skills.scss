@@ -4,10 +4,6 @@
 @import '../../content/scss/mixins';
 @import './skill-details/skill-details-rating/skill-details-rating';
 
-.in-skill-details {
-    cursor: pointer;
-}
-
 .irrelevant-skill {
     .skill-title {
         opacity: 0.7;
@@ -43,15 +39,6 @@
             .simplebar-content {
                 padding: 5px;
                 overflow-x: hidden;
-            }
-        }
-        .skill-title {
-            padding: 5px 5px 5px 20px;
-            word-break: break-word;
-            flex-grow: 1;
-
-            &.irrelevant {
-                opacity: 0.3;
             }
         }
 
@@ -106,6 +93,7 @@
             margin-left: 5px;
             margin-right: 5px;
             hyphens: auto;
+            overflow-wrap: anywhere;
         }
     }
 }
