@@ -268,7 +268,7 @@ public class SkillResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.implementation").value(DEFAULT_IMPLEMENTATION.toString()))
             .andExpect(jsonPath("$.validation").value(DEFAULT_VALIDATION.toString()))
-            .andExpect(jsonPath("$.expiryPeriod").value(DEFAULT_EXPIRY_PERIOD.toString()))
+            .andExpect(jsonPath("$.expiryPeriod").value(DEFAULT_EXPIRY_PERIOD))
             .andExpect(jsonPath("$.contact").value(DEFAULT_CONTACT.toString()))
             .andExpect(jsonPath("$.score").value(DEFAULT_SCORE))
             .andExpect(jsonPath("$.rateScore").value(DEFAULT_RATE_SCORE.doubleValue()))
@@ -852,7 +852,6 @@ public class SkillResourceIntTest {
             .expiryPeriod(UPDATED_EXPIRY_PERIOD)
             .contact(UPDATED_CONTACT)
             .score(UPDATED_SCORE)
-            .expiryPeriod(UPDATED_EXPIRY_PERIOD)
             .rateScore(UPDATED_RATE_SCORE)
             .rateCount(UPDATED_RATE_COUNT);
         SkillDTO skillDTO = skillMapper.toDto(updatedSkill);
