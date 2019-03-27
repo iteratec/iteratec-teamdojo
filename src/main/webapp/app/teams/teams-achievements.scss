@@ -3,6 +3,9 @@
 @import '../../content/scss/mixins';
 
 .teams-achievements {
+    h4 {
+        color: $dojo-text-primary;
+    }
     .achievement-container {
         /deep/ .simplebar-scroll-content {
             padding-right: 1.94em !important;
