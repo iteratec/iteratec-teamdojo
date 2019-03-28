@@ -289,6 +289,8 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
                 });
                 this.breadcrumbService.setBreadcrumb(this.team, this.activeDimension, this.activeLevel, this.activeBadge, skill.body);
             });
+        } else {
+            this.goToDetails(s);
         }
     }
 

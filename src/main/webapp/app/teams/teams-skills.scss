@@ -4,10 +4,6 @@
 @import '../../content/scss/mixins';
 @import './skill-details/skill-details-rating/skill-details-rating';
 
-.in-skill-details {
-    cursor: pointer;
-}
-
 .irrelevant-skill {
     .skill-title {
         opacity: 0.7;
@@ -29,7 +25,6 @@
         color: $dojo-text-primary;
     }
 
-    padding-right: 10px;
     &-filter {
         color: $dojo-text-primary;
         margin-right: 14px;
@@ -42,19 +37,8 @@
         /deep/ .simplebar-scroll-content {
             padding-right: 1.94em !important;
             .simplebar-content {
-                padding-left: 2px !important;
-                padding-right: 5px !important;
-                margin-right: -0.69em !important;
-                overflow-x: hidden !important;
-            }
-        }
-        .skill-title {
-            padding: 5px 5px 5px 20px;
-            word-break: break-word;
-            flex-grow: 1;
-
-            &.irrelevant {
-                opacity: 0.3;
+                padding: 5px;
+                overflow-x: hidden;
             }
         }
 
@@ -129,12 +113,6 @@
                     opacity: 0.3;
                     cursor: default;
                 }
-                a {
-                    small {
-                        color: $dojo-text-secondary;
-                        font-size: 16px;
-                    }
-                }
                 /* relavance action icons */
                 &.skill-status-relevance-action-irrelevant {
                     &:before {
@@ -189,10 +167,18 @@
                     }
                 }
             }
+            a.skill-action-bar-item {
+                color: $dojo-text-primary;
+            }
         }
         .list-group-item {
             @include skill-list-entry();
+            flex: 1 1 32%;
             border: none;
+            margin-left: 5px;
+            margin-right: 5px;
+            hyphens: auto;
+            overflow-wrap: anywhere;
         }
     }
 
@@ -204,9 +190,7 @@
 @media only screen and (min-width: map-get($grid-breakpoints, lg)) {
     .teams-skills {
         .teams-skills-list {
-            height: calc(100vh - 320px);
-            padding: 5px;
-            padding-left: 0;
+            height: calc(100vh - 276px);
         }
     }
 }
