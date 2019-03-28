@@ -13,6 +13,9 @@
                 padding: 5px;
             }
         }
+        /deep/ .btn-link {
+            text-decoration: none;
+        }
         @include accordion();
         .achievement-list-header-right {
             .expand-icon {

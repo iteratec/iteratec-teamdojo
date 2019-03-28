@@ -1,24 +1,28 @@
 <div class="teams-skills">
     <div class="teams-skills-filter">
         <h4>{{'teamdojoApp.teams.skills.title' | translate}}</h4>
-        <div class="teams-skills-list-header">
-            <input type="text" [placeholder]="'teamdojoApp.teams.skills.search.placeholder' | translate"
-                   class="skill-search-input skill-list-control" [value]="search" (keyup)="search$.next($event.target.value)"/>
-            <div class="skill-list-control completed-check-control">
-                <input class="form-check-input" type="checkbox" value="" id="checkIncomplete"
-                       [checked]="filters.indexOf('INCOMPLETE') > -1" (click)="onFilterClicked('INCOMPLETE')">
-                <label class="form-check-label" for="checkIncomplete"
-                       dojoTranslate="teamdojoApp.teams.skills.search.filter.label">
-                </label>
+        <div class="d-flex flex-column justify-content-between">
+            <div class="form-inline mb-2 justify-content-between">
+                <div class="form-group form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="checkIncomplete"
+                           [checked]="filters.indexOf('INCOMPLETE') > -1" (click)="onFilterClicked('INCOMPLETE')">
+                    <label class="form-check-label" for="checkIncomplete"
+                           dojoTranslate="teamdojoApp.teams.skills.search.filter.label">
+                    </label>
+                </div>
+                <div class="form-group skill-sort">
+                    <select class="form-control" name="orderBy" [(ngModel)]="orderBy" id="field_orderBy">
+                        <option value="title">{{'teamdojoApp.teams.skills.search.orderBy.title' | translate}}</option>
+                        <option value="score">{{'teamdojoApp.teams.skills.search.orderBy.score' | translate}}</option>
+                        <option
+                            value="rateCount">{{'teamdojoApp.teams.skills.search.orderBy.rateCount' | translate}}</option>
+                    </select>
+                </div>
             </div>
-            <label class="form-select-label">{{'teamdojoApp.overview.skills.orderBy' | translate}}</label>
-            <select class="form-control skill-list-control transparent-background" name="orderBy" [(ngModel)]="orderBy"
-                    id="field_orderBy">
-                <option value="title">{{'teamdojoApp.teams.skills.search.orderBy.title' | translate}}</option>
-                <option value="score">{{'teamdojoApp.teams.skills.search.orderBy.score' | translate}}</option>
-                <option
-                    value="rateCount">{{'teamdojoApp.teams.skills.search.orderBy.rateCount' | translate}}</option>
-            </select>
+            <div class="form-group mb-2 skill-search">
+                <input type="text" [placeholder]="'teamdojoApp.teams.skills.search.placeholder' | translate"
+                       class="skill-search-input" [value]="search" (keyup)="search$.next($event.target.value)"/>
+            </div>
         </div>
     </div>
     <div class="teams-skills-list list-group" data-simplebar="init">

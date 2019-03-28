@@ -26,43 +26,6 @@
     }
 
     padding-right: 10px;
-    &-list-header {
-        .form-check-input {
-            margin-left: -0.75rem;
-        }
-
-        .form-select-label {
-            margin-bottom: 0px;
-        }
-
-        .form-check-label {
-            margin-left: 0.5rem;
-            padding-top: 0.05rem;
-        }
-
-        .skill-list-control {
-            height: calc(2rem);
-            padding: 0.2rem 0.75rem;
-            margin-bottom: 0.5rem;
-            &.transparent-background {
-                background: transparent;
-            }
-        }
-
-        .completed-check-control {
-            margin-top: 0.5em;
-        }
-
-        .skill-search-input {
-            border-radius: 0.25rem;
-        }
-
-        color: $dojo-text-primary;
-        margin-right: 14px;
-        .skill-sort select {
-            background-color: transparent;
-        }
-    }
 
     .teams-skills-list {
         /deep/ .simplebar-scroll-content {
