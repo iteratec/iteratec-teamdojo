@@ -22,6 +22,7 @@ import 'simplebar';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AccountService } from 'app/core';
+import { SkillStatus, SkillStatusUtils } from 'app/shared/model/skill-status';
 
 const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 
@@ -213,6 +214,22 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
         }
     }
 
+    getStatusClass(skill: IAchievableSkill): string {
+        return SkillStatusUtils.getLowerCaseValue(skill.skillStatus);
+    }
+
+    getSkillStatusTranslationKey(skill: AchievableSkill): string {
+        return SkillStatusUtils.getLowerCaseValue(skill.skillStatus);
+    }
+
+    clickSkillStatus(skill: IAchievableSkill) {
+        if (SkillStatusUtils.isValid(skill.skillStatus)) {
+            this.setIncomplete(skill);
+        } else if (SkillStatusUtils.isInvalid(skill.skillStatus)) {
+            this.setComplete(skill);
+        }
+    }
+
     setIrrelevant(skill: IAchievableSkill) {
         skill.irrelevant = true;
         skill.achievedAt = null;
@@ -222,6 +239,14 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
     setRelevant(skill: IAchievableSkill) {
         skill.irrelevant = false;
         this.updateSkill(skill);
+    }
+
+    toggleRelevance(skill: IAchievableSkill) {
+        if (skill.irrelevant) {
+            this.setRelevant(skill);
+        } else {
+            this.setIrrelevant(skill);
+        }
     }
 
     private updateSkill(skill: IAchievableSkill) {
@@ -297,6 +322,8 @@ export class TeamsSkillsComponent implements OnInit, OnChanges {
                 });
                 this.breadcrumbService.setBreadcrumb(this.team, this.activeDimension, this.activeLevel, this.activeBadge, skill.body);
             });
+        } else {
+            this.goToDetails(s);
         }
     }
 

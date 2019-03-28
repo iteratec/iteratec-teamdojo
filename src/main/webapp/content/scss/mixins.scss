@@ -1,7 +1,6 @@
 @mixin skill-list-entry() {
     padding: 0;
     outline: none;
-    cursor: pointer;
     background-color: $dojo-bg-gradient-from;
     border-radius: 2px;
     @include shadow();
@@ -14,11 +13,30 @@
         background: #f0f0f0;
     }
     a {
-        color: $dojo-text-primary;
+        color: $dojo-text-secondary;
         font-weight: normal;
     }
     * {
         outline: none;
+    }
+    .skill-info {
+        &.irrelevant {
+            opacity: 0.3;
+        }
+        .skill-text {
+            padding: 5px 5px 5px 10px;
+            .skill-description {
+                font-size: 0.73em;
+                a {
+                    color: $dojo-text-primary;
+                    white-space: pre-wrap;
+                }
+            }
+            .skill-title,
+            .skill-description {
+                cursor: pointer;
+            }
+        }
     }
 }
 @mixin achievement-image() {

@@ -16,6 +16,9 @@ import { Subject } from 'rxjs';
 import { SkillSortPipe } from 'app/shared/pipe/skill-sort.pipe';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AccountService } from 'app/core';
+import { AchievableSkill } from 'app/shared/model/achievable-skill.model';
+import { SkillService } from 'app/entities/skill';
+import { SkillStatusUtils } from 'app/shared/model/skill-status';
 import { IDimension } from 'app/shared/model/dimension.model';
 
 const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
@@ -28,6 +31,7 @@ const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 export class OverviewSkillsComponent implements OnInit, OnChanges {
     @Input() activeSkill: ISkill;
     @Output() onSkillChanged = new EventEmitter<ISkill>();
+    @Output() onSkillClicked = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
     /* data from backend */
     teams: ITeam[];
     levels: ILevel[];
@@ -53,7 +57,8 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
         private route: ActivatedRoute,
         private breadcrumbService: BreadcrumbService,
         private dimensionService: DimensionService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private skillService: SkillService
     ) {}
 
     ngOnInit() {
@@ -155,6 +160,12 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         this.updateBreadcrumb();
         this.onSkillChanged.emit(this.activeSkill);
+        this.skillService.find(this.activeSkill.id).subscribe(skill => {
+            this.onSkillClicked.emit({
+                iSkill: skill.body,
+                aSkill: this.activeSkill
+            });
+        });
     }
 
     private updateBreadcrumb() {
@@ -213,7 +224,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     }
 
     private isTeamSkillCompleted(teamSkill: ITeamSkill): boolean {
-        return teamSkill && !!teamSkill.completedAt;
+        return teamSkill && SkillStatusUtils.isValid(teamSkill.skillStatus);
     }
 
     isActiveSkill(skill: ISkill) {
