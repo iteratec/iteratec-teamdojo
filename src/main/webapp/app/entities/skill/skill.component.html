@@ -14,17 +14,16 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
-                <th jhiSortBy="id"><span dojoTranslate="teamdojoApp.global.field.id">ID</span> <span
-                    class="fa fa-sort"></span></th>
-            <th jhiSortBy="title"><span dojoTranslate="teamdojoApp.skill.title">Title</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="description"><span dojoTranslate="teamdojoApp.skill.description">Description</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="implementation"><span dojoTranslate="teamdojoApp.skill.implementation">Implementation</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="validation"><span dojoTranslate="teamdojoApp.skill.validation">Validation</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="expiryPeriod"><span dojoTranslate="teamdojoApp.skill.expiryPeriod">Expiry Period</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="contact"><span dojoTranslate="teamdojoApp.skill.contact">Contact</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="score"><span dojoTranslate="teamdojoApp.skill.score">Score</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="rateScore"><span dojoTranslate="teamdojoApp.skill.rateScore">Rate Score</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="rateCount"><span dojoTranslate="teamdojoApp.skill.rateCount">Rate Count</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="id"><span dojoTranslate="teamdojoApp.global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="title"><span dojoTranslate="teamdojoApp.skill.title">Title</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="description"><span dojoTranslate="teamdojoApp.skill.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="implementation"><span dojoTranslate="teamdojoApp.skill.implementation">Implementation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="validation"><span dojoTranslate="teamdojoApp.skill.validation">Validation</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="expiryPeriod"><span dojoTranslate="teamdojoApp.skill.expiryPeriod">Expiry Period</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contact"><span dojoTranslate="teamdojoApp.skill.contact">Contact</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="score"><span dojoTranslate="teamdojoApp.skill.score">Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rateScore"><span dojoTranslate="teamdojoApp.skill.rateScore">Rate Score</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="rateCount"><span dojoTranslate="teamdojoApp.skill.rateCount">Rate Count</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
 

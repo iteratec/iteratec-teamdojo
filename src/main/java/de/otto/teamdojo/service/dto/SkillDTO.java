@@ -23,8 +23,8 @@ public class SkillDTO implements Serializable {
     @Size(max = 2048)
     private String validation;
 
-    @Pattern(regexp = "^P(?:([-+]?[0-9]+)Y)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)W)?(?:([-+]?[0-9]+)D)?$")
-    private String expiryPeriod;
+    @Min(value = 1)
+    private Integer expiryPeriod;
 
     private String contact;
 
@@ -80,11 +80,11 @@ public class SkillDTO implements Serializable {
         this.validation = validation;
     }
 
-    public String getExpiryPeriod() {
+    public Integer getExpiryPeriod() {
         return expiryPeriod;
     }
 
-    public void setExpiryPeriod(String expiryPeriod) {
+    public void setExpiryPeriod(Integer expiryPeriod) {
         this.expiryPeriod = expiryPeriod;
     }
 

@@ -80,20 +80,16 @@
                 <hr>
                 <div class="form-group">
                     <label class="form-control-label" dojoTranslate="teamdojoApp.skill.expiryPeriod" for="field_expiryPeriod">Expiry Period</label>
-                    <input type="text" class="form-control" name="expiryPeriod" id="field_expiryPeriod"
-                        [(ngModel)]="skill.expiryPeriod" pattern="^P(?:([-+]?[0-9]+)Y)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)W)?(?:([-+]?[0-9]+)D)?$"
-                        [placeholder]="'teamdojoApp.skill.expiryPeriodPlaceholder' | translate"/>
+                    <input type="number" class="form-control" name="expiryPeriod" id="field_expiryPeriod"
+                        [(ngModel)]="skill.expiryPeriod" min="1" jhiMin="1"/>
                     <div [hidden]="!(editForm.controls.expiryPeriod?.dirty && editForm.controls.expiryPeriod?.invalid)">
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.expiryPeriod?.errors?.pattern"
-                               dojoTranslate="entity.validation.pattern"
-                               [translateValues]="{ pattern: 'Expiry Period' }">
-                            This field should follow pattern for "Expiry Period".
+                            [hidden]="!editForm.controls.expiryPeriod?.errors?.min" dojoTranslate="entity.validation.min" [translateValues]="{ min: 1 }">
+                            This field should be at least 1.
                         </small>
                         <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.expiryPeriod?.errors?.pattern" dojoTranslate="entity.validation.expectedPattern"
-                               [translateValues]="{ regex: '/^P(?:([-+]?[0-9]+)Y)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)W)?(?:([-+]?[0-9]+)D)?$/' }">
-                            The expected pattern is /^P(?:([-+]?[0-9]+)Y)?(?:([-+]?[0-9]+)M)?(?:([-+]?[0-9]+)W)?(?:([-+]?[0-9]+)D)?$/.
+                            [hidden]="!editForm.controls.expiryPeriod?.errors?.number" dojoTranslate="entity.validation.number">
+                            This field should be a number.
                         </small>
                     </div>
                 </div>
