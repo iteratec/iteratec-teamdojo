@@ -70,9 +70,40 @@
             margin-right: 5px;
         }
         .skill-status {
-            color: $dojo-text-secondary;
             padding: 10px;
-            background-color: transparent;
+            width: 35px;
+            cursor: default;
+            &.skill-status-irrelevant {
+                &:before {
+                    content: '\f165'; // thumbs-down
+                }
+                background-color: transparent;
+                color: $dojo-text-secondary;
+            }
+            &.skill-status-achieved {
+                background-color: $success;
+                &:before {
+                    content: '\f00c'; // checkmark
+                }
+            }
+            &.skill-status-expired {
+                background-color: $danger;
+                &:before {
+                    content: '\f10c'; // circle-o
+                }
+            }
+            &.skill-status-expiring {
+                background-color: $warning;
+                &:before {
+                    content: '\f071'; // exclamation-triangle
+                }
+            }
+            &.skill-status-open {
+                color: black;
+                &:before {
+                    content: '\f10c'; // circle-o
+                }
+            }
             &.completed {
                 background-color: $warning;
             }
@@ -84,20 +115,77 @@
             }
         }
         .skill-action-bar {
-            padding: 5px 10px;
+            padding: 10px;
             border-top: 1px solid $gray-400;
 
+            .skill-action-bar-item-label {
+                font-family: $font-family-sans-serif;
+            }
+
             &-item {
+                font-size: 18px;
+                color: $dojo-text-primary;
                 &.disabled {
                     opacity: 0.3;
                     cursor: default;
                 }
-                i {
-                    margin-right: 3px;
-                }
                 a {
                     small {
                         color: $dojo-text-secondary;
+                        font-size: 16px;
+                    }
+                }
+                /* relavance action icons */
+                &.skill-status-relevance-action-irrelevant {
+                    &:before {
+                        content: '\f164'; // thumbs-up f164
+                    }
+                }
+                &.skill-status-relevance-action-achieved {
+                    &:before {
+                        content: '\f165'; // thumbs-down
+                    }
+                }
+                &.skill-status-relevance-action-expired {
+                    &:before {
+                        content: '\f165'; // thumbs-down
+                    }
+                }
+                &.skill-status-relevance-action-expiring {
+                    &:before {
+                        content: '\f165'; // thumbs-down
+                    }
+                }
+                &.skill-status-relevance-action-open {
+                    &:before {
+                        content: '\f165'; // thumbs-down
+                    }
+                }
+
+                /* action icons */
+                &.skill-status-action-irrelevant {
+                    &:before {
+                        // content: '\f088'; // thumbs-down
+                    }
+                }
+                &.skill-status-action-achieved {
+                    &:before {
+                        content: '\f00c'; // checkmark
+                    }
+                }
+                &.skill-status-action-expired {
+                    &:before {
+                        content: '\f10c'; // circle-o
+                    }
+                }
+                &.skill-status-action-expiring {
+                    &:before {
+                        content: '\f071'; // exclamation-triangle
+                    }
+                }
+                &.skill-status-action-open {
+                    &:before {
+                        content: '\f10c'; // circle-o
                     }
                 }
             }
@@ -106,6 +194,10 @@
             @include skill-list-entry();
             border: none;
         }
+    }
+
+    .skill-vote-question {
+        margin-right: 0.5rem;
     }
 }
 

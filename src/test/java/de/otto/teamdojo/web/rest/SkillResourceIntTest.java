@@ -34,7 +34,6 @@ import org.springframework.validation.Validator;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-
 import static de.otto.teamdojo.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -62,8 +61,9 @@ public class SkillResourceIntTest {
     private static final String DEFAULT_VALIDATION = "AAAAAAAAAA";
     private static final String UPDATED_VALIDATION = "BBBBBBBBBB";
 
-    private static final String DEFAULT_EXPIRY_PERIOD = "P9M+71W-05D";
-    private static final String UPDATED_EXPIRY_PERIOD = "P25D";
+    private static final Integer DEFAULT_EXPIRY_PERIOD = 24;
+
+    private static final Integer UPDATED_EXPIRY_PERIOD = 25;
 
     private static final String DEFAULT_CONTACT = "AAAAAAAAAA";
     private static final String UPDATED_CONTACT = "BBBBBBBBBB";
@@ -122,7 +122,7 @@ public class SkillResourceIntTest {
 
     /**
      * Create an entity for this test.
-     *
+     * <p>
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
@@ -245,7 +245,7 @@ public class SkillResourceIntTest {
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
             .andExpect(jsonPath("$.[*].implementation").value(hasItem(DEFAULT_IMPLEMENTATION.toString())))
             .andExpect(jsonPath("$.[*].validation").value(hasItem(DEFAULT_VALIDATION.toString())))
-            .andExpect(jsonPath("$.[*].expiryPeriod").value(hasItem(DEFAULT_EXPIRY_PERIOD.toString())))
+            .andExpect(jsonPath("$.[*].expiryPeriod").value(hasItem(DEFAULT_EXPIRY_PERIOD)))
             .andExpect(jsonPath("$.[*].contact").value(hasItem(DEFAULT_CONTACT.toString())))
             .andExpect(jsonPath("$.[*].score").value(hasItem(DEFAULT_SCORE)))
             .andExpect(jsonPath("$.[*].rateScore").value(hasItem(DEFAULT_RATE_SCORE.doubleValue())))
@@ -268,7 +268,7 @@ public class SkillResourceIntTest {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.implementation").value(DEFAULT_IMPLEMENTATION.toString()))
             .andExpect(jsonPath("$.validation").value(DEFAULT_VALIDATION.toString()))
-            .andExpect(jsonPath("$.expiryPeriod").value(DEFAULT_EXPIRY_PERIOD.toString()))
+            .andExpect(jsonPath("$.expiryPeriod").value(DEFAULT_EXPIRY_PERIOD))
             .andExpect(jsonPath("$.contact").value(DEFAULT_CONTACT.toString()))
             .andExpect(jsonPath("$.score").value(DEFAULT_SCORE))
             .andExpect(jsonPath("$.rateScore").value(DEFAULT_RATE_SCORE.doubleValue()))
@@ -469,6 +469,33 @@ public class SkillResourceIntTest {
         // Get all the skillList where expiryPeriod is null
         defaultSkillShouldNotBeFound("expiryPeriod.specified=false");
     }
+
+    @Test
+    @Transactional
+    public void getAllSkillsByExpiryPeriodIsGreaterThanOrEqualToSomething() throws Exception {
+        // Initialize the database
+        skillRepository.saveAndFlush(skill);
+
+        // Get all the skillList where expiryPeriod greater than or equals to DEFAULT_EXPIRY_PERIOD
+        defaultSkillShouldBeFound("expiryPeriod.greaterOrEqualThan=" + DEFAULT_EXPIRY_PERIOD);
+
+        // Get all the skillList where expiryPeriod greater than or equals to UPDATED_EXPIRY_PERIOD
+        defaultSkillShouldNotBeFound("expiryPeriod.greaterOrEqualThan=" + UPDATED_EXPIRY_PERIOD);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSkillsByExpiryPeriodIsLessThanSomething() throws Exception {
+        // Initialize the database
+        skillRepository.saveAndFlush(skill);
+
+        // Get all the skillList where expiryPeriod less than or equals to DEFAULT_EXPIRY_PERIOD
+        defaultSkillShouldNotBeFound("expiryPeriod.lessThan=" + DEFAULT_EXPIRY_PERIOD);
+
+        // Get all the skillList where expiryPeriod less than or equals to UPDATED_EXPIRY_PERIOD
+        defaultSkillShouldBeFound("expiryPeriod.lessThan=" + UPDATED_EXPIRY_PERIOD);
+    }
+
 
     @Test
     @Transactional
@@ -679,7 +706,6 @@ public class SkillResourceIntTest {
         defaultSkillShouldBeFound("rateCount.lessThan=" + UPDATED_RATE_COUNT);
     }
 
-
     @Test
     @Transactional
     public void getAllSkillsByTeamsIsEqualToSomething() throws Exception {
@@ -826,7 +852,6 @@ public class SkillResourceIntTest {
             .expiryPeriod(UPDATED_EXPIRY_PERIOD)
             .contact(UPDATED_CONTACT)
             .score(UPDATED_SCORE)
-            .expiryPeriod(UPDATED_EXPIRY_PERIOD)
             .rateScore(UPDATED_RATE_SCORE)
             .rateCount(UPDATED_RATE_COUNT);
         SkillDTO skillDTO = skillMapper.toDto(updatedSkill);

@@ -34,16 +34,18 @@
             "validation": "Validation",
             "validationExplanationShort": "(What? (Long version))",
             "validationExplanation": "What should have been \"applied\" or \"implemented\"? Try to describe individual steps in order to gain the skill so that it can be built, consolidated and perpetuated. Key points are sufficient.",
+            "expiryPeriod": "Expiry Period (in days)",
             "validationExplanationQuestion": "What should have been \"applied\" or \"implemented\"?",
-            "expiryPeriod": "Expiry Period",
-            "expiryPeriodPlaceholder": "e.g. P1Y6M1W2D or P6M-1D",
             "contact": "Contact",
             "score": "Score",
             "rateScore": "Rate Score",
             "rateCount": "Rate Count",
             "teams": "Teams",
             "badges": "Badges",
-            "levels": "Levels"
+            "levels": "Levels",
+            "fieldValidation": {
+                "expiryPeriod": "The expiry period must be a positive integer."
+            }
         },
         "skillDTO": {
             "description": "description",

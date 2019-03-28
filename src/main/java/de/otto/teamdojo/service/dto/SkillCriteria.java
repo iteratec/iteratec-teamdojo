@@ -30,7 +30,7 @@ public class SkillCriteria implements Serializable {
 
     private StringFilter validation;
 
-    private StringFilter expiryPeriod;
+    private IntegerFilter expiryPeriod;
 
     private StringFilter contact;
 
@@ -91,11 +91,11 @@ public class SkillCriteria implements Serializable {
         this.validation = validation;
     }
 
-    public StringFilter getExpiryPeriod() {
+    public IntegerFilter getExpiryPeriod() {
         return expiryPeriod;
     }
 
-    public void setExpiryPeriod(StringFilter expiryPeriod) {
+    public void setExpiryPeriod(IntegerFilter expiryPeriod) {
         this.expiryPeriod = expiryPeriod;
     }
 
@@ -188,7 +188,6 @@ public class SkillCriteria implements Serializable {
             Objects.equals(badgesId, that.badgesId) &&
             Objects.equals(levelsId, that.levelsId) &&
             Objects.equals(trainingsId, that.trainingsId);
-
     }
 
     @Override
