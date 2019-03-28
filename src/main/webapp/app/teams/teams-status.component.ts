@@ -10,7 +10,7 @@ import { ISkill } from 'app/shared/model/skill.model';
 import { TeamScoreCalculation } from 'app/shared/util/team-score-calculation';
 import { OrganizationService } from 'app/entities/organization';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { TeamsEditComponent } from 'app/teams/teams-edit.component';
+import { TeamsEditComponent } from 'app/shared/teams/teams-edit.component';
 import { BreadcrumbService } from 'app/layouts/navbar/breadcrumb.service';
 import { TeamsSelectionService } from 'app/shared/teams-selection/teams-selection.service';
 import { take } from 'rxjs/operators';

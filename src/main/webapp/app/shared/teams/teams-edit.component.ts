@@ -4,11 +4,11 @@ import { Observable } from 'rxjs';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { ITeam } from 'app/shared/model/team.model';
-import { DimensionService } from 'app/entities/dimension';
 import { IImage } from 'app/shared/model/image.model';
-import { ImageService } from 'app/entities/image';
-import { TeamService } from 'app/entities/team';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TeamService } from 'app/entities/team';
+import { DimensionService } from 'app/entities/dimension';
+import { ImageService } from 'app/entities/image';
 
 @Component({
     selector: 'jhi-teams-quickedit',
