@@ -111,6 +111,11 @@
             "details": {
                 "achievedByNone": "Dieser Skill wurde noch von keiner Person erfüllt!"
             }
+        },
+        "status": {
+            "edit": {
+                "label": "Person bearbeiten"
+            }
         }
     }
 }
