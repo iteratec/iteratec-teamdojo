@@ -33,7 +33,7 @@ public class ImageServiceImpl implements ImageService {
     public static final int MAX_SIZE_LARGE = 512;
     public static final int MAX_SIZE_MEDIUM = 224;
     public static final int MAX_SIZE_SMALL = 72;
-    public static final String IMAGE_FORMAT  = "png";
+    public static final String IMAGE_FORMAT = "png";
 
     private final Logger log = LoggerFactory.getLogger(ImageServiceImpl.class);
 
@@ -69,13 +69,21 @@ public class ImageServiceImpl implements ImageService {
             imageDTO.setMediumContentType(contentType);
             imageDTO.setSmall(getByteArrayFromBufferedImage(small));
             imageDTO.setSmallContentType(contentType);
-        }
 
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        byte[] imageDigest = md.digest(imageDTO.getLarge());
-        String hash = DatatypeConverter
-            .printHexBinary(imageDigest).toUpperCase();
-        imageDTO.setHash(hash);
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] imageDigest = md.digest(imageDTO.getLarge());
+            String hash = DatatypeConverter
+                .printHexBinary(imageDigest).toUpperCase();
+            imageDTO.setHash(hash);
+        } else {
+            imageDTO.setLarge(null);
+            imageDTO.setLargeContentType(null);
+            imageDTO.setMedium(null);
+            imageDTO.setMediumContentType(null);
+            imageDTO.setSmall(null);
+            imageDTO.setSmallContentType(null);
+            imageDTO.setHash(null);
+        }
 
         Image image = imageMapper.toEntity(imageDTO);
         image = imageRepository.save(image);
