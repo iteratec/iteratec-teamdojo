@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TeamsSelectionService } from './teams-selection.service';
 import { TeamsService } from 'app/teams/teams.service';
 import { ITeam } from 'app/shared/model/team.model';
 import { Router } from '@angular/router';
+import { TeamsEditComponent } from 'app/shared/teams/teams-edit.component';
 
 @Component({
     selector: 'jhi-teams-selection',
@@ -19,7 +20,8 @@ export class TeamsSelectionComponent implements OnInit {
         private activeModal: NgbActiveModal,
         private teamsSelectionService: TeamsSelectionService,
         private teamsService: TeamsService,
-        private router: Router
+        private router: Router,
+        private modalService: NgbModal
     ) {}
 
     ngOnInit(): void {
@@ -45,9 +47,16 @@ export class TeamsSelectionComponent implements OnInit {
         this.router.navigate(['']);
     }
 
-    createNewTeam() {
+    createNewTeam(): NgbModalRef {
         this.activeModal.close('Create new Team');
-        this.router.navigate(['/team/new']);
+        const modalRef = this.modalService.open(TeamsEditComponent, { size: 'lg' });
+        (<TeamsEditComponent>modalRef.componentInstance).team = {};
+        modalRef.result.then(team => {
+            this.selectedTeam = team;
+            this.teamsSelectionService.query().subscribe();
+            this.router.navigate(['/teams/', (<ITeam>team).shortName]);
+        });
+        return modalRef;
     }
 
     cancelTeamSelection() {

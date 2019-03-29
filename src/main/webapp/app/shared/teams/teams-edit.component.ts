@@ -57,16 +57,12 @@ export class TeamsEditComponent implements OnInit {
         imageResult.subscribe(
             (imgRes: HttpResponse<IImage>) => {
                 this.team.imageId = imgRes.body.id;
-                this.teamService.update(this.team).subscribe(
-                    (res: HttpResponse<ITeam>) => {
-                        this.isSaving = false;
-                        this.activeModal.close(res.body);
-                    },
-                    (res: HttpErrorResponse) => {
-                        this.isSaving = false;
-                        console.log('Failed to update team', res);
-                    }
-                );
+
+                if (this.team.id !== undefined) {
+                    this.subscribeToSaveResponse(this.teamService.update(this.team));
+                } else {
+                    this.subscribeToSaveResponse(this.teamService.create(this.team));
+                }
             },
             (res: HttpErrorResponse) => {
                 this.isSaving = false;
@@ -89,5 +85,18 @@ export class TeamsEditComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    private subscribeToSaveResponse(result: Observable<HttpResponse<ITeam>>) {
+        result.subscribe(
+            (res: HttpResponse<ITeam>) => {
+                this.isSaving = false;
+                this.activeModal.close(res.body);
+            },
+            (res: HttpErrorResponse) => {
+                this.isSaving = false;
+                console.log('Failed to create / update team', res);
+            }
+        );
     }
 }
