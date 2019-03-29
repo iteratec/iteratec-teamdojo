@@ -50,7 +50,7 @@ export class TeamsSelectionComponent implements OnInit {
     createNewTeam(): NgbModalRef {
         this.activeModal.close('Create new Team');
         const modalRef = this.modalService.open(TeamsEditComponent, { size: 'lg' });
-        (<TeamsEditComponent>modalRef.componentInstance).team = {};
+        (<TeamsEditComponent>modalRef.componentInstance).team = { official: false, pureTrainingTeam: true };
         modalRef.result.then(team => {
             this.selectedTeam = team;
             this.highlightedTeam = team;
