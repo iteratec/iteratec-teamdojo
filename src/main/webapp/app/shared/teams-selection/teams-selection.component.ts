@@ -53,6 +53,8 @@ export class TeamsSelectionComponent implements OnInit {
         (<TeamsEditComponent>modalRef.componentInstance).team = {};
         modalRef.result.then(team => {
             this.selectedTeam = team;
+            this.highlightedTeam = team;
+            this.teamsSelectionService.selectedTeam = team;
             this.teamsSelectionService.query().subscribe();
             this.router.navigate(['/teams/', (<ITeam>team).shortName]);
         });
