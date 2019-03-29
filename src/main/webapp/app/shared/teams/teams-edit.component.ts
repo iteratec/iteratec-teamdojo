@@ -19,6 +19,7 @@ export class TeamsEditComponent implements OnInit {
     team: ITeam;
     isSaving: boolean;
     image: IImage;
+    editMode: boolean;
 
     constructor(
         private activeModal: NgbActiveModal,
@@ -41,7 +42,7 @@ export class TeamsEditComponent implements OnInit {
     }
 
     cancel() {
-        this.activeModal.dismiss('Edit has been cancelled');
+        this.activeModal.dismiss((this.editMode ? 'Edit' : 'Create') + ' has been cancelled');
     }
 
     save() {
@@ -95,7 +96,7 @@ export class TeamsEditComponent implements OnInit {
             },
             (res: HttpErrorResponse) => {
                 this.isSaving = false;
-                console.log('Failed to create / update team', res);
+                console.log('Failed to ' + (this.editMode ? 'edit' : 'create'), res);
             }
         );
     }

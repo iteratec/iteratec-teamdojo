@@ -1,6 +1,6 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
     <div class="modal-header">
-        <h4 class="modal-title" dojoTranslate="teamdojoApp.teams.status.edit.label">Edit Person</h4>
+        <h4 class="modal-title">{{'teamdojoApp.teams.status.' + (editMode ? 'edit' : 'create') + '.label'| translate}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="cancel()">
             <span aria-hidden="true">&times;</span>
         </button>

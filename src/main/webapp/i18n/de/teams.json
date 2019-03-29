@@ -82,6 +82,9 @@
                     "shortName": "Kurzname",
                     "slogan": "Slogan"
                 },
+                "create": {
+                    "label": "Neues Team erstellen"
+                },
                 "expired": "abgelaufen"
             },
             "achievements": {
@@ -115,6 +118,9 @@
         "status": {
             "edit": {
                 "label": "Person bearbeiten"
+            },
+            "create": {
+                "label": "Neue Person erstellen"
             }
         }
     }

@@ -61,6 +61,7 @@ export class TeamsStatusComponent implements OnInit, OnChanges {
         }
         this.isTeamEditOpen = true;
         const modalRef = this.modalService.open(TeamsEditComponent, { size: 'lg' });
+        (<TeamsEditComponent>modalRef.componentInstance).editMode = true;
         (<TeamsEditComponent>modalRef.componentInstance).team = Object.assign({}, this.team);
         modalRef.result.then(
             team => {
