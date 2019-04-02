@@ -76,7 +76,7 @@ public interface SkillRepository extends JpaRepository<Skill, Long>, JpaSpecific
         Pageable pageable);
 
     @Query("SELECT DISTINCT" +
-        " new de.otto.teamdojo.service.dto.AchievableSkillDTO(t.id, s.id, s.title, s.description, t.completedAt, t.verifiedAt, t.vote, t.voters, t.irrelevant, s.expiryPeriod, s.score, s.rateScore, s.rateCount)" +
+        " new de.otto.teamdojo.service.dto.AchievableSkillDTO(t.id, s.id, s.title, s.description, t.completedAt, t.verifiedAt, t.vote, t.voters, t.irrelevant, s.score, s.expiryPeriod, s.rateScore, s.rateCount)" +
         " FROM Skill s" +
         " LEFT JOIN s.teams t ON t.team.id = :teamId" +
         " LEFT JOIN s.badges b" +
@@ -94,7 +94,7 @@ public interface SkillRepository extends JpaRepository<Skill, Long>, JpaSpecific
 
 
     @Query("SELECT DISTINCT" +
-        " new de.otto.teamdojo.service.dto.AchievableSkillDTO(t.id, s.id, s.title, s.description, t.completedAt, t.verifiedAt, t.vote, t.voters, t.irrelevant, s.expiryPeriod, s.score, s.rateScore, s.rateCount)" +
+        " new de.otto.teamdojo.service.dto.AchievableSkillDTO(t.id, s.id, s.title, s.description, t.completedAt, t.verifiedAt, t.vote, t.voters, t.irrelevant, s.score, s.expiryPeriod, s.rateScore, s.rateCount)" +
         " FROM Skill s" +
         " LEFT JOIN s.teams t ON t.team.id = :teamId" +
         " WHERE s.id = :skillId")
