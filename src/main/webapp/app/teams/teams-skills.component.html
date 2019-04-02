@@ -116,11 +116,13 @@
                             </p>
                         </div>
                         <div *ngIf="isSuggestAble(skill)"
-                            class="skill-action-bar d-flex flex-wrap justify-content-between">
-                            <a class="skill-action-bar-item" (click)="suggest(skill)">
-                                <small dojoTranslate="teamdojoApp.teams.skills.action.suggest"
-                                       [translateValues]="{'team': team.name }"></small>
-                            </a>
+                             class="skill-action-bar d-flex flex-wrap justify-content-between">
+                            <p class="skill-action-bar-item">
+                                <a (click)="suggest(skill)">
+                                    <small dojoTranslate="teamdojoApp.teams.skills.action.suggest"
+                                           [translateValues]="{'team': team.name }"></small>
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>

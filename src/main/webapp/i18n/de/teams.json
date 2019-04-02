@@ -20,7 +20,7 @@
                     "cancel": "Abbrechen"
                 },
                 "search": {
-                    "placeholder": "Suche",
+                    "placeholder": "Suchen nach Titel",
                     "filter": {
                         "label": "Erreichte Skills ausblenden"
                     },

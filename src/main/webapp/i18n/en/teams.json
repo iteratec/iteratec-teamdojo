@@ -20,7 +20,7 @@
                     "cancel": "Cancel"
                 },
                 "search": {
-                    "placeholder": "Search",
+                    "placeholder": "Search by title",
                     "filter": {
                         "label": "Hide completed skills"
                     },

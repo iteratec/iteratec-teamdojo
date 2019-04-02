@@ -25,13 +25,7 @@
         color: $dojo-text-primary;
     }
 
-    &-filter {
-        color: $dojo-text-primary;
-        margin-right: 14px;
-        .skill-sort select {
-            background-color: transparent;
-        }
-    }
+    padding-right: 10px;
 
     .teams-skills-list {
         /deep/ .simplebar-scroll-content {
