@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 import { SkillSortPipe } from 'app/shared/pipe/skill-sort.pipe';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AccountService } from 'app/core';
-import { AchievableSkill } from 'app/shared/model/achievable-skill.model';
+import { IAchievableSkill } from 'app/shared/model/achievable-skill.model';
 import { SkillService } from 'app/entities/skill';
 import { SkillStatusUtils } from 'app/shared/model/skill-status';
 import { IDimension } from 'app/shared/model/dimension.model';
@@ -31,7 +31,7 @@ const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 export class OverviewSkillsComponent implements OnInit, OnChanges {
     @Input() activeSkill: ISkill;
     @Output() onSkillChanged = new EventEmitter<ISkill>();
-    @Output() onSkillClicked = new EventEmitter<{ iSkill: ISkill; aSkill: AchievableSkill }>();
+    @Output() onSkillClicked = new EventEmitter<{ iSkill: ISkill; aSkill: IAchievableSkill }>();
     /* data from backend */
     teams: ITeam[];
     levels: ILevel[];
