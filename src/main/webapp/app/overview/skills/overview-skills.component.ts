@@ -16,6 +16,10 @@ import { Subject } from 'rxjs';
 import { SkillSortPipe } from 'app/shared/pipe/skill-sort.pipe';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { AccountService } from 'app/core';
+import { IAchievableSkill } from 'app/shared/model/achievable-skill.model';
+import { SkillService } from 'app/entities/skill';
+import { SkillStatusUtils } from 'app/shared/model/skill-status';
+import { IDimension } from 'app/shared/model/dimension.model';
 
 const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 
@@ -27,16 +31,20 @@ const ROLES_ALLOWED_TO_UPDATE = ['ROLE_ADMIN'];
 export class OverviewSkillsComponent implements OnInit, OnChanges {
     @Input() activeSkill: ISkill;
     @Output() onSkillChanged = new EventEmitter<ISkill>();
+    @Output() onSkillClicked = new EventEmitter<{ iSkill: ISkill; aSkill: IAchievableSkill }>();
+    /* data from backend */
     teams: ITeam[];
     levels: ILevel[];
     levelSkills: ILevelSkill[];
     badges: IBadge[];
     badgeSkills: IBadgeSkill[];
     skills: ISkill[];
+    dimensions: IDimension[];
+    /* component state */
     activeSkills: ISkill[];
-    itemSkills: ILevelSkill[] | IBadgeSkill[];
     activeLevel: ILevel;
     activeBadge: IBadge;
+    activeDimension: IDimension;
     dimensionsBySkillId: any;
     generalSkillsIds: number[];
     search$: Subject<string>;
@@ -49,36 +57,54 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
         private route: ActivatedRoute,
         private breadcrumbService: BreadcrumbService,
         private dimensionService: DimensionService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private skillService: SkillService
     ) {}
 
     ngOnInit() {
-        this.route.data.subscribe(({ dojoModel: { teams, levels, levelSkills, badges, badgeSkills }, skills }) => {
+        this.route.data.subscribe(({ dojoModel: { teams, levels, levelSkills, badges, badgeSkills }, skills, dimensions }) => {
             this.teams = teams || [];
             this.levels = levels || [];
             this.levelSkills = levelSkills || [];
             this.badges = badges || [];
             this.badgeSkills = badgeSkills || [];
             this.skills = (skills && skills.body ? skills.body : skills) || [];
+            this.dimensions = (dimensions && dimensions.body ? dimensions.body : dimensions) || [];
             this.route.queryParamMap.subscribe((params: ParamMap) => {
                 this.activeLevel = null;
                 this.activeBadge = null;
+                this.activeDimension = null;
                 if (params.get('level')) {
                     this.activeLevel = (this.levels || []).find((level: ILevel) => level.id === Number.parseInt(params.get('level'), 10));
                     this.activeSkills = this.activeLevel ? this.sortActiveSkills(this.findSkills(this.activeLevel.skills)) : [];
-                    this.itemSkills = this.activeLevel.skills || [];
                     this.updateBreadcrumb();
                 } else if (params.get('badge')) {
                     this.activeBadge = (this.badges || []).find((badge: IBadge) => badge.id === Number.parseInt(params.get('badge'), 10));
                     this.activeSkills = this.activeBadge ? this.sortActiveSkills(this.findSkills(this.activeBadge.skills)) : [];
-                    this.itemSkills = this.activeBadge.skills || [];
                     this.updateBreadcrumb();
+                } else if (params.get('dimension')) {
+                    this.activeDimension = this.dimensions.find(
+                        (dimension: IDimension) => dimension.id === Number.parseInt(params.get('dimension'), 10)
+                    );
+                    if (this.activeDimension && this.activeDimension.id) {
+                        const levelsOfActiveDimension: ILevel[] = this.levels.filter((level: ILevel) => {
+                            return level.dimensionId === this.activeDimension.id;
+                        });
+                        const skillsOfActiveDimension: Array<ISkill[]> = levelsOfActiveDimension.map((level: ILevel) => {
+                            const levelSkillsOfLevel: ILevelSkill[] = this.levelSkills.filter((levelSkill: ILevelSkill) => {
+                                return levelSkill.levelId === level.id;
+                            });
+                            return levelSkillsOfLevel.map((levelSkill: ILevelSkill) => {
+                                return this.skills.find((skill: ISkill) => {
+                                    return skill.id === levelSkill.skillId;
+                                });
+                            });
+                        });
+                        this.activeSkills = this.sortActiveSkills([].concat.apply([], skillsOfActiveDimension));
+                        this.updateBreadcrumb();
+                    }
                 } else {
                     this.activeSkills = this.sortActiveSkills(this.skills);
-                    this.itemSkills = (this.levelSkills || []).concat(
-                        this.badgeSkills.filter((b: IBadgeSkill) => !this.levelSkills.find((l: ILevelSkill) => l.skillId === b.skillId)) ||
-                            []
-                    );
                     this.updateBreadcrumb();
                 }
             });
@@ -134,6 +160,12 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         this.updateBreadcrumb();
         this.onSkillChanged.emit(this.activeSkill);
+        this.skillService.find(this.activeSkill.id).subscribe(skill => {
+            this.onSkillClicked.emit({
+                iSkill: skill.body,
+                aSkill: this.activeSkill
+            });
+        });
     }
 
     private updateBreadcrumb() {
@@ -142,7 +174,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
                 this.breadcrumbService.setBreadcrumb(null, dimension.body, this.activeLevel, this.activeBadge, this.activeSkill);
             });
         } else {
-            this.breadcrumbService.setBreadcrumb(null, null, this.activeLevel, this.activeBadge, this.activeSkill);
+            this.breadcrumbService.setBreadcrumb(null, this.activeDimension, this.activeLevel, this.activeBadge, this.activeSkill);
         }
     }
 
@@ -192,7 +224,7 @@ export class OverviewSkillsComponent implements OnInit, OnChanges {
     }
 
     private isTeamSkillCompleted(teamSkill: ITeamSkill): boolean {
-        return teamSkill && !!teamSkill.completedAt;
+        return teamSkill && SkillStatusUtils.isValid(teamSkill.skillStatus);
     }
 
     isActiveSkill(skill: ISkill) {

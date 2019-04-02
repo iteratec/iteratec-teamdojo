@@ -10,7 +10,7 @@ export interface ISkill {
     description?: string;
     implementation?: string;
     validation?: string;
-    expiryPeriod?: string;
+    expiryPeriod?: number;
     contact?: string;
     score?: number;
     rateScore?: number;
@@ -29,7 +29,7 @@ export class Skill implements ISkill {
         public description?: string,
         public implementation?: string,
         public validation?: string,
-        public expiryPeriod?: string,
+        public expiryPeriod?: number,
         public contact?: string,
         public score?: number,
         public rateScore?: number,

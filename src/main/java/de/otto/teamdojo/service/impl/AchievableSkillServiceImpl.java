@@ -22,7 +22,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -79,6 +78,12 @@ public class AchievableSkillServiceImpl implements AchievableSkillService {
             queryFilter.addAll(filter);
         }
         return queryFilter;
+    }
+
+    @Override
+    public Page<AchievableSkillDTO> findAllByTeamAndDimension(Long teamId, Long dimensionId, List<String> filter, Pageable pageable){
+        List<String> queryFilter = getQueryFilter(filter);
+        return skillRepository.findAchievableSkillsByDimensions(teamId, dimensionId, queryFilter, pageable);
     }
 
     @Override

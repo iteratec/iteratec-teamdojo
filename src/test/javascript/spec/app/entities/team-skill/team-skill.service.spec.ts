@@ -1,13 +1,12 @@
 /* tslint:disable max-line-length */
-import { TestBed, getTestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { of } from 'rxjs';
-import { take, map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { TeamSkillService } from 'app/entities/team-skill/team-skill.service';
 import { ITeamSkill, TeamSkill } from 'app/shared/model/team-skill.model';
+import { SkillStatus } from 'app/shared/model/skill-status';
 
 describe('Service Tests', () => {
     describe('TeamSkill Service', () => {
@@ -25,7 +24,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new TeamSkill(0, currentDate, currentDate, false, 'AAAAAAA', 0, 'AAAAAAA');
+            elemDefault = new TeamSkill(0, currentDate, currentDate, false, SkillStatus.OPEN, 'AAAAAAA', 0, 'AAAAAAA');
         });
 
         describe('Service methods', async () => {

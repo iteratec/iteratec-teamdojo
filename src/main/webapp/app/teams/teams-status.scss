@@ -2,16 +2,15 @@
 .teams-status {
     height: inherit;
     position: relative;
-    overflow-y: hidden;
-    padding-right: 10px;
     .teams-status-avatar {
+        height: 25vw;
         text-align: center;
         .team-logo-wrapper {
             position: relative;
         }
         .avatar-image-wrapper {
-            width: 31vh;
-            height: 41vh;
+            width: 18vw;
+            height: 20vw;
             position: absolute;
             top: 0.5rem;
             .avatar-image {
@@ -28,34 +27,34 @@
         }
         .status-meta {
             width: 100%;
-            height: 20vh;
+            height: 7vw;
             position: relative;
-            margin-top: -4vh;
+            margin-top: -2vw;
             color: $dojo-text-inverse-secondary;
             &-text {
                 position: absolute;
-                top: 8vh;
+                top: 3vw;
                 z-index: 4;
                 h5 {
-                    font-size: calc(10px + 1.4vh);
+                    font-size: calc(10px + 0.8vw);
                 }
                 h6 {
-                    font-size: calc(6px + 0.8vh);
+                    font-size: calc(6px + 0.4vw);
                 }
                 .team-title-with-slogan {
-                    margin-top: -1vh;
+                    margin-top: -0.5vw;
                 }
                 .team-score {
-                    font-size: calc(10px + 1vh);
+                    font-size: calc(10px + 0.6vw);
                     z-index: 4;
                     &::before {
                         content: '';
-                        width: calc(10px + 1vh);
-                        height: calc(10px + 1vh);
+                        width: calc(10px + 0.6vw);
+                        height: calc(10px + 0.6vw);
                         position: absolute;
                         background: no-repeat center/contain url('../../content/images/coin.png');
-                        margin-top: calc(2px + 0.2vh);
-                        margin-left: calc(-12px - 1.2vh);
+                        margin-top: calc(2px + 0.1vw);
+                        margin-left: calc(-12px - 0.6vw);
                         z-index: 4;
                     }
                 }
@@ -64,10 +63,7 @@
                 content: '';
                 width: inherit;
                 height: inherit;
-                max-width: 50vh;
-                min-width: 100%;
-                min-height: 90px;
-                max-height: 16vh;
+                min-width: 120%;
                 position: absolute;
                 background: no-repeat center/contain url('../../content/images/brushstroke.png');
                 z-index: 2;
@@ -76,16 +72,17 @@
     }
 
     .teams-status-achievements-container {
-        height: 29vh;
+        height: calc(82vh - 25vw);
     }
 
     .team-edit-btn {
         cursor: pointer;
         position: absolute;
-        right: -5rem;
+        right: 0;
         top: 10px;
         font-size: 1.3em;
         color: #777;
+        z-index: 2;
         &:hover {
             color: #000;
         }

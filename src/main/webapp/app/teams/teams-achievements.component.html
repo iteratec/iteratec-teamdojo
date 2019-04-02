@@ -36,7 +36,7 @@
             </ngb-panel>
         </ngb-accordion>
         <div class="mt-1">
-            <ngb-accordion [activeIds]="expandedDimensions">
+            <ngb-accordion [activeIds]="expandedDimensions" (panelChange)="handleDimensionToggle($event)">
                 <ngb-panel class="mt-1" *ngFor="let dimension of team.participations"
                            id="achievements-dimension-{{dimension.id}}">
                     <ng-template ngbPanelTitle>
@@ -54,8 +54,16 @@
                                 </ng-template>
                             </div>
                             <div class="achievement-list-header-right">
-                                <fa-icon icon="caret-right" class="mr-2"></fa-icon>
-                                <span>{{dimension.name}}</span>
+                                <div class="expand-icon">
+                                    <fa-icon
+                                        icon="caret-{{expandedDimensions.includes('achievements-dimension-' + dimension.id) ? 'down' : 'right'}}"></fa-icon>
+                                </div>
+                                <div class="dimension-name"
+                                     (click)="selectItem('dimension', dimension.id); $event.stopPropagation()">{{dimension.name}}
+                                    <fa-icon class="filter-icon"
+                                             [ngClass]="{'visible-filter-icon': activeItemIds.dimension === dimension.id}"
+                                             icon="filter"></fa-icon>
+                                </div>
                             </div>
                         </div>
                     </ng-template>

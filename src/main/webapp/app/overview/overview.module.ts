@@ -10,7 +10,14 @@ import { OverviewSkillsComponent } from 'app/overview/skills/overview-skills.com
 import { OverviewSkillDetailsComponent } from 'app/overview/skills/skill-details/overview-skill-details.component';
 import { TeamsModule } from 'app/teams';
 import { BreadcrumbService } from 'app/layouts/navbar/breadcrumb.service';
-import { AllCommentsResolve, AllSkillsResolve, AllTrainingsResolve, DojoModelResolve, SkillResolve } from 'app/shared/common.resolver';
+import {
+    AllCommentsResolve,
+    AllDimensionsResolve,
+    AllSkillsResolve,
+    AllTrainingsResolve,
+    DojoModelResolve,
+    SkillResolve
+} from 'app/shared/common.resolver';
 import { ServerInfoService } from 'app/server-info';
 
 @NgModule({
@@ -29,6 +36,7 @@ import { ServerInfoService } from 'app/server-info';
         AllSkillsResolve,
         AllCommentsResolve,
         AllTrainingsResolve,
+        AllDimensionsResolve,
         BreadcrumbService,
         ServerInfoService
     ],

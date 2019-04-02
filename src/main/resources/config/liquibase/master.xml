@@ -49,6 +49,7 @@
 
     <include file="config/liquibase/changelog/20190304093000_add_hash_column_to_image.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190304153000_update_default_organization_user_mode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190222103700_extend_skill_expiryPeriod.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190319180000_add_is_pure_training_team_to_team.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190320145800_add_is_official_to_team.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190327104100_change_default_value_pure_training_team.xml" relativeToChangelogFile="false"/>

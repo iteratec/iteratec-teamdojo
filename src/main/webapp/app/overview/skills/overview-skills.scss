@@ -7,9 +7,7 @@
 .overviews-skills {
     height: inherit;
     padding-right: 10px;
-    .skill-search {
-        width: 100%;
-    }
+
     .teams-skills-list {
         /deep/ .simplebar-track {
             bottom: 0.9em !important;
@@ -43,11 +41,27 @@
     }
 }
 
-.additional-functions {
+.skill-list-header {
     width: 100%;
     padding-right: 13px;
     padding-left: 2px;
-    .skill-sort select {
+    margin-bottom: 25px;
+
+    .form-select-label {
+        margin-bottom: 0px;
+    }
+
+    .skill-list-control {
+        height: calc(2rem);
+        padding: 0.2rem 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .skill-search-input {
+        border-radius: 0.25rem;
+    }
+
+    select {
         background-color: transparent;
     }
 }

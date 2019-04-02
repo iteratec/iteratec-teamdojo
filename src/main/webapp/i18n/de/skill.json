@@ -34,16 +34,18 @@
             "validation": "Validierung",
             "validationExplanationShort": "(Was? (Langfassung))",
             "validationExplanation": "Was sollte \"angewendet\" oder \"umgesetzt\" worden sein? Versuche Einzelschritte zu beschreiben, um die Fähigkeit zu erlangen, so dass diese aufgebaut, gefestigt und verstetigt werden kann. Stichpunkte sind ausreichend.",
+            "expiryPeriod": "Gültigkeitszeitraum (in Tagen)",
             "validationExplanationQuestion": "Was sollte \"angewendet\" oder \"umgesetzt\" worden sein?",
-            "expiryPeriod": "Gültigkeitszeitraum",
-            "expiryPeriodPlaceholder": "z.B. P1Y6M1W2D oder P6M-1D",
             "contact": "Kontakt",
             "score": "Punktzahl",
             "rateScore": "Punktzahl aus Bewertungen",
             "rateCount": "Anzahl Bewertungen",
             "teams": "Teams",
             "badges": "Badges",
-            "levels": "Levels"
+            "levels": "Levels",
+            "fieldValidation": {
+                "expiryPeriod": "Der Gültigkeitszeitraum muss eine positive ganze Zahl sein."
+            }
         },
         "skillDTO": {
             "description": "Beschreibung",
