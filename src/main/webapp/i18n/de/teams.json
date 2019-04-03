@@ -109,6 +109,9 @@
                     "shortName": "Kurzname",
                     "slogan": "Slogan"
                 },
+                "create": {
+                    "label": "Neues Team erstellen"
+                },
                 "expired": "abgelaufen"
             },
             "achievements": {
@@ -137,6 +140,14 @@
         "skills": {
             "details": {
                 "achievedByNone": "Dieser Skill wurde noch von keiner Person erfüllt!"
+            }
+        },
+        "status": {
+            "edit": {
+                "label": "Person bearbeiten"
+            },
+            "create": {
+                "label": "Neue Person erstellen"
             }
         }
     }

@@ -41,7 +41,7 @@ public class TeamTestDataProvider {
         public TeamBuilder(String name, String shortName) {
             this.name = name;
             this.shortName = shortName;
-            this.pureTrainingTeam = false;
+            this.pureTrainingTeam = true;
             this.official = false;
         }
 

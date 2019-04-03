@@ -109,6 +109,9 @@
                     "shortName": "Short Name",
                     "slogan": "Slogan"
                 },
+                "create": {
+                    "label": "Create new Team"
+                },
                 "expired": "expired"
             },
             "achievements": {
@@ -141,6 +144,9 @@
             "status": {
                 "edit": {
                     "label": "Edit Person"
+                },
+                "create": {
+                    "label": "Create new Person"
                 }
             }
         }

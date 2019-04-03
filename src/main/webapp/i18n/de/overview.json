@@ -39,10 +39,11 @@
     "persondojoApp": {
         "overview": {
             "teams": {
-                "title": "Personen"
+                "title": "Personen",
+                "official": "Offizielles Projekt"
             },
             "navigation": {
-                "text": "Personenbersicht"
+                "text": "Personenübersicht"
             }
         }
     }
