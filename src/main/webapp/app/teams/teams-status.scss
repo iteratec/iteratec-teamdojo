@@ -79,10 +79,9 @@
         cursor: pointer;
         position: absolute;
         right: 0;
-        top: 10px;
         font-size: 1.3em;
         color: #777;
-        z-index: 2;
+        z-index: 4;
         &:hover {
             color: #000;
         }
