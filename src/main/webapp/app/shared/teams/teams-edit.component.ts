@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { ITeam } from 'app/shared/model/team.model';
@@ -9,6 +10,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TeamService } from 'app/entities/team';
 import { DimensionService } from 'app/entities/dimension';
 import { ImageService } from 'app/entities/image';
+import { IDimension } from 'app/shared/model/dimension.model';
 
 @Component({
     selector: 'jhi-teams-quickedit',
@@ -20,6 +22,7 @@ export class TeamsEditComponent implements OnInit {
     isSaving: boolean;
     image: IImage;
     editMode: boolean;
+    dimensions: IDimension[];
 
     constructor(
         private activeModal: NgbActiveModal,
@@ -39,6 +42,13 @@ export class TeamsEditComponent implements OnInit {
                 .find(this.team.imageId)
                 .subscribe((res: HttpResponse<IImage>) => (this.image = res.body), (res: HttpErrorResponse) => this.onError(res.message));
         }
+        this.dimensionService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDimension[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDimension[]>) => response.body)
+            )
+            .subscribe((res: IDimension[]) => (this.dimensions = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     cancel() {
@@ -86,6 +96,21 @@ export class TeamsEditComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    trackDimensionById(index: number, item: IDimension) {
+        return item.id;
+    }
+
+    getSelected(selectedVals: Array<any>, option: any) {
+        if (selectedVals) {
+            for (let i = 0; i < selectedVals.length; i++) {
+                if (option.id === selectedVals[i].id) {
+                    return selectedVals[i];
+                }
+            }
+        }
+        return option;
     }
 
     private subscribeToSaveResponse(result: Observable<HttpResponse<ITeam>>) {
