@@ -48,12 +48,14 @@ import {
     faAngleLeft,
     faAngleDown,
     faCaretRight,
+    faCaretDown,
     faPaperPlane,
     faComment,
     faEllipsisV,
     faCircle,
     faGlobe,
-    faTrophy
+    faTrophy,
+    faFilter
 } from '@fortawesome/free-solid-svg-icons';
 
 // Adds the SVG icon to the library so you can use it in your page
@@ -99,11 +101,13 @@ library.add(faAngleUp);
 library.add(faAngleLeft);
 library.add(faAngleDown);
 library.add(faCaretRight);
+library.add(faCaretDown);
 library.add(faPaperPlane);
 library.add(faComment);
 library.add(faEllipsisV);
 library.add(faCircle);
 library.add(faGlobe);
 library.add(faTrophy);
+library.add(faFilter);
 
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here

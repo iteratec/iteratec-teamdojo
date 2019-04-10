@@ -20,7 +20,7 @@
                     "cancel": "Cancel"
                 },
                 "search": {
-                    "placeholder": "Search",
+                    "placeholder": "Search by title",
                     "filter": {
                         "label": "Hide completed skills"
                     },
@@ -30,13 +30,40 @@
                         "rateCount": "Rate count"
                     }
                 },
+                "status": {
+                    "irrelevant": "This skill is irrelevant.",
+                    "achieved": "This skill has been completed.",
+                    "expiring": "This skill has been completed, but will expire within the next 7 days.",
+                    "expired": "This skill has been completed before, but is now expired.",
+                    "open": "This skill awaits completion."
+                },
+                "relevanceAction": {
+                    "onSkillStatus": {
+                        "irrelevant": "Relevant",
+                        "achieved": "Irrelevant",
+                        "expiring": "Irrelevant",
+                        "expired": "Irrelevant",
+                        "open": "Irrelevant"
+                    },
+                    "admin": {
+                        "irrelevant": "Irrelevant",
+                        "relevant": "Relevant"
+                    }
+                },
                 "action": {
-                    "complete": "Complete",
-                    "incomplete": "Reopen",
-                    "irrelevant": "Irrelevant",
-                    "relevant": "Relevant",
                     "vote": "Do you think {{ team }} can handle this?",
-                    "suggest": "Suggest {{ team }} this Skill!"
+                    "suggest": "Suggest {{ team }} this Skill!",
+                    "onSkillStatus": {
+                        "irrelevant": "",
+                        "achieved": "Reopen",
+                        "expiring": "Reopen",
+                        "expired": "Renew",
+                        "open": "Complete"
+                    },
+                    "admin": {
+                        "complete": "Complete",
+                        "incomplete": "Reopen"
+                    }
                 },
                 "details": {
                     "activate": "Activate skill",
@@ -82,6 +109,9 @@
                     "shortName": "Short Name",
                     "slogan": "Slogan"
                 },
+                "create": {
+                    "label": "Create new Team"
+                },
                 "expired": "expired"
             },
             "achievements": {
@@ -114,6 +144,9 @@
             "status": {
                 "edit": {
                     "label": "Edit Person"
+                },
+                "create": {
+                    "label": "Create new Person"
                 }
             }
         }

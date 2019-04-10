@@ -1,6 +1,6 @@
 <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
     <div class="modal-header">
-        <h4 class="modal-title" dojoTranslate="teamdojoApp.teams.status.edit.label">Edit Person</h4>
+        <h4 class="modal-title">{{'teamdojoApp.teams.status.' + (editMode ? 'edit' : 'create') + '.label'| translate}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="cancel()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -38,7 +38,8 @@
                         <label class="form-control-label" dojoTranslate="teamdojoApp.teams.status.edit.shortName"
                                for="field_shortName">Short Name</label>
                         <input type="text" class="form-control" name="shortName" id="field_shortName"
-                               [(ngModel)]="team.shortName" required minlength="2" maxlength="20" pattern="^[a-zA-Z0-9_-]*$"/>
+                               [(ngModel)]="team.shortName" required minlength="2" maxlength="20"
+                               pattern="^[a-zA-Z0-9_-]*$"/>
                         <div [hidden]="!(editForm.controls.shortName?.dirty && editForm.controls.shortName?.invalid)">
                             <small class="form-text text-danger"
                                    [hidden]="!editForm.controls.shortName?.errors?.required"
@@ -67,16 +68,37 @@
                         <label class="form-control-label" dojoTranslate="teamdojoApp.teams.status.edit.slogan"
                                for="field_slogan">Slogan</label>
                         <input type="text" class="form-control" name="slogan" id="field_slogan"
-                               [(ngModel)]="team.slogan" />
+                               [(ngModel)]="team.slogan"/>
                     </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label" dojoTranslate="teamdojoApp.team.pureTrainingTeam"
+                               for="field_pureTrainingTeam">Pure Training Team</label>
+                        <input type="checkbox" class="form-control" name="pureTrainingTeam" id="field_pureTrainingTeam"
+                               [(ngModel)]="team.pureTrainingTeam"/>
+                    </div>
+                    <span>{{ 'teamdojoApp.team.pureTrainingTeamExplanation' | translate }}</span>
+                    <hr>
+
+                    <div class="form-group">
+                        <label class="form-control-label" dojoTranslate="teamdojoApp.team.official"
+                               for="field_official">Is Official</label>
+                        <input type="checkbox" class="form-control" name="official" id="field_official"
+                               [(ngModel)]="team.official"/>
+                    </div>
+                    <span>{{ 'teamdojoApp.team.officialExplanation' | translate }}</span>
+                    <hr>
 
                     <div class="form-group">
                         <label class="form-control-label" for="field_large">Logo</label>
                         <div>
-                            <img [src]="'data:' + image.largeContentType + ';base64,' + image.large" style="max-height: 100px;" *ngIf="image.large" alt="image image"/>
+                            <img [src]="'data:' + image.largeContentType + ';base64,' + image.large"
+                                 style="max-height: 100px;" *ngIf="image.large" alt="image image"/>
                             <div *ngIf="image.large" class="form-text clearfix">
                                 <span class="pull-left">{{image.largeContentType}}, {{byteSize(image.large)}}</span>
-                                <button type="button" (click)="clearInputImage('large', 'largeContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <button type="button"
+                                        (click)="clearInputImage('large', 'largeContentType', 'fileImage')"
+                                        class="btn btn-secondary btn-xs pull-right">
                                     <span class="fa fa-times"></span>
                                 </button>
                             </div>
@@ -84,12 +106,21 @@
                                    accept="image/*" dojoTranslate="entity.action.addimage"/>
                         </div>
                         <input type="hidden" class="form-control" name="large" id="field_large"
-                               [(ngModel)]="image.large" />
+                               [(ngModel)]="image.large"/>
                         <input type="hidden" class="form-control" name="largeContentType" id="field_largeContentType"
-                               [(ngModel)]="image.largeContentType" />
+                               [(ngModel)]="image.largeContentType"/>
                     </div>
                 </div>
-                <div>
+                <div class="form-group">
+                    <label dojoTranslate="teamdojoApp.team.participations"
+                           for="field_participations">Participations</label>
+                    <select class="form-control" id="field_participations" multiple name="participations"
+                            [(ngModel)]="team.participations">
+                        <option [ngValue]="getSelected(team.participations, dimensionOption)"
+                                *ngFor="let dimensionOption of dimensions; trackBy: trackDimensionById">
+                            {{dimensionOption.name}}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -97,7 +128,7 @@
 
     </div>
     <div class="modal-footer">
-        <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="cancel()">
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="cancel()">
             <span class="fa fa-ban"></span>&nbsp;<span dojoTranslate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">

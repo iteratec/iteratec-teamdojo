@@ -9,8 +9,42 @@
     }
     .achievement-container {
         @include accordion();
+        .achievement-list-header-right {
+            .expand-icon {
+                display: inline-block;
+                width: 1rem;
+            }
+            .dimension-name {
+                background-color: $dojo-text-inverse-secondary;
+                padding: 0.2rem 0.75rem;
+                border-radius: 0.25rem;
+                display: inline-block;
+                .filter-icon {
+                    font-size: 0.75rem;
+                    visibility: hidden;
+                }
+                .visible-filter-icon {
+                    visibility: visible;
+                }
+            }
+        }
+        font-weight: 400;
+        font-size: 1rem;
         height: inherit;
-        padding-right: 10px;
+
+        /deep/ .btn {
+            &.btn-link {
+                text-decoration: none;
+                width: 100%;
+                height: 100%;
+                padding: 1rem 1.25rem;
+            }
+        }
+
+        /deep/ .card-header {
+            padding: 0px;
+        }
+
         /deep/ .simplebar-track {
             bottom: 1em !important;
         }

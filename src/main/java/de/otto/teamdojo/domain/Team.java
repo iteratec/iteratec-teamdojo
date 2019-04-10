@@ -1,19 +1,19 @@
 package de.otto.teamdojo.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Team.
@@ -24,7 +24,7 @@ import java.util.Objects;
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
@@ -50,14 +50,22 @@ public class Team implements Serializable {
     @Column(name = "valid_until")
     private Instant validUntil;
 
+    @NotNull
+    @Column(name = "pure_training_team", nullable = false)
+    private Boolean pureTrainingTeam;
+
+    @NotNull
+    @Column(name = "official", nullable = false)
+    private Boolean official;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "team_participations",
-               joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "participations_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "team_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "participations_id", referencedColumnName = "id"))
     private Set<Dimension> participations = new HashSet<>();
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team" , cascade = CascadeType.REMOVE)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<TeamSkill> skills = new HashSet<>();
     @ManyToOne
@@ -136,6 +144,32 @@ public class Team implements Serializable {
 
     public void setValidUntil(Instant validUntil) {
         this.validUntil = validUntil;
+    }
+
+    public Boolean isPureTrainingTeam() {
+        return pureTrainingTeam;
+    }
+
+    public Team pureTrainingTeam(Boolean pureTrainingTeam) {
+        this.pureTrainingTeam = pureTrainingTeam;
+        return this;
+    }
+
+    public void setPureTrainingTeam(Boolean pureTrainingTeam) {
+        this.pureTrainingTeam = pureTrainingTeam;
+    }
+
+    public Boolean isOfficial() {
+        return official;
+    }
+
+    public Team official(Boolean official) {
+        this.official = official;
+        return this;
+    }
+
+    public void setOfficial(Boolean official) {
+        this.official = official;
     }
 
     public Set<Dimension> getParticipations() {
@@ -231,6 +265,8 @@ public class Team implements Serializable {
             ", slogan='" + getSlogan() + "'" +
             ", contactPerson='" + getContactPerson() + "'" +
             ", validUntil='" + getValidUntil() + "'" +
+            ", pureTrainingTeam='" + isPureTrainingTeam() + "'" +
+            ", official='" + isOfficial() + "'" +
             "}";
     }
 }

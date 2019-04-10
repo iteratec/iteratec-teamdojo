@@ -2,7 +2,11 @@ package de.otto.teamdojo.service.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
+import io.github.jhipster.service.filter.BooleanFilter;
+import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
+import io.github.jhipster.service.filter.FloatFilter;
+import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.service.filter.InstantFilter;
@@ -30,6 +34,10 @@ public class TeamCriteria implements Serializable {
     private StringFilter contactPerson;
 
     private InstantFilter validUntil;
+
+    private BooleanFilter pureTrainingTeam;
+
+    private BooleanFilter official;
 
     private LongFilter participationsId;
 
@@ -85,6 +93,22 @@ public class TeamCriteria implements Serializable {
         this.validUntil = validUntil;
     }
 
+    public BooleanFilter getPureTrainingTeam() {
+        return pureTrainingTeam;
+    }
+
+    public void setPureTrainingTeam(BooleanFilter pureTrainingTeam) {
+        this.pureTrainingTeam = pureTrainingTeam;
+    }
+
+    public BooleanFilter getOfficial() {
+        return official;
+    }
+
+    public void setOfficial(BooleanFilter official) {
+        this.official = official;
+    }
+
     public LongFilter getParticipationsId() {
         return participationsId;
     }
@@ -126,6 +150,8 @@ public class TeamCriteria implements Serializable {
             Objects.equals(slogan, that.slogan) &&
             Objects.equals(contactPerson, that.contactPerson) &&
             Objects.equals(validUntil, that.validUntil) &&
+            Objects.equals(pureTrainingTeam, that.pureTrainingTeam) &&
+            Objects.equals(official, that.official) &&
             Objects.equals(participationsId, that.participationsId) &&
             Objects.equals(skillsId, that.skillsId) &&
             Objects.equals(imageId, that.imageId);
@@ -140,6 +166,8 @@ public class TeamCriteria implements Serializable {
         slogan,
         contactPerson,
         validUntil,
+        pureTrainingTeam,
+        official,
         participationsId,
         skillsId,
         imageId
@@ -155,6 +183,8 @@ public class TeamCriteria implements Serializable {
                 (slogan != null ? "slogan=" + slogan + ", " : "") +
                 (contactPerson != null ? "contactPerson=" + contactPerson + ", " : "") +
                 (validUntil != null ? "validUntil=" + validUntil + ", " : "") +
+                (pureTrainingTeam != null ? "pureTrainingTeam=" + pureTrainingTeam + ", " : "") +
+                (official != null ? "official=" + official + ", " : "") +
                 (participationsId != null ? "participationsId=" + participationsId + ", " : "") +
                 (skillsId != null ? "skillsId=" + skillsId + ", " : "") +
                 (imageId != null ? "imageId=" + imageId + ", " : "") +

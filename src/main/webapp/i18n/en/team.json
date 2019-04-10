@@ -21,6 +21,10 @@
             "contactPerson": "Contact Person",
             "suggestedBy": "Suggested by",
             "validUntil": "Valid Until",
+            "pureTrainingTeam": "Pure Training Team",
+            "pureTrainingTeamExplanation": "When activated as pure training team, the team will not be listed in the overview. Although it remains visible in the team selection.",
+            "official": "Is official project team",
+            "officialExplanation": "Training rooms can be used by anyone even without an official project/product team. Please mark them, then an \"official\" badge will be displayed.",
             "participations": "Participations",
             "skills": "Skills",
             "image": "Image"
@@ -36,6 +40,10 @@
             "created": "A new Person is created with identifier {{ param }}",
             "updated": "A Person is updated with identifier {{ param }}",
             "deleted": "A Person is deleted with identifier {{ param }}",
+            "pureTrainingTeam": "Pure Training Person",
+            "pureTrainingTeamExplanation": "When activated as pure training person, the person will not be listed in the overview. Although it remains visible in the person selection.",
+            "official": "Is official project",
+            "officialExplanation": "Training rooms can be used by anyone even without an official project/product. Please mark them, then an \"official\" badge will be displayed.",
             "delete": {
                 "question": "Are you sure you want to delete Person \"{{ name }}\"?"
             },
