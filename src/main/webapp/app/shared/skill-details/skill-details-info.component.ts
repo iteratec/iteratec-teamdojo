@@ -19,6 +19,8 @@ import { ITraining } from 'app/shared/model/training.model';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TrainingsAddComponent } from 'app/shared/trainings/trainings-add.component';
 import { SkillStatus, SkillStatusUtils } from 'app/shared/model/skill-status';
+import { ServerInfoService } from 'app/server-info';
+import { IServerInfo } from 'app/shared/model/server-info.model';
 
 @Component({
     selector: 'jhi-skill-details-info',
@@ -62,7 +64,8 @@ export class SkillDetailsInfoComponent implements OnInit, OnChanges {
         private route: ActivatedRoute,
         private teamSkillsService: TeamSkillService,
         private teamsSelectionService: TeamsSelectionService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private serverInfoService: ServerInfoService
     ) {}
 
     ngOnInit(): void {
@@ -95,7 +98,13 @@ export class SkillDetailsInfoComponent implements OnInit, OnChanges {
         this.neededForBadges = this._badges.filter((badge: IBadge) =>
             this._badgeSkills.some((badgeSkill: IBadgeSkill) => badge.id === badgeSkill.badgeId && badgeSkill.skillId === this.skill.id)
         );
-        this.trainings = (this._allTrainings || []).filter(training => (training.skills || []).find(skill => skill.id === this.skill.id));
+        this.serverInfoService.query().subscribe((serverInfo: IServerInfo) => {
+            this.trainings = (this._allTrainings || []).filter(
+                training =>
+                    (training.skills || []).find(skill => skill.id === this.skill.id) &&
+                    (training.validUntil === null || training.validUntil > moment(serverInfo.time))
+            );
+        });
     }
 
     onVoteSubmittedFromChild(vote: ISkillRate) {
