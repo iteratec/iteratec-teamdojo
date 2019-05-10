@@ -16,9 +16,6 @@ import { filter, map, take } from 'rxjs/operators';
 import { IOrganization } from 'app/shared/model/organization.model';
 import { HttpResponse } from '@angular/common/http';
 import { OrganizationService } from 'app/entities/organization';
-import { mergeMap } from 'rxjs/operators';
-import { ServerInfoService } from 'app/server-info';
-import { IServerInfo } from 'app/shared/model/server-info.model';
 import { DimensionService } from 'app/entities/dimension';
 
 @Injectable()
@@ -186,7 +183,7 @@ export class AllCommentsResolve implements Resolve<any> {
 
 @Injectable()
 export class SkillResolve implements Resolve<any> {
-    constructor(private skillService: SkillService, private serverInfoService: ServerInfoService, private router: Router) {}
+    constructor(private skillService: SkillService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const skillId = route.params['skillId'] ? route.params['skillId'] : null;
@@ -206,12 +203,10 @@ export class SkillResolve implements Resolve<any> {
 
 @Injectable()
 export class AllTrainingsResolve implements Resolve<any> {
-    constructor(private trainingService: TrainingService, private serverInfoService: ServerInfoService) {}
+    constructor(private trainingService: TrainingService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        return this.serverInfoService
-            .query()
-            .pipe(mergeMap((serverInfo: IServerInfo) => this.trainingService.query({ 'validUntil.greaterThan': serverInfo.time })));
+        return this.trainingService.query();
     }
 }
 
