@@ -43,6 +43,7 @@
             "teams": "Teams",
             "badges": "Badges",
             "levels": "Levels",
+            "markdownSupported": "Markdown is supported",
             "fieldValidation": {
                 "expiryPeriod": "The expiry period must be a positive integer."
             }

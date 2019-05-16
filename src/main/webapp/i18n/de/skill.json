@@ -43,6 +43,7 @@
             "teams": "Teams",
             "badges": "Badges",
             "levels": "Levels",
+            "markdownSupported": "Markdown wird unterstützt",
             "fieldValidation": {
                 "expiryPeriod": "Der Gültigkeitszeitraum muss eine positive ganze Zahl sein."
             }

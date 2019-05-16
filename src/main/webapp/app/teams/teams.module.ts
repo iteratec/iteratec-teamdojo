@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { TeamdojoSharedModule } from 'app/shared';
 import { TEAMS_ROUTES, TeamsComponent } from './';
@@ -19,7 +20,7 @@ import { AllCommentsResolve, AllSkillsResolve, DojoModelResolve, SkillResolve } 
 import { TeamsEditComponent } from 'app/shared/teams/teams-edit.component';
 
 @NgModule({
-    imports: [TeamdojoSharedModule, RouterModule.forChild(TEAMS_ROUTES), NgbModule],
+    imports: [TeamdojoSharedModule, RouterModule.forChild(TEAMS_ROUTES), NgbModule, MarkdownModule.forChild()],
     declarations: [
         TeamsComponent,
         TeamsAchievementsComponent,
