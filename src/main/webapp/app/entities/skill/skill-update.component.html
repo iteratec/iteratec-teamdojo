@@ -36,6 +36,7 @@
                 <div class="form-group">
                     <label class="form-control-label" dojoTranslate="teamdojoApp.skill.description" for="field_description">Description</label>
                     <span>{{ 'teamdojoApp.skill.descriptionExplanationShort' | translate }}</span>
+                    <span class="pull-right text-secondary">{{ 'teamdojoApp.skill.markdownSupported' | translate}}</span>
                     <textarea class="form-control" name="description" id="field_description"
                               [(ngModel)]="skill.description" rows="6" maxlength="2048"></textarea>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
@@ -51,6 +52,7 @@
                 <div class="form-group">
                     <label class="form-control-label" dojoTranslate="teamdojoApp.skill.implementation" for="field_implementation">Implementation</label>
                     <span>{{ 'teamdojoApp.skill.implementationExplanationShort' | translate }}</span>
+                    <span class="pull-right text-secondary">{{ 'teamdojoApp.skill.markdownSupported' | translate}}</span>
                     <textarea class="form-control" name="implementation" id="field_implementation"
                               [(ngModel)]="skill.implementation" rows="6" maxlength="2048"></textarea>
                     <div [hidden]="!(editForm.controls.implementation?.dirty && editForm.controls.implementation?.invalid)">
@@ -66,6 +68,7 @@
                 <div class="form-group">
                     <label class="form-control-label" dojoTranslate="teamdojoApp.skill.validation" for="field_validation">Validation</label>
                     <span>{{ 'teamdojoApp.skill.validationExplanationShort' | translate }}</span>
+                    <span class="pull-right text-secondary">{{ 'teamdojoApp.skill.markdownSupported' | translate}}</span>
                     <textarea class="form-control" name="validation" id="field_validation"
                               [(ngModel)]="skill.validation" rows="6" maxlength="2048"></textarea>
                     <div [hidden]="!(editForm.controls.validation?.dirty && editForm.controls.validation?.invalid)">
