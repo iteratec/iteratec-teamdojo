@@ -31,6 +31,7 @@
         "ng-jhipster": "^0.9.3",
         "ngx-cookie": "^2.0.1",
         "ngx-infinite-scroll": "^7.0.1",
+        "ngx-markdown": "^7.1.5",
         "ngx-webstorage": "^2.0.1",
         "rxjs": "^6.4.0",
         "simplebar": "^2.6.1",
