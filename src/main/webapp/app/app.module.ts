@@ -7,6 +7,7 @@ import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { NgJhipsterModule } from 'ng-jhipster';
 import { StarRatingModule } from 'angular-star-rating';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
@@ -37,6 +38,7 @@ import { ActiveMenuDirective, ErrorComponent, FooterComponent, JhiMainComponent,
             i18nEnabled: true,
             defaultI18nLang: 'en'
         }),
+        MarkdownModule.forRoot(),
         TeamdojoSharedModule.forRoot(),
         TeamdojoCoreModule,
         OverviewModule,

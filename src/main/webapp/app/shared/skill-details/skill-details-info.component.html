@@ -33,21 +33,21 @@
             <span class="headline"> {{ 'teamdojoApp.teams.skills.details.desc' | translate }}</span>
             <span class="explanation"> {{ 'teamdojoApp.skill.descriptionExplanationQuestion' | translate }}</span>
         </div>
-        <p>{{ skill.description }}</p>
+        <markdown [data]="skill.description"></markdown>
     </div>
     <div class="skill-impl desc-block">
         <div class="skill-desc-block-headline">
             <span class="headline"> {{ 'teamdojoApp.teams.skills.details.implementation' | translate }}</span>
             <span class="explanation"> {{ 'teamdojoApp.skill.implementationExplanationQuestion' | translate }}</span>
         </div>
-        <p>{{ skill.implementation }}</p>
+        <markdown [data]="skill.implementation"></markdown>
     </div>
     <div class="skill-validation desc-block">
         <div class="skill-desc-block-headline">
             <span class="headline"> {{ 'teamdojoApp.teams.skills.details.validation' | translate }}</span>
             <span class="explanation"> {{ 'teamdojoApp.skill.validationExplanationQuestion' | translate }}</span>
         </div>
-        <p>{{ skill.validation }}</p>
+        <markdown [data]="skill.validation"></markdown>
     </div>
 
     <div class="row skill-metadata">
