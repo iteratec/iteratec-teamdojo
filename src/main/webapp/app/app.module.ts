@@ -38,7 +38,15 @@ import { ActiveMenuDirective, ErrorComponent, FooterComponent, JhiMainComponent,
             i18nEnabled: true,
             defaultI18nLang: 'en'
         }),
-        MarkdownModule.forRoot(),
+        MarkdownModule.forRoot({
+            markedOptions: {
+                provide: MarkedOptions,
+                useValue: {
+                    breaks: true,
+                    sanitize: true
+                }
+            }
+        }),
         TeamdojoSharedModule.forRoot(),
         TeamdojoCoreModule,
         OverviewModule,
