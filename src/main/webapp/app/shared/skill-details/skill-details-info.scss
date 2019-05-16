@@ -3,6 +3,8 @@
 @import '../../../content/scss/colors';
 @import '../../../content/scss/mixins';
 
+$headlineFontSizeBase: 1.25;
+
 .skill-title {
     font-size: 1.5rem;
     font-weight: 500;
@@ -15,7 +17,7 @@
 }
 
 .headline {
-    font-size: 1.25rem;
+    font-size: #{$headlineFontSizeBase}rem;
     font-weight: 500;
 }
 
@@ -163,4 +165,12 @@
 
 .training-is-official {
     display: inline-block;
+}
+
+/deep/ .desc-block {
+    @for $i from 1 through 6 {
+        h#{$i} {
+            font-size: #{$headlineFontSizeBase * (1 - ($i * 0.04))}rem;
+        }
+    }
 }
