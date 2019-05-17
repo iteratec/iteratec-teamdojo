@@ -3,6 +3,8 @@
 @import '../../../content/scss/colors';
 @import '../../../content/scss/mixins';
 
+$headlineFontSizeBase: 1.25;
+
 .skill-title {
     font-size: 1.5rem;
     font-weight: 500;
@@ -15,7 +17,7 @@
 }
 
 .headline {
-    font-size: 1.25rem;
+    font-size: #{$headlineFontSizeBase}rem;
     font-weight: 500;
 }
 
@@ -123,13 +125,22 @@
     }
 }
 
-.dojo-card {
+.skill-details {
     background: rgba($dojo-bg-gradient-from, 0.5);
     padding: 20px;
     @include shadow();
 
     .skill-desc-block-headline {
         margin-bottom: 0.3rem;
+    }
+    /deep/ .simplebar-track {
+        bottom: 0.9em !important;
+    }
+    /deep/ .simplebar-scroll-content {
+        padding-right: 2.1em !important;
+        .simplebar-content {
+            overflow-x: hidden;
+        }
     }
 }
 
@@ -163,4 +174,14 @@
 
 .training-is-official {
     display: inline-block;
+}
+
+.desc-block /deep/ {
+    @include markdownHeadlines($headlineFontSizeBase);
+}
+
+@media only screen and (min-width: map-get($grid-breakpoints, lg)) {
+    .skill-details {
+        height: calc(100vh - 242px);
+    }
 }

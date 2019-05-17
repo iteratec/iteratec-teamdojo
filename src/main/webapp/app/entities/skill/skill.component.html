@@ -45,9 +45,9 @@
             <tr *ngFor="let skill of skills ;trackBy: trackId">
                 <td><a [routerLink]="['/skill', skill.id, 'view' ]">{{skill.id}}</a></td>
                 <td>{{skill.title}}</td>
-                <td>{{skill.description}}</td>
-                <td>{{skill.implementation}}</td>
-                <td>{{skill.validation}}</td>
+                <td class="break-line">{{skill.description}}</td>
+                <td class="break-line">{{skill.implementation}}</td>
+                <td class="break-line">{{skill.validation}}</td>
                 <td>{{skill.expiryPeriod}}</td>
                 <td>{{skill.contact}}</td>
                 <td>{{skill.score}}</td>
