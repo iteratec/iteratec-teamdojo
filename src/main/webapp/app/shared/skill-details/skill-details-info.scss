@@ -137,7 +137,7 @@ $headlineFontSizeBase: 1.25;
         bottom: 0.9em !important;
     }
     /deep/ .simplebar-scroll-content {
-        padding-right: 2em !important;
+        padding-right: 2.1em !important;
         .simplebar-content {
             overflow-x: hidden;
         }
@@ -176,12 +176,8 @@ $headlineFontSizeBase: 1.25;
     display: inline-block;
 }
 
-/deep/ .desc-block {
-    @for $i from 1 through 6 {
-        h#{$i} {
-            font-size: #{$headlineFontSizeBase * (1 - ($i * 0.04))}rem;
-        }
-    }
+.desc-block /deep/ {
+    @include markdownHeadlines($headlineFontSizeBase);
 }
 
 @media only screen and (min-width: map-get($grid-breakpoints, lg)) {
