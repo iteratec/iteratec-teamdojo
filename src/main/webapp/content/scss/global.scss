@@ -237,6 +237,10 @@ entity detail page css
     @include markdownHeadlines(1.25);
 }
 
+.break-line {
+    white-space: pre-wrap;
+}
+
 /* ==========================================================================
 ui bootstrap tweaks
 ========================================================================== */
